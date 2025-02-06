@@ -1,0 +1,1 @@
+export const newsFields = `newsTitle,slug,images,postDate,description`;

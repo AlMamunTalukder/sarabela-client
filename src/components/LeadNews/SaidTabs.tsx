@@ -4,7 +4,10 @@ import LastNews from "../News/LastNews";
 import ImportantNews from "../News/ImportantNews";
 import DailyIslam from "../News/DailyIslam";
 
-const SaidTabs = () => {
+type BaseProps = {
+  basePath: string
+}
+const SaidTabs = ({ basePath }: BaseProps) => {
   return (
     <Tabs defaultValue="last" defaultChecked className="bg-white">
       <TabsList>
@@ -20,15 +23,15 @@ const SaidTabs = () => {
       </TabsList>
       <TabsContent value="last">
         {/* this is last news  */}
-        <LastNews />
+        <LastNews basePath={basePath} />
       </TabsContent>
       <TabsContent value="important">
         {/* this is important news */}
-        <ImportantNews />
+        <ImportantNews basePath={basePath} />
       </TabsContent>
       <TabsContent value="dailyIslam">
         {/* this is important news */}
-        <DailyIslam />
+        <DailyIslam basePath={basePath} />
       </TabsContent>
     </Tabs>
   );

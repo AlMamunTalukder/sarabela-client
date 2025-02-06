@@ -1,103 +1,47 @@
 "use client";
+import { useSpecificNewsData } from "@/hooks/useSpecificNewsData";
+import { sortByDate } from "@/util/sort";
 import Link from "next/link";
 
-const dailyIslam = [
-  {
-    id: 1,
-    title: "জাতিসংঘে বাংলাদেশের অবদান",
-    description:
-      "জাতিসংঘে বাংলাদেশের শান্তিরক্ষা কার্যক্রমে অগ্রণী ভূমিকা পালন করছে।",
-    date: "২০২৪-১২-০৫",
-  },
-  {
-    id: 2,
-    title: "ডিজিটাল বাংলাদেশ ভিশনের সফল বাস্তবায়ন",
-    description:
-      "ডিজিটাল বাংলাদেশ প্রকল্পের অধীনে ইন্টারনেট এবং প্রযুক্তি সেবা গ্রামীণ অঞ্চলেও প্রসারিত হয়েছে।",
-    date: "২০২৪-১২-০৪",
-  },
-  {
-    id: 3,
-    title: "পরিবেশ রক্ষায় নতুন উদ্যোগ",
-    description:
-      "পরিবেশ সংরক্ষণে বাংলাদেশ সরকার নতুন বনায়ন প্রকল্প শুরু করেছে।",
-    date: "২০২৪-১২-০৩",
-  },
-  {
-    id: 4,
-    title: "পরিবেশ রক্ষায় নতুন উদ্যোগ",
-    description:
-      "পরিবেশ সংরক্ষণে বাংলাদেশ সরকার নতুন বনায়ন প্রকল্প শুরু করেছে।",
-    date: "২০২৪-১২-০৩",
-  },
-  {
-    id: 5,
-    title: "পরিবেশ রক্ষায় নতুন উদ্যোগ",
-    description:
-      "পরিবেশ সংরক্ষণে বাংলাদেশ সরকার নতুন বনায়ন প্রকল্প শুরু করেছে।",
-    date: "২০২৪-১২-০৩",
-  },
-  {
-    id: 7,
-    title: "পরিবেশ রক্ষায় নতুন উদ্যোগ",
-    description:
-      "পরিবেশ সংরক্ষণে বাংলাদেশ সরকার নতুন বনায়ন প্রকল্প শুরু করেছে।",
-    date: "২০২৪-১২-০৩",
-  },
-  {
-    id: 8,
-    title: "পরিবেশ রক্ষায় নতুন উদ্যোগ",
-    description:
-      "পরিবেশ সংরক্ষণে বাংলাদেশ সরকার নতুন বনায়ন প্রকল্প শুরু করেছে।",
-    date: "২০২৪-১২-০৩",
-  },
-  {
-    id: 9,
-    title: "পরিবেশ রক্ষায় নতুন উদ্যোগ",
-    description:
-      "পরিবেশ সংরক্ষণে বাংলাদেশ সরকার নতুন বনায়ন প্রকল্প শুরু করেছে।",
-    date: "২০২৪-১২-০৩",
-  },
-  {
-    id: 10,
-    title: "পরিবেশ রক্ষায় নতুন উদ্যোগ",
-    description:
-      "পরিবেশ সংরক্ষণে বাংলাদেশ সরকার নতুন বনায়ন প্রকল্প শুরু করেছে।",
-    date: "২০২৪-১২-০৩",
-  },
-  {
-    id: 11,
-    title: "পরিবেশ রক্ষায় নতুন উদ্যোগ",
-    description:
-      "পরিবেশ সংরক্ষণে বাংলাদেশ সরকার নতুন বনায়ন প্রকল্প শুরু করেছে।",
-    date: "২০২৪-১২-০৩",
-  },
-];
+type BaseProps = {
+  basePath: string
+}
 
-const DailyIslam = () => {
+
+const DailyIslam = ({ basePath }: BaseProps) => {
+  const { newsData, loading, error } = useSpecificNewsData()
+  if (loading) {
+    return <h3>Loading.......</h3>
+  }
+  if (error) {
+    return <h3>Oops! data not found.</h3>
+  }
+
+  const sortNewsData = sortByDate(newsData, 'postDate')
+
   return (
     <div
       className="w-full max-h-[200px] lg:max-h-[700px] px-2 md:px-4 overflow-y-auto 
         [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]"
     >
       <ul className="divide-y divide-gray-200">
-        {dailyIslam?.map((news) => (
+        {sortNewsData?.map((news) => (
           <li
-            key={news?.id}
+            key={news?._id}
             className="py-3 md:py-4 hover:bg-gray-50 transition-colors duration-200 rounded-lg"
           >
-            <Link href={`/view_details`} className="block space-y-1">
+            <Link href={`${basePath}/${news.slug}`} className="block space-y-1">
               <h3
                 className="text-sm md:text-base lg:text-lg font-semibold text-gray-800 
               line-clamp-1 hover:text-blue-600 transition-colors"
               >
-                {news?.title}
+                {news?.newsTitle}
               </h3>
               <p className="text-xs md:text-sm text-gray-600 line-clamp-2">
-                {news?.description}
+                {news.description}
               </p>
               <div className="flex justify-between items-center text-xs md:text-sm text-gray-500">
-                <span>{news?.date}</span>
+                <span>{news?.postDate}</span>
                 <span className="text-blue-500 hover:text-blue-700">
                   আরও পড়ুন
                 </span>

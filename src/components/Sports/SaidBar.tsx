@@ -1,103 +1,24 @@
 "use client";
-import cricket from "@public/asset/Sports/crikect.jpg";
-import football from "@public/asset/Sports/football.jpg";
-import hokeei from "@public/asset/Sports/hokei.jpg";
-import sport from "@public/asset/Sports/sports.jpg";
+import { useSpecificNewsData } from "@/hooks/useSpecificNewsData";
+import { sortByDate } from "@/util/sort";
 import Image from "next/image";
 import Link from "next/link";
+interface TopNewsProps {
+  basePath?: string;
+}
+const SaidBar = ({ basePath = "/international" }: TopNewsProps) => {
 
-const sports = [
-  {
-    id: "01",
-    category: "খেলাধুলা",
-    title: "বিশ্বকাপে বাংলাদেশ জয়ী",
-    description:
-      "বিশ্বকাপে বাংলাদেশ তাদের প্রথম ম্যাচে দুর্দান্ত জয় পেয়েছে, যা ক্রিকেটপ্রেমীদের আনন্দিত করেছে।",
-    date: "২০২৪-১২-০৪",
-    news_type: "trending",
-    published_time: "09:00",
-    image: cricket,
-  },
-  {
-    id: "02",
-    category: "খেলাধুলা",
-    title: "ফুটবলে নতুন রেকর্ড",
-    description:
-      "ফুটবল বিশ্বে নতুন রেকর্ড তৈরি হয়েছে, যেখানে একজন প্লেয়ার এক ম্যাচে ৫ গোল করেছেন।",
-    date: "২০২৪-১২-০৪",
-    news_type: "normal",
-    published_time: "12:00",
-    image: football,
-  },
-  {
-    id: "03",
-    category: "খেলাধুলা",
-    title: "বাংলাদেশ বেসবল টিমের সাফল্য",
-    description:
-      "বাংলাদেশ দেশের খেলাধুলা সম্প্রসারণের প্রতি নতুন দৃষ্টিভঙ্গি প্রদান করেছে।",
-    date: "২০২৪-১২-০৪",
-    news_type: "normal",
-    published_time: "14:30",
-    image: hokeei,
-  },
-  {
-    id: "05",
-    category: "খেলাধুলা",
-    title: "টেনিস বিশ্বকাপে শিরোপা জয়",
-    description:
-      "বিশ্বকাপে একটি নতুন ইতিহাস সৃষ্টি হয়েছে, যেখানে একজন টেনিস খেলোয়াড় প্রথমবার শিরোপা জয়ী হন।",
-    date: "২০২৪-১২-০৪",
-    news_type: "normal",
-    published_time: "16:00",
-    image: sport,
-  },
-  {
-    id: "06",
-    category: "খেলাধুলা",
-    title: "টেনিস বিশ্বকাপে শিরোপা জয়",
-    description:
-      "বিশ্বকাপে একটি নতুন ইতিহাস সৃষ্টি হয়েছে, যেখানে একজন টেনিস খেলোয়াড় প্রথমবার শিরোপা জয়ী হন।",
-    date: "২০২৪-১২-০৪",
-    news_type: "normal",
-    published_time: "16:00",
-    image: sport,
-  },
-  {
-    id: "07",
-    category: "খেলাধুলা",
-    title: "টেনিস বিশ্বকাপে শিরোপা জয়",
-    description:
-      "বিশ্বকাপে একটি নতুন ইতিহাস সৃষ্টি হয়েছে, যেখানে একজন টেনিস খেলোয়াড় প্রথমবার শিরোপা জয়ী হন।",
-    date: "২০২৪-১২-০৪",
-    news_type: "normal",
-    published_time: "16:00",
-    image: sport,
-  },
-  {
-    id: "08",
-    category: "খেলাধুলা",
-    title: "টেনিস বিশ্বকাপে শিরোপা জয়",
-    description:
-      "বিশ্বকাপে একটি নতুন ইতিহাস সৃষ্টি হয়েছে, যেখানে একজন টেনিস খেলোয়াড় প্রথমবার শিরোপা জয়ী হন।",
-    date: "২০২৪-১২-০৪",
-    news_type: "normal",
-    published_time: "16:00",
-    image: sport,
-  },
-  {
-    id: "09",
-    category: "খেলাধুলা",
-    title: "টেনিস বিশ্বকাপে শিরোপা জয়",
-    description:
-      "বিশ্বকাপে একটি নতুন ইতিহাস সৃষ্টি হয়েছে, যেখানে একজন টেনিস খেলোয়াড় প্রথমবার শিরোপা জয়ী হন।",
-    date: "২০২৪-১২-০৪",
-    news_type: "normal",
-    published_time: "16:00",
-    image: sport,
-  },
-];
 
-const  SaidBar = () => {
+  const { newsData, loading, error } = useSpecificNewsData()
+  if (loading) {
+    return <h3>Loading.......</h3>
+  }
+  if (error) {
+    return <h3>Oops! data not found.</h3>
+  }
+
+  const sortNewsData = sortByDate(newsData, 'postDate')
+
   return (
     <div
       className="p-4 max-h-[300px] lg:max-h-[720px] overflow-y-auto [&::-webkit-scrollbar]:hidden 
@@ -105,20 +26,26 @@ const  SaidBar = () => {
         [scrollbar-width:none] border border-black"
     >
       <div className="grid grid-cols-1 gap-4">
-        {sports?.map((news, index) => (
+        {sortNewsData?.map((news, index) => (
           <div key={index} className="flex gap-4 items-start border-b pb-4">
             <div className="w-1/2">
               <h1 className="font-semibold text-gray-800 hover:text-blue-600 cursor-pointer">
-                <Link href={`/view_details`}>{news?.title}</Link>
+                <Link href={`${basePath}/${news.slug}`}>{news?.newsTitle}</Link>
               </h1>
-              <p className="truncate">{news?.date}</p>
+              <p className="truncate">{news?.postDate}</p>
             </div>
-            <div className="flex-1  flex-shrink-0 overflow-hidden  hover:scale-105 duration-300">
-              <Image
-                src={news?.image}
-                alt={news?.title}
-                className="w-full h-full object-cover"
-              />
+            <div className="flex-1 h-24  flex-shrink-0 overflow-hidden  hover:scale-105 duration-300">
+              {news.images?.[0] && (
+                <Image
+                  src={news.images[0]}
+                  alt={news.newsTitle || "News Image"}
+                  blurDataURL="/placeholder.jpg"
+                  className="w-full h-full object-cover"
+                  width={500}
+                  height={200}
+
+                />
+              )}
             </div>
           </div>
         ))}

@@ -9,10 +9,10 @@ const LeadSection = () => {
         <div className="w-full lg:w-3/4">
           <NewsCard />
         </div>
-        
+
         {/* Sidebar Section */}
         <div className="w-full lg:w-1/4">
-          <SaidTabs />
+          <SaidTabs basePath='/international' />
         </div>
       </div>
     </div>
