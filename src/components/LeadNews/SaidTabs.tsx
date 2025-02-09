@@ -5,9 +5,10 @@ import ImportantNews from "../News/ImportantNews";
 import DailyIslam from "../News/DailyIslam";
 
 type BaseProps = {
-  basePath: string
+  basePath: string;
+  category: string;
 }
-const SaidTabs = ({ basePath }: BaseProps) => {
+const SaidTabs = ({ category, basePath }: BaseProps) => {
   return (
     <Tabs defaultValue="last" defaultChecked className="bg-white">
       <TabsList>
@@ -22,19 +23,17 @@ const SaidTabs = ({ basePath }: BaseProps) => {
         </TabsTrigger>
       </TabsList>
       <TabsContent value="last">
-        {/* this is last news  */}
-        <LastNews basePath={basePath} />
+        <LastNews category={category} basePath={basePath} />
       </TabsContent>
       <TabsContent value="important">
-        {/* this is important news */}
-        <ImportantNews basePath={basePath} />
+        <ImportantNews category={category} basePath={basePath} />
       </TabsContent>
-      <TabsContent value="dailyIslam">
-        {/* this is important news */}
-        <DailyIslam basePath={basePath} />
+      <TabsContent  value="dailyIslam">
+        <DailyIslam category={category} basePath={basePath} />
       </TabsContent>
     </Tabs>
   );
 };
+
 
 export default SaidTabs;

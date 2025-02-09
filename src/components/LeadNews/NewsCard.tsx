@@ -4,12 +4,15 @@ import Image from "next/image";
 import Link from "next/link";
 import LeadNewsCard from "./LeadNewsCard";
 import { sortByDate } from "@/util/sort";
-
 import { useSpecificNewsData } from "@/hooks/useSpecificNewsData";
+import { getCategory } from "@/util/getCategory";
+
 
 const NewsCard = () => {
+  const basePath = '/international';
+  const category = getCategory(basePath);
 
-  const { newsData, loading, error } = useSpecificNewsData()
+  const { newsData, loading, error } = useSpecificNewsData(category)
   if (loading) {
     return <h3>Loading.......</h3>
   }

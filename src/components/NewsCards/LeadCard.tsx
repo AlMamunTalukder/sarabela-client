@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 
 interface news_data {
   id: string;
@@ -11,7 +12,6 @@ interface news_data {
 
 const LeadCard = ({ data }: { data: news_data }) => {
 
-  console.log(data);
 
   return <div></div>;
 };

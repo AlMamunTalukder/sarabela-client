@@ -10,17 +10,19 @@ import { useEffect, useState } from "react";
 import { useParams, } from "next/navigation";
 import { TNews } from "@/types";
 import RelatedNews from "./RelatedNews";
+import { getCategory } from "@/util/getCategory";
 interface TopNewsProps {
     basePath?: string;
-  }
-const SingleDetails = ({ basePath}: TopNewsProps) => {
+}
+const SingleDetails = ({ basePath }: TopNewsProps) => {
     const params = useParams();
     const encodedSlug = Array.isArray(params?.slug) ? params.slug.join("/") : params?.slug || "";
-
+    const category = getCategory(basePath);
     const decodedSlug = encodedSlug ? decodeURIComponent(encodedSlug) : "";
     const [singleNewsData, setSingleNewsData] = useState<TNews | null>(null);
     const [loading, setLoading] = useState(false)
     const [error, setError] = useState<string | null>(null);
+
 
     useEffect(() => {
         const fetchData = async () => {
@@ -69,7 +71,7 @@ const SingleDetails = ({ basePath}: TopNewsProps) => {
                                     {singleNewsData ? <NewsCard news={singleNewsData} /> : <p>Loading news...</p>}
                                     <Feedback />
                                     <Advertisements />
-                                    <RelatedNews basePath={basePath} />
+                                    <RelatedNews category={category} basePath={basePath} />
                                     <PaginationPages />
                                 </div>
 
@@ -83,7 +85,7 @@ const SingleDetails = ({ basePath}: TopNewsProps) => {
                     <div className="hidden lg:block w-full lg:w-1/4">
                         <div className="sticky top-[70px]">
                             <div className="bg-white py-2">
-                                <SaidBar basePath={basePath} />
+                                <SaidBar category={category} basePath={basePath} />
                             </div>
                         </div>
                     </div>

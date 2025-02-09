@@ -1,9 +1,10 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 "use client";
 import Image from "next/image";
 import DateAndTime from "@/lib/dateAndTime";
 import Link from "next/link";
-import logo from "@public/asset/dailyTimes24.png";
 import banner from "@public/asset/banner.jpg";
+import logo from '../../../public/asset/logo/logo2.png'
 
 const topNews = [
   {
@@ -36,22 +37,18 @@ const Header = () => {
   return (
     <section className="hidden lg:block border-b-2 border-[#B99470] py-2 bg-blue-100">
       <div className="max-w-7xl mx-auto  grid grid-cols-4 items-center justify-between gap-4">
-        
-        <div className="flex items-center grid-cols-1 gap-2">
+
+        <div className=" items-center grid-cols-1 gap-2">
           <Link href="/">
-            {" "}
             <Image
-              src={logo?.src}
-              placeholder="blur"
-              blurDataURL={logo?.src}
+              src={logo}
               alt="daily times 24"
-              width={150}
-              height={100}
+    
             />
           </Link>
-          <div>
+          {/* <div>
             <DateAndTime />
-          </div>
+          </div> */}
         </div>
 
         <div className="flex w-full col-span-1 flex-col lg:flex-row">

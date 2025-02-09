@@ -4,12 +4,15 @@ import Image from "next/image";
 import Link from "next/link";
 import { useSpecificNewsData } from "@/hooks/useSpecificNewsData";
 import { sortByDate } from "./sort";
-
+import truncateText from "./truncate";
+import { formatDate } from "./formateDate";
+import parse from 'html-react-parser'
 interface TopNewsProps {
   basePath?: string;
+  category: string;
 }
-const TopNews = ({ basePath = "/international" }: TopNewsProps) => {
-  const { newsData, loading, error } = useSpecificNewsData()
+const TopNews = ({ category, basePath = "/international" }: TopNewsProps) => {
+  const { newsData, loading, error } = useSpecificNewsData(category)
   if (loading) {
     return <h3>Loading.......</h3>
   }
@@ -50,7 +53,7 @@ const TopNews = ({ basePath = "/international" }: TopNewsProps) => {
           ))
         }
 
-        {sortNewsData?.slice(0, 3).map((news) => (
+        {sortNewsData?.slice(0, 5).map((news) => (
           <div key={news._id} className="bg-white overflow-hidden">
             <div className="relative h-32  w-full aspect-[3/2] hover:scale-105 duration-500 ">
 
@@ -68,9 +71,9 @@ const TopNews = ({ basePath = "/international" }: TopNewsProps) => {
               <h2 className="text-lg lg:text-xl font-bold hover:text-blue-600">
                 <Link href={`${basePath}/${news.slug}`}>{news?.newsTitle}</Link>
               </h2>
-              <p className="text-sm text-gray-600">{news?.description}</p>
+              <p className="text-sm text-gray-600">{parse(truncateText(news?.description, 200))}</p>
               <div className="flex justify-between">
-                <p className="text-sm text-gray-400">{news?.postDate}</p>
+                <p className="text-sm text-gray-400">{formatDate(news?.postDate)}</p>
                 <p className="text-blue-600 text-sm">
                   <Link href={`${basePath}/${news.slug}`}>আরো পড়ুন</Link>
                 </p>

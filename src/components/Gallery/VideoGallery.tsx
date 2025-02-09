@@ -1,110 +1,71 @@
-"use client";
-import React, { useState, useEffect, useCallback, useRef } from "react";
-import Image from "next/image";
-import { ChevronLeft, ChevronRight, PlayIcon } from "lucide-react";
-import Link from "next/link";
-import VideoModal from "./VideoModal";
-import image from "@public/asset/Gallery/image-3.jpg";
+"use client"
 
-const newsData = [
-  {
-    id: 1,
-    title: "বিশ্ব অর্থনৈতিক পরিবর্তন চলছে",
-    description:
-      "বিশ্ব বাণিজ্যে গুরুত্বপূর্ণ পরিবর্তনের পূর্বাভাস দিয়েছেন বিশেষজ্ঞরা",
-    date: "১২ ডিসেম্বর, ২০২৪",
-    Thumbnail: image,
-    alt: "Breaking News 1",
-    videoUrl: "https://www.youtube.com/embed/lE6RYpe9IT0?autoplay=1",
-  },
-  {
-    id: 2,
-    title: "নবীন প্রযুক্তি রিনিউয়েবল এনার্জিতে বিপ্লব",
-    description:
-      "নতুন সৌর প্রযুক্তি বর্তমান মডেলের চেয়ে ৫০% বেশি কার্যকারিতা প্রদানের প্রতিশ্রুতি দেয়",
-    date: "১১ ডিসেম্বর, ২০২৪",
-    Thumbnail: "/asset/Gallery/image-4.jpg",
-    alt: "Breaking News 2",
-    videoUrl: "https://www.youtube.com/embed/BumD3DxlxeM?autoplay=1",
-  },
-  {
-    id: 3,
-    title: "জলবায়ু পরিবর্তন সম্মেলন ফলপ্রসূ হচ্ছে",
-    description: "বিশ্ব নেতারা কঠোর কার্বন হ্রাস লক্ষ্য পূরণের অঙ্গীকার করেছেন",
-    date: "১০ ডিসেম্বর, ২০২৪",
-    Thumbnail: "/asset/Gallery/image-5.jpg",
-    alt: "Breaking News 3",
-    videoUrl: "https://www.youtube.com/embed/lE6RYpe9IT0?autoplay=1",
-  },
-  {
-    id: 4,
-    title: "জলবায়ু পরিবর্তন সম্মেলন ফলপ্রসূ হচ্ছে",
-    description: "বিশ্ব নেতারা কঠোর কার্বন হ্রাস লক্ষ্য পূরণের অঙ্গীকার করেছেন",
-    date: "১০ ডিসেম্বর, ২০২৪",
-    Thumbnail: "/asset/Gallery/image02.jpg",
-    alt: "Breaking News 3",
-    videoUrl: "https://www.youtube.com/embed/lE6RYpe9IT0?autoplay=1",
-  },
-  {
-    id: 5,
-    title: "জলবায়ু পরিবর্তন সম্মেলন ফলপ্রসূ হচ্ছে",
-    description: "বিশ্ব নেতারা কঠোর কার্বন হ্রাস লক্ষ্য পূরণের অঙ্গীকার করেছেন",
-    date: "১০ ডিসেম্বর, ২০২৪",
-    Thumbnail: "/asset/Gallery/image.jpg",
-    alt: "Breaking News 3",
-    videoUrl: "https://www.youtube.com/embed/lE6RYpe9IT0?autoplay=1",
-  },
-];
+import { useState, useEffect, useCallback, useRef } from "react"
+import { ChevronLeft, ChevronRight, PlayIcon } from "lucide-react"
+import Link from "next/link"
+import VideoModal from "./VideoModal"
+import { useSpecificVideoNewsData } from "@/hooks/useSpecificVideoNewsData"
+import { sortByDate } from "@/util/sort"
+import Image from "next/image"
 
 const VideoGallery = () => {
-  const [currentCarouselIndex, setCurrentCarouselIndex] = useState(0);
-  const [isPaused, setIsPaused] = useState(false);
-  const [isVideoModalOpen, setIsVideoModalOpen] = useState(false);
-  const intervalRef = useRef<NodeJS.Timeout | null>(null);
+  const [currentCarouselIndex, setCurrentCarouselIndex] = useState(0)
+  const [isPaused, setIsPaused] = useState(false)
+  const [isVideoModalOpen, setIsVideoModalOpen] = useState(false)
+  const intervalRef = useRef<NodeJS.Timeout | null>(null)
+  const { videoNewsData, loading, error } = useSpecificVideoNewsData()
+
+  const sortVideoNews = sortByDate(videoNewsData, "postDate")
 
   const goToPrevious = useCallback(() => {
-    setCurrentCarouselIndex((prevIndex) =>
-      prevIndex === 0 ? newsData.length - 1 : prevIndex - 1
-    );
-  }, []);
+    setCurrentCarouselIndex((prevIndex) => (prevIndex === 0 ? sortVideoNews?.length - 1 : prevIndex - 1))
+  }, [sortVideoNews])
 
   const goToNext = useCallback(() => {
-    setCurrentCarouselIndex((prevIndex) =>
-      prevIndex === newsData.length - 1 ? 0 : prevIndex + 1
-    );
-  }, []);
+    setCurrentCarouselIndex((prevIndex) => (prevIndex === sortVideoNews?.length - 1 ? 0 : prevIndex + 1))
+  }, [sortVideoNews])
 
   useEffect(() => {
     if (intervalRef.current) {
-      clearInterval(intervalRef.current);
+      clearInterval(intervalRef.current)
     }
 
     if (!isPaused && !isVideoModalOpen) {
-      intervalRef.current = setInterval(goToNext, 2000);
+      intervalRef.current = setInterval(goToNext, 2000)
     }
 
     return () => {
       if (intervalRef.current) {
-        clearInterval(intervalRef.current);
+        clearInterval(intervalRef.current)
       }
-    };
-  }, [goToNext, isPaused, isVideoModalOpen]);
+    }
+  }, [goToNext, isPaused, isVideoModalOpen])
 
-  const handleSideImageClick = (index: React.SetStateAction<number>) => {
-    setCurrentCarouselIndex(index);
-  };
+  const handleSideImageClick = (index: number) => {
+    setCurrentCarouselIndex(index + 1)
+  }
+
+  if (loading) {
+    return <h3>Loading.......</h3>
+  }
+  if (error) {
+    return <h3>Oops! Data not found.</h3>
+  }
+
+  const getImageUrl = (images: string[] | undefined) => {
+    if (Array.isArray(images) && images.length > 0) {
+      return images[0]
+    }
+    return "/placeholder.svg"
+  }
 
   return (
     <div className="py-8">
       <div className="border-t-2 py-2 flex justify-between">
-        <h1 className="text-4xl font-semibold border-s-4 border-blue-500 ps-2">
-          ভিডিও
-        </h1>
+        <h1 className="text-4xl font-semibold border-s-4 border-blue-500 ps-2">ভিডিও</h1>
       </div>
       <div>
         <div className="flex flex-col lg:flex-row-reverse gap-6">
-          {/* trending news */}
-
           <div
             className="w-full lg:w-2/3 relative"
             onMouseEnter={() => setIsPaused(true)}
@@ -112,13 +73,16 @@ const VideoGallery = () => {
           >
             <div className="relative overflow-hidden">
               <div className="relative w-full h-full aspect-[3/2]">
-                <Image
-                  src={newsData[currentCarouselIndex]?.Thumbnail}
-                  alt={newsData[currentCarouselIndex]?.alt}
-                  className="object-cover"
-                  fill
-                  priority={currentCarouselIndex === 0}
-                />
+                {sortVideoNews[currentCarouselIndex]?.images && (
+                  <Image
+                    key={sortVideoNews[currentCarouselIndex]._id}
+                    src={getImageUrl(sortVideoNews[currentCarouselIndex].images) || "/placeholder.svg"}
+                    alt="Video Thumbnail"
+                    className="object-cover"
+                    fill
+                    priority={currentCarouselIndex === 0}
+                  />
+                )}
               </div>
               <div className="absolute inset-0 bg-black bg-opacity-30 flex items-center justify-center">
                 <button
@@ -129,67 +93,64 @@ const VideoGallery = () => {
                 </button>
               </div>
               <div className="absolute bottom-0 left-0 right-0 bg-black bg-opacity-60 text-white p-1 lg:p-4">
-                <Link href={`/view_details`}>
+                <Link href={`/video/${sortVideoNews[currentCarouselIndex]?.slug}`}>
                   <h2 className="text-xl lg:text-2xl font-bold mb-2 hover:text-blue-500">
-                    {newsData[currentCarouselIndex]?.title}
+                    {sortVideoNews[currentCarouselIndex]?.newsTitle}
                   </h2>
                   <p className="text-sm text-gray-200 hidden lg:block">
-                    {newsData[currentCarouselIndex]?.description}
+                    {sortVideoNews[currentCarouselIndex]?.shortDescription}
                   </p>
                 </Link>
               </div>
               <div className="absolute top-3 right-3 space-x-2">
-                <button
-                  onClick={goToPrevious}
-                  className="bg-white/50 rounded-full p-1 hover:bg-white/75 z-10"
-                >
+                <button onClick={goToPrevious} className="bg-white/50 rounded-full p-1 hover:bg-white/75 z-10">
                   <ChevronLeft size={32} />
                 </button>
-                <button
-                  onClick={goToNext}
-                  className="bg-white/50 rounded-full p-1 hover:bg-white/75 z-10"
-                >
+                <button onClick={goToNext} className="bg-white/50 rounded-full p-1 hover:bg-white/75 z-10">
                   <ChevronRight size={32} />
                 </button>
               </div>
             </div>
           </div>
 
-          {/* other card of related tending news */}
+          {/* Video thumbnails */}
           <div className="w-full flex-1 grid grid-cols-3 md:grid-cols-2 lg:grid-cols-2 gap-4">
-            {newsData.map((newsItem, index) => (
-              <div
-                key={newsItem.id}
-                onClick={() => handleSideImageClick(index)}
-                className="cursor-pointer opacity-70 hover:opacity-100 transition-opacity duration-300"
-              >
-                <div className="relative aspect-[3/2]">
-                  <Image
-                    src={newsItem?.Thumbnail}
-                    alt={newsItem?.alt}
-                    fill
-                    className="object-cover"
-                  />
+            {sortVideoNews?.slice(0, 3)?.map((newsItem, index) => {
+          
+              return (
+
+                <div
+                  key={newsItem?._id}
+                  onClick={() => handleSideImageClick(index)}
+                  className="cursor-pointer opacity-70 hover:opacity-100 transition-opacity duration-300"
+                >
+                  <div className="relative aspect-[3/2]">
+                    <Image
+                      src={getImageUrl(newsItem.images) || "/placeholder.svg"}
+                      alt={newsItem?.newsTitle || "News Image"}
+                      className="object-cover"
+                      fill
+                    />
+                  </div>
+                  <Link href={`/video/${newsItem.slug}`}>
+                    <h2 className="font-semibold hover:text-blue-500 pt-2">{newsItem?.newsTitle}</h2>
+                  </Link>
                 </div>
-                <Link href={`/view_details`}>
-                  <h2 className="font-semibold hover:text-blue-500 pt-2">
-                    {newsItem?.title}
-                  </h2>
-                </Link>
-              </div>
-            ))}
+              )
+            })}
           </div>
         </div>
       </div>
       {isVideoModalOpen && (
         <VideoModal
           currentCarouselIndex={currentCarouselIndex}
-          newsData={newsData}
+          newsData={sortVideoNews}
           setIsVideoModalOpen={setIsVideoModalOpen}
         />
       )}
     </div>
-  );
-};
+  )
+}
 
-export default VideoGallery;
+export default VideoGallery
+

@@ -5,8 +5,9 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 interface TopNewsProps {
   basePath?: string;
+  category: string;
 }
-const SideTabs = ({ basePath = "/international" }: TopNewsProps) => {
+const SideTabs = ({ category, basePath = "/" }: TopNewsProps) => {
   return (
     <Tabs defaultValue="most_read" defaultChecked className="bg-white">
       <TabsList>
@@ -21,13 +22,13 @@ const SideTabs = ({ basePath = "/international" }: TopNewsProps) => {
         </TabsTrigger>
       </TabsList>
       <TabsContent value="most_read">
-        <ReadNews basePath={basePath}/>
+        <ReadNews category={category} basePath={basePath} />
       </TabsContent>
       <TabsContent value="important">
-        <ImportantNews basePath={basePath}/>
+        <ImportantNews category={category} basePath={basePath} />
       </TabsContent>
       <TabsContent value="discussed">
-        <Discussed basePath={basePath}/>
+        <Discussed category={category} basePath={basePath} />
       </TabsContent>
     </Tabs>
   );

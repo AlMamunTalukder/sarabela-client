@@ -44,7 +44,6 @@ const Feedback = () => {
   const handleSubmit = (e: { preventDefault: () => void }) => {
     e.preventDefault();
     if (comment.trim()) {
-      console.log("Submitted comment:", comment);
       setComment("");
     }
   };
