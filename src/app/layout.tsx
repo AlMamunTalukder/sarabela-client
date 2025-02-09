@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import { Baloo_Da_2 } from "next/font/google";
+import { Tiro_Bangla } from "next/font/google";
 import Providers from "@/lib/Provider";
-const baloo_font = Baloo_Da_2({
+
+const tiro_Bangla = Tiro_Bangla({
   weight: "400",
   subsets: ["latin"],
 });
@@ -20,7 +21,7 @@ export default function RootLayout({
   return (
     <html lang="en">      
       <Providers>
-        <body className={baloo_font.className}>{children}</body>
+        <body className={`bg-white dark:bg-gray-900 text-gray-900 dark:text-white ${tiro_Bangla.className}`}>{children}</body>
       </Providers>
     </html>
   );

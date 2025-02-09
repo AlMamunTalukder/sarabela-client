@@ -132,7 +132,7 @@ const NewsSlider: React.FC = () => {
                     {newsData[currentCarouselIndex].date}
                   </span>
                 </div>
-                <Link href={`/view_details`} className="hover:text-blue-500">
+                <Link href={`/view-details-photo/${newsData[currentCarouselIndex].id}`} className="hover:text-blue-500">
                   <h2 className=" text-ellipsis text-xl lg:text-2xl font-bold mb-2">
                     {newsData[currentCarouselIndex].title}
                   </h2>
@@ -177,7 +177,9 @@ const NewsSlider: React.FC = () => {
                 </div>
                 <div className="pt-2">
                   <p className="font-semibold hover:text-blue-500">
-                    <Link href={`/view_details`}>{newsItem?.title}</Link>
+                    <Link href={`/view-details-photo/${newsItem?.id}`}>
+                      {newsItem?.title}
+                    </Link>
                   </p>
                 </div>
               </div>

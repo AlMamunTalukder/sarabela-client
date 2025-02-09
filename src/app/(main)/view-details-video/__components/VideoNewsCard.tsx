@@ -1,6 +1,7 @@
 import React from 'react';
 
-const NormalCard = () => {
+
+const VideoNewsCard = () => {
     return (
         <div>
             
@@ -8,4 +9,4 @@ const NormalCard = () => {
     );
 }
 
-export default NormalCard;
+export default VideoNewsCard;

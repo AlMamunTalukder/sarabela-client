@@ -2,10 +2,10 @@ import SaidBar from "@/components/Sports/SaidBar";
 import image1 from "@public/asset/Gallery/image-6.jpg";
 import related_news from "@public/asset/Gallery/image02.jpg";
 import PaginationPages from "@/util/PaginationPages";
-import NewsCard from "@/components/News/NewsCard";
 import Advertisement_3 from "@/util/Advertisement_3";
-import RelatedNews from "@/components/News/RelatedNews";
 import Feedback from "@/util/Feedback";
+import RelatedNews from "@/components/News/RelatedNews";
+import PhotoNewsCard from "../__components/PhotoNewsCard";
 
 const newsData = {
   id: 1,
@@ -106,16 +106,14 @@ const Page = () => {
         <div className="flex flex-col lg:flex-row gap-8">
           {/* Main Content Section */}
           <div className="w-full lg:w-3/4">
-            <div className="bg-white">
-              <div className="space-y-6">
-                {/* News Card */}
-                <div className="overflow-hidden">
-                  <NewsCard news={newsData} />
-                  <Feedback />
-                  <Advertisement_3 />
-                  <RelatedNews data={relatedNews} />
-                  <PaginationPages />
-                </div>
+            <div className="bg-white space-y-6">
+              {/* News Card */}
+              <div className="overflow-hidden">
+                <PhotoNewsCard news={newsData} />
+                <Feedback />
+                <Advertisement_3 />
+                <RelatedNews data={relatedNews} />
+                <PaginationPages />
               </div>
             </div>
           </div>

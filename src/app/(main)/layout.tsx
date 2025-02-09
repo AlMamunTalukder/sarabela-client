@@ -10,21 +10,18 @@ const Layout = ({ children }: { children: ReactNode }) => {
       <header className="z-30">
         <Header />
       </header>
-      
+
       <nav className="sticky top-0 z-40">
         <Navbar />
       </nav>
-      
-      <main className="flex-grow mb-[50px]">
-        {children}
-      </main>
+
+      <main className="flex-grow mb-[50px]">{children}</main>
 
       {/* Breaking News Ticker */}
       <div className="fixed bottom-0 left-0 right-0 z-50">
         <BreakingNews />
       </div>
-      
-      {/* Footer with margin to prevent breaking news overlap */}
+
       <footer className="relative z-30 mb-[50px]">
         <Footer />
       </footer>

@@ -4,7 +4,7 @@ interface AdvertisementProps {
   banner: StaticImageData;
 }
 
-const Advertisement = ({ banner }: AdvertisementProps) => {
+const Advertisement_1 = ({ banner }: AdvertisementProps) => {
   return (
     <div className="w-full my-4 h-[300px] relative">
       <Image
@@ -21,4 +21,4 @@ const Advertisement = ({ banner }: AdvertisementProps) => {
   );
 };
 
-export default Advertisement;
+export default Advertisement_1;
