@@ -3,7 +3,10 @@ import ImportantNews from "@/components/News/ImportantNews";
 import ReadNews from "@/components/News/ReadNews";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
-const SideTabs = () => {
+interface TopNewsProps {
+  basePath?: string;
+}
+const SideTabs = ({ basePath = "/international" }: TopNewsProps) => {
   return (
     <Tabs defaultValue="most_read" defaultChecked className="bg-white">
       <TabsList>
@@ -18,13 +21,13 @@ const SideTabs = () => {
         </TabsTrigger>
       </TabsList>
       <TabsContent value="most_read">
-        <ReadNews />
+        <ReadNews basePath={basePath}/>
       </TabsContent>
       <TabsContent value="important">
-        <ImportantNews />
+        <ImportantNews basePath={basePath}/>
       </TabsContent>
       <TabsContent value="discussed">
-        <Discussed />
+        <Discussed basePath={basePath}/>
       </TabsContent>
     </Tabs>
   );

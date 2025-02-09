@@ -1,36 +1,34 @@
 "use client";
+import { TNews } from "@/types";
+import truncateText from "@/util/truncate";
 import Image from "next/image";
-import { StaticImageData } from "next/image";
 import Link from "next/link";
 
-interface News {
-  id: number;
-  category: string;
-  title: string;
-  description: string;
-  date: string;
-  news_type: string;
-  published_time: string;
-  image: StaticImageData;
+type NewsProps = {
+  data: TNews[]
 }
 
-const TrendingCard = ({ data }: { data: News[] }) => {
+const TrendingCard = ({ data }: NewsProps) => {
   return (
     <div className="grid">
       {data.map((news) => (
-        <div key={news.id} className="flex flex-row bg-white pt-2">
-          <Image
-            src={news.image}
-            alt={news.title}
-            className="object-cover"
-            width={200}
-            height={100}
-          />
+        <div key={news._id} className=" flex flex-row bg-white pt-2">
+
+          {news.images?.[0] && (
+            <Image
+              src={news.images[0]}
+              alt={news.newsTitle || "News Image"}
+              className="object-cover"
+              width={200}
+              height={100}
+
+            />
+          )}
           <div className="ms-4">
             <h3 className="text-lg font-semibold text-gray-800 hover:text-blue-500">
-              <Link href="/view_details">{news.title}</Link>
+              <Link href={`/international/${news.slug}`}>{news.newsTitle}</Link>
             </h3>
-            <p className="text-sm text-gray-600 mt-2">{news.description}</p>
+            <p className="text-sm text-gray-600 mt-2">{truncateText(news.description, 100)}</p>
           </div>
         </div>
       ))}

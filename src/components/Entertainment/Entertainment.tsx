@@ -1,8 +1,9 @@
-import NewsCard from "./NewsCard";
+import EntertainmentNewsCard from "./EntertainmentNewsCard";
+
 const Entertainment = () => {
   return (
     <div className="border-t-2 my-4">
-      <NewsCard />
+      <EntertainmentNewsCard />
     </div>
   );
 };
