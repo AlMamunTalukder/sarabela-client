@@ -20,7 +20,6 @@ import {
   X,
   Sun,
   Moon,
-  ChevronsUpDown,
 } from "lucide-react";
 import Image from "next/image";
 import logo from "@public/asset/dailyTimes24.png";
@@ -28,7 +27,8 @@ import { usePathname } from "next/navigation";
 import { useDispatch, useSelector } from "react-redux";
 import { toggleDarkMode } from "@/lib/themeSlice";
 import { Button } from "../ui/button";
-import MultipleField from "../Form-Inputs/MultipleField";
+import { Popover, PopoverTrigger } from "@radix-ui/react-popover";
+import SearchCombobox from "../Form-Inputs/SearchCombobox";
 
 interface SocialLink {
   id: string;
@@ -70,33 +70,9 @@ const navItems: NavItem[] = [
   },
 ];
 
-const searchNews = [
-  {
-    value: "next.js",
-    label: "Next.js",
-  },
-  {
-    value: "sveltekit",
-    label: "SvelteKit",
-  },
-  {
-    value: "nuxt.js",
-    label: "Nuxt.js",
-  },
-  {
-    value: "remix",
-    label: "Remix",
-  },
-  {
-    value: "astro",
-    label: "Astro",
-  },
-];
-
 const Navbar: React.FC = () => {
   const [isOpen, setIsOpen] = React.useState(false);
-  const [isSearchBarOpen, setSearchBarOpen] = React.useState(false);
-  const [value, setValue] = React.useState("");
+  const [isSearchOpen, setIsSearchOpen] = React.useState(false);
   const navRef = React.useRef<HTMLDivElement>(null);
   const pathname = usePathname();
   const dispatch = useDispatch();
@@ -185,23 +161,22 @@ const Navbar: React.FC = () => {
           <div className="flex items-center space-x-4">
             <div className="border-e-2 pe-2">
               <div>
-                {/* Button to trigger search/popover */}
-                <Button
-                  variant="outline"
-                  role="combobox"
-                  aria-expanded={open}
-                  onClick={() => setSearchBarOpen(!isSearchBarOpen)} 
-                  className="w-[200px] justify-between"
-                >
-                  {value
-                    ? searchNews.find((framework) => framework.value === value)
-                        ?.label
-                    : "Select framework..."}
-                  <ChevronsUpDown className="opacity-50" />
-                </Button>
-                {isSearchBarOpen && (
-                  <MultipleField searchNews={searchNews} setValue={setValue} />
-                )}
+                <Popover open={isSearchOpen} onOpenChange={setIsSearchOpen}>
+                  <PopoverTrigger asChild>
+                    <Button
+                      variant="ghost"
+                      size="icon"
+                      className="bg-white p-2 rounded-full text-blue-600 hover:bg-blue-50 transition-colors"
+                    >
+                      <Search size={15} />
+                    </Button>
+                  </PopoverTrigger>
+                  <SearchCombobox
+                    isOpen={isSearchOpen}
+                    setIsOpen={setIsSearchOpen}
+                    placeholder="Search news..."
+                  />
+                </Popover>
               </div>
             </div>
             {socialLinks.map((link) => (

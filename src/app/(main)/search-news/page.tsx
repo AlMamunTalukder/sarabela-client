@@ -1,4 +1,4 @@
-import MultipleField from "@/components/Form-Inputs/MultipleField";
+import MultipleField from "@/components/Form-Inputs/SearchCombobox";
 import React from "react";
 
 const Page = () => {
