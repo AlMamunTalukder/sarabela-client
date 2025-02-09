@@ -34,7 +34,7 @@ const topNews = [
 
 const Header = () => {
   return (
-    <section className="hidden lg:block border-b-2 border-[#B99470] py-2 bg-blue-100">
+    <section className="hidden lg:block border-b-2 border-[#B99470] py-2 bg-blue-100 dark:bg-black">
       <div className="max-w-7xl mx-auto  grid grid-cols-4 items-center justify-between gap-4">
         
         <div className="flex items-center grid-cols-1 gap-2">

@@ -152,11 +152,22 @@ const Footer = () => {
         </div>
 
         {/* Bottom Section */}
-        <div className="mt-8 text-center text-gray-400 text-sm">
-          <hr className="border-gray-600" />
-          <p className="mt-4">
+        <div className="py-8">
+        <hr className="border-gray-600" />
+        </div>
+        <div className="flex justify-between items-center text-gray-400 text-sm">
+          <p>
             &copy; {new Date().getFullYear()} Daily Time 24. All Rights
             Reserved.
+          </p>
+          <p>
+            Develop & Maintenance by{" "}
+            <Link
+              href={`https://softypy.com`}
+              className="text-orange-500 hover:text-blue-500"
+            >
+              SoftyPy IT{" "}
+            </Link>
           </p>
         </div>
       </div>

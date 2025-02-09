@@ -18,10 +18,17 @@ import {
   UserRound,
   Menu,
   X,
+  Sun,
+  Moon,
+  ChevronsUpDown,
 } from "lucide-react";
 import Image from "next/image";
 import logo from "@public/asset/dailyTimes24.png";
 import { usePathname } from "next/navigation";
+import { useDispatch, useSelector } from "react-redux";
+import { toggleDarkMode } from "@/lib/themeSlice";
+import { Button } from "../ui/button";
+import MultipleField from "../Form-Inputs/MultipleField";
 
 interface SocialLink {
   id: string;
@@ -36,10 +43,10 @@ interface NavItem {
 }
 
 const socialLinks: SocialLink[] = [
-  { id: "01", icon: <Facebook size={20} />, link: "https://facebook.com" },
-  { id: "02", icon: <Twitter size={20} />, link: "https://twitter.com" },
-  { id: "03", icon: <Linkedin size={20} />, link: "https://linkedin.com" },
-  { id: "04", icon: <Youtube size={20} />, link: "https://youtube.com" },
+  { id: "01", icon: <Facebook size={15} />, link: "https://facebook.com" },
+  { id: "02", icon: <Twitter size={15} />, link: "https://twitter.com" },
+  { id: "03", icon: <Linkedin size={15} />, link: "https://linkedin.com" },
+  { id: "04", icon: <Youtube size={15} />, link: "https://youtube.com" },
 ];
 
 const navItems: NavItem[] = [
@@ -63,21 +70,37 @@ const navItems: NavItem[] = [
   },
 ];
 
+const searchNews = [
+  {
+    value: "next.js",
+    label: "Next.js",
+  },
+  {
+    value: "sveltekit",
+    label: "SvelteKit",
+  },
+  {
+    value: "nuxt.js",
+    label: "Nuxt.js",
+  },
+  {
+    value: "remix",
+    label: "Remix",
+  },
+  {
+    value: "astro",
+    label: "Astro",
+  },
+];
+
 const Navbar: React.FC = () => {
   const [isOpen, setIsOpen] = React.useState(false);
+  const [isSearchBarOpen, setSearchBarOpen] = React.useState(false);
+  const [value, setValue] = React.useState("");
   const navRef = React.useRef<HTMLDivElement>(null);
   const pathname = usePathname();
-
-  React.useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (navRef.current && !navRef.current.contains(event.target as Node)) {
-        setIsOpen(false);
-      }
-    };
-
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => document.removeEventListener("mousedown", handleClickOutside);
-  }, []);
+  const dispatch = useDispatch();
+  const mode = useSelector((state: any) => state.themeToggle.mode);
 
   React.useEffect(() => {
     setIsOpen(false);
@@ -160,15 +183,26 @@ const Navbar: React.FC = () => {
 
           {/* Search and Social */}
           <div className="flex items-center space-x-4">
-            <div className="relative">
-              <input
-                type="text"
-                className="w-48 bg-white rounded-full outline-none pl-4 pr-10 py-2 text-gray-700 focus:w-64 transition-all duration-300"
-                placeholder="Search..."
-              />
-              <button className="absolute right-2 top-1/2 transform -translate-y-1/2 text-blue-600">
-                <Search size={20} />
-              </button>
+            <div className="border-e-2 pe-2">
+              <div>
+                {/* Button to trigger search/popover */}
+                <Button
+                  variant="outline"
+                  role="combobox"
+                  aria-expanded={open}
+                  onClick={() => setSearchBarOpen(!isSearchBarOpen)} 
+                  className="w-[200px] justify-between"
+                >
+                  {value
+                    ? searchNews.find((framework) => framework.value === value)
+                        ?.label
+                    : "Select framework..."}
+                  <ChevronsUpDown className="opacity-50" />
+                </Button>
+                {isSearchBarOpen && (
+                  <MultipleField searchNews={searchNews} setValue={setValue} />
+                )}
+              </div>
             </div>
             {socialLinks.map((link) => (
               <Link key={link.id} href={link.link}>
@@ -177,9 +211,20 @@ const Navbar: React.FC = () => {
                 </div>
               </Link>
             ))}
-            <div className="border-s-2 px-2">
-              <button className="text-white hover:text-blue-100">
-                <UserRound size={25} />
+
+            <div className="border-s-2 px-2 flex gap-2">
+              <button className="p-2 rounded-full bg-gray-200 dark:bg-gray-700">
+                <UserRound size={15} />
+              </button>
+              <button
+                onClick={() => dispatch(toggleDarkMode())}
+                className="p-2 rounded-full bg-gray-200 dark:bg-gray-700"
+              >
+                {mode ? (
+                  <Sun size={15} className="text-yellow-400" />
+                ) : (
+                  <Moon size={15} className="text-blue-400" />
+                )}
               </button>
             </div>
           </div>
