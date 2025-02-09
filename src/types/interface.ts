@@ -63,3 +63,13 @@ export type TVideoNews = {
   metaDescription: string;
   
 };
+
+export type TPhotoNews = {
+  _id:string;
+  title: string;
+  description:string,
+  imgTagline:string,
+  images:[string]
+  postDate:Date,
+  adminName:string,
+};
