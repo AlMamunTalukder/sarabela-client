@@ -22,24 +22,15 @@ const topNews = [
     description:
       "বিশ্বকাপ ক্রিকেটে পাকিস্তানকে ৫ উইকেটে হারিয়ে বাংলাদেশ দলের দুর্দান্ত পারফরম্যান্স।",
   },
-  // {
-  //   id: "03",
-  //   title:
-  //     "বিশ্বকাপ ক্রিকেটে বাংলাদেশের জয় ঢাকায় বড় পরিসরে শুরু হয়েছে বইমেলা",
-  //   image: "/asset/topnews/image-1 (1).jpg",
-  //   description:
-  //     "বিশ্বকাপ ক্রিকেটে পাকিস্তানকে ৫ উইকেটে হারিয়ে বাংলাদেশ দলের দুর্দান্ত পারফরম্যান্স।",
-  // },
 ];
 
 const Header = () => {
   return (
-    <section className="hidden lg:block border-b-2 border-[#B99470] py-2 bg-blue-100 dark:bg-black">
-      <div className="max-w-7xl mx-auto  grid grid-cols-4 items-center justify-between gap-4">
-        
+    <section className="hidden lg:block border-b-2 border-[#B99470] py-2 bg-blue-100 dark:bg-gray-600">
+      <div className="max-w-7xl mx-auto grid grid-cols-4 items-center justify-between gap-4">
+        {/* Logo and Date */}
         <div className="flex items-center grid-cols-1 gap-2">
           <Link href="/">
-            {" "}
             <Image
               src={logo?.src}
               placeholder="blur"
@@ -49,11 +40,12 @@ const Header = () => {
               height={100}
             />
           </Link>
-          <div>
+          <div className="text-gray-800 dark:text-gray-300">
             <DateAndTime />
           </div>
         </div>
 
+        {/* Banner */}
         <div className="flex w-full col-span-1 flex-col lg:flex-row">
           <Image
             src={banner}
@@ -63,26 +55,26 @@ const Header = () => {
           />
         </div>
 
+        {/* Top News */}
         <div className="col-span-2 flex">
           {topNews.map((item) => (
             <div
               key={item.id}
-              className="gap-2 border-s-2 border-gray-300 px-2 flex"
+              className="gap-2 border-s-2 border-gray-300 dark:border-gray-700 px-2 flex"
             >
               <div>
                 <Image
                   src={item.image}
                   alt={item.title}
-                  className=" object-cover"
+                  className="object-cover"
                   placeholder="blur"
                   blurDataURL={item?.title}
                   width={80}
                   height={40}
                 />
               </div>
-
               <div className="col-span-1 flex-1">
-                <h2 className="text-sm font-semibold hover:text-blue-500">
+                <h2 className="text-sm font-semibold hover:text-blue-500 dark:hover:text-blue-400 text-gray-900 dark:text-gray-200">
                   <Link href={`view_details`}>{item.title}</Link>
                 </h2>
               </div>

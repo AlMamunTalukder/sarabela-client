@@ -85,7 +85,7 @@ const Navbar: React.FC = () => {
   return (
     <div
       ref={navRef}
-      className="bg-gradient-to-r from-blue-700 to-blue-600 lg:bg-blue-600"
+      className="bg-gray-500"
     >
       {/* Mobile Top Bar */}
       <div className="lg:hidden mx-auto px-4">

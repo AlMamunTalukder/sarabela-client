@@ -32,10 +32,10 @@ const NewsCard = () => {
                   className="block group">
                   <div className="relative aspect-[4/3] overflow-hidden">
                     <div className="relative w-full h-full transform transition-transform duration-500 group-hover:scale-110">
-                      {news.images?.[0] && (
+                      {news?.images?.[0] && (
                         <Image
-                          src={news.images[0]}
-                          alt={news.newsTitle || "News Image"}
+                          src={news?.images[0]}
+                          alt={news?.newsTitle || "News Image"}
                           placeholder="blur"
                           blurDataURL="/placeholder.jpg"
                           className="object-cover w-full "
@@ -45,8 +45,8 @@ const NewsCard = () => {
                         />
                       )}
                     </div>
-                    <div className="absolute bottom-0 p-4 bg-gradient-to-t from-black to-transparent w-full">
-                      <h1 className="text-2xl lg:text-4xl text-white font-semibold group-hover:text-yellow-500 transition-colors">
+                    <div className="absolute bottom-0 p-4 bg-white w-full">
+                      <h1 className="text-2xl lg:text-4xl font-semibold group-hover:text-yellow-500 transition-colors">
                         {news.newsTitle}
                       </h1>
                     </div>
