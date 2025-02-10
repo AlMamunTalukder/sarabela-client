@@ -83,13 +83,10 @@ const Navbar: React.FC = () => {
   }, [pathname]);
 
   return (
-    <div
-      ref={navRef}
-      className="bg-gray-500"
-    >
+    <div ref={navRef} className="bg-white dark:bg-gray-400 border-b  shadow-sm">
       {/* Mobile Top Bar */}
       <div className="lg:hidden mx-auto px-4">
-        <div className="flex justify-between items-center py-2 border-b border-blue-400">
+        <div className="flex justify-between items-center py-2 border-b border-red-500">
           <div className="flex items-center space-x-4">
             <Image
               src={logo}
@@ -123,13 +120,14 @@ const Navbar: React.FC = () => {
                 {navItems.map((item) =>
                   item.nested ? (
                     <NavigationMenuItem key={item.href}>
-                      <NavigationMenuTrigger className="px-3 py-2 text-white hover:text-blue-100 ">
+                      <NavigationMenuTrigger className="px-3 py-2 text-black hover:text-red-500 ">
                         {item.label}
                       </NavigationMenuTrigger>
                       <NavigationMenuContent>
-                        <ul className="grid grid-cols-4 gap-4 w-[750px] p-4">
+                        <ul className="grid grid-cols-4 gap-4 w-[750px] p-4 ">
                           {item.nested.map((nestedItem) => (
                             <ListItem
+                              className="hover:text-red-500"
                               key={nestedItem.href}
                               title={nestedItem.label}
                               href={nestedItem.href}
@@ -142,9 +140,9 @@ const Navbar: React.FC = () => {
                     <NavigationMenuItem key={item.href}>
                       <Link
                         href={item.href}
-                        className={`px-3 py-2 text-white hover:text-blue-100 ${
+                        className={`px-3 py-2 hover:text-red-500 ${
                           pathname === item.href
-                            ? "border-b-2 border-white"
+                            ? "border-b-2 border-black text-red-500"
                             : ""
                         }`}
                       >
@@ -163,13 +161,9 @@ const Navbar: React.FC = () => {
               <div>
                 <Popover open={isSearchOpen} onOpenChange={setIsSearchOpen}>
                   <PopoverTrigger asChild>
-                    <Button
-                      variant="ghost"
-                      size="icon"
-                      className="bg-white p-2 rounded-full text-blue-600 hover:bg-blue-50 transition-colors"
-                    >
+                    <button className="p-2 rounded-full bg-gray-200 dark:bg-gray-700 hover:bg-red-400 transition-colors">
                       <Search size={15} />
-                    </Button>
+                    </button>
                   </PopoverTrigger>
                   <SearchCombobox
                     isOpen={isSearchOpen}
@@ -181,7 +175,7 @@ const Navbar: React.FC = () => {
             </div>
             {socialLinks.map((link) => (
               <Link key={link.id} href={link.link}>
-                <div className="bg-white p-2 rounded-full text-blue-600 hover:bg-blue-50 transition-colors">
+                <div className="p-2 rounded-full bg-gray-200 dark:bg-gray-700 hover:bg-red-400 transition-colors">
                   {link.icon}
                 </div>
               </Link>

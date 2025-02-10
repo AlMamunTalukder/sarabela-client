@@ -5,18 +5,22 @@ import Link from "next/link";
 import { ChevronsRight } from "lucide-react";
 import { useSpecificNewsData } from "@/hooks/useSpecificNewsData";
 import { sortByDate } from "@/util/sort";
-
+import { getCategory } from "@/util/getCategory";
+import truncateText from "@/util/truncate";
+import parse from "html-react-parser";
 const EntertainmentNewsCard = () => {
-  const { newsData, loading, error } = useSpecificNewsData()
+  const basePath = "/entertainment";
+  const category = getCategory(basePath);
+
+  const { newsData, loading, error } = useSpecificNewsData(category);
   if (loading) {
-    return <h3>Loading.......</h3>
+    return <h3>Loading.......</h3>;
   }
   if (error) {
-    return <h3>Oops! data not found.</h3>
+    return <h3>Oops! data not found.</h3>;
   }
 
-  const sortNewsData = sortByDate(newsData, 'postDate')
-
+  const sortNewsData = sortByDate(newsData, "postDate");
 
   return (
     <div>
@@ -32,65 +36,64 @@ const EntertainmentNewsCard = () => {
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-4 gap-4">
-        {
-          sortNewsData?.slice(0, 1)?.map((news) => (
-            <div key={news._id} className="relative group order-1 lg:order-2 lg:col-span-2 ">
-              <div className="overflow-hidden">
-                <div className="relative h-full  overflow-hidden aspect-[3/2]">
+        {sortNewsData?.slice(0, 1)?.map((news) => (
+          <div key={news._id} className="col-span-1 lg:order-2 sm:col-span-2">
+              <Link href={`sports/${news.slug}`} className="block group">
+                <div className="relative aspect-[3/2] overflow-hidden">
+                  <div className="relative w-full h-full transform transition-transform duration-500 group-hover:scale-105">
 
-                  {news.images?.[0] && (
-                    <Image
-                      src={news.images[0]}
-                      alt={news.newsTitle || "News Image"}
-            
-                      className="object-cover group-hover:scale-110 transition-transform duration-500 w-full h-full"
-                      width={500}
-                      height={1000}
-
-                    />
-                  )}
+                    {news?.images?.[0] && (
+                      <Image
+                        src={news?.images[0]}
+                        alt={news?.newsTitle || "News Image"}
+                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 100vw"
+                        width={500}
+                        height={500}
+                        className="object-cover w-full h-full "
+                      />
+                    )}
+                  </div>
+                  <div className="absolute bottom-0 p-4 bg-gradient-to-t from-black to-transparent w-full">
+                    <h1 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-white group-hover:text-yellow-400 transition-colors">
+                      {news.newsTitle}
+                    </h1>
+                  </div>
                 </div>
-                <div className="absolute inset-0 flex items-end p-4">
-                  <Link href={`/entertainment`} className="text-2xl lg:text-4xl">
-                    <h2 className=" text-xl md:text-4xl font-bold hover:text-yellow-400 transition-colors">
-                      {news?.newsTitle}
-                    </h2>
-                  </Link>
-                </div>
-              </div>
+              </Link>
             </div>
-          ))
-        }
+        ))}
         <div className="space-y-6 order-2 lg:order-1 lg:col-span-1 lg:border-e border-black pe-2">
           {sortNewsData.slice(0, 3).map((news, idx) => (
             <div
               key={idx}
               className="bg-white overflow-hidden flex items-stretch"
             >
-              <div className="w-1/2 overflow-hidden ">
-
+              <div className="w-1/2 relative aspect-[3/2] overflow-hidden ">
                 {news?.images?.[0] && (
                   <Image
                     src={news?.images[0]}
                     alt={news?.newsTitle || "News Image"}
                     placeholder="blur"
                     blurDataURL="/placeholder.jpg"
-                    className="object-cover  hover:scale-110 duration-700  "
-                    width={500}
-                    height={500}
-
+                    className="group-hover:scale-110 transition-transform duration-500"
+                    objectFit="fill"
+                    fill
+                    priority
+                   
                   />
                 )}
               </div>
               <div className="flex-1 ps-4 flex flex-col justify-between">
-                <Link href={`view_details`}>
+                <Link href={`/entertainment/${news.slug}`}>
                   <h2 className="text-lg font-bold mb-2 hover:text-blue-600">
                     {news?.newsTitle}
                   </h2>
                 </Link>
 
                 <p className="text-sm text-gray-600 line-clamp-2 mb-2">
-                  {news?.description}
+                  {news?.description
+                    ? parse(truncateText(news.description, 150))
+                    : ""}
                 </p>
               </div>
             </div>
@@ -104,7 +107,7 @@ const EntertainmentNewsCard = () => {
               className="bg-white overflow-hidden flex items-stretch"
             >
               <div className="flex-1 pe-4 flex flex-col justify-between">
-                <Link href={`view_details`}>
+                <Link href={`/entertainment/${news.slug}`}>
                   <h2 className="text-lg font-bold mb-2 hover:text-blue-600">
                     {news?.newsTitle}
                   </h2>
@@ -114,7 +117,6 @@ const EntertainmentNewsCard = () => {
                 </p>
               </div>
               <div className="w-1/2 overflow-hidden">
-
                 {news?.images?.[0] && (
                   <Image
                     src={news?.images[0]}
@@ -122,7 +124,6 @@ const EntertainmentNewsCard = () => {
                     className="object-cover hover:scale-110 transition-transform duration-300"
                     width={500}
                     height={500}
-
                   />
                 )}
               </div>

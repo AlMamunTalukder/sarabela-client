@@ -12,7 +12,7 @@ const LeadSection = () => {
 
         {/* Sidebar Section */}
         <div className="w-full lg:w-1/4">
-          <SaidTabs basePath='/international' />
+          <SaidTabs />
         </div>
       </div>
     </div>

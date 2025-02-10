@@ -6,10 +6,11 @@ import { useSpecificNewsData } from "@/hooks/useSpecificNewsData";
 import { sortByDate } from "./sort";
 interface TopNewsProps {
   basePath?: string;
+  category: string;
 }
 
-const OtherNews = ({ basePath = "/international" }: TopNewsProps) => {
-  const { newsData, loading, error } = useSpecificNewsData()
+const OtherNews = ({ category, basePath = "/international" }: TopNewsProps) => {
+  const { newsData, loading, error } = useSpecificNewsData(category)
   if (loading) {
     return <h3>Loading.......</h3>
   }

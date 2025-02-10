@@ -2,21 +2,22 @@
 "use client";
 
 import { useSpecificNewsData } from "@/hooks/useSpecificNewsData";
+import { getCategory } from "@/util/getCategory";
 import { sortByDate } from "@/util/sort";
+import truncateText from "@/util/truncate";
 import Image from "next/image";
 import Link from "next/link";
+import parse from "html-react-parser";
+import { formatDate } from "@/util/formateDate";
 interface TopNewsProps {
   basePath?: string;
+  category:string;
 }
 
-const RelatedNews = ({ basePath = "/international" }: TopNewsProps) => {
-  const { newsData, loading, error } = useSpecificNewsData()
-  if (loading) {
-    return <h3>Loading.......</h3>
-  }
-  if (error) {
-    return <h3>Oops! data not found.</h3>
-  }
+const RelatedNews = ({category, basePath = "/international" }: TopNewsProps) => {
+  // const category = getCategory(basePath);
+  const { newsData, loading, error } = useSpecificNewsData(category)
+
   if (loading) {
     return <h3>Loading.......</h3>
   }
@@ -45,13 +46,14 @@ const RelatedNews = ({ basePath = "/international" }: TopNewsProps) => {
 
               />
             )}
+
             <div>
               <h2 className="text-lg font-semibold hover:text-blue-600">
                 <Link href={`${basePath}/${newsItem.slug}`}>{newsItem?.newsTitle}</Link>
               </h2>
-              <p className="text-sm text-gray-600">{newsItem?.description}</p>
+              <p className="text-sm text-gray-600">  {newsItem?.description ? parse(truncateText(newsItem.description, 150)) : ""}</p>
               <p className="text-xs text-gray-500">
-                {newsItem?.postDate}
+                {formatDate(newsItem?.postDate)}
               </p>
             </div>
           </div>

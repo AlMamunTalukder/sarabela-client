@@ -2,78 +2,27 @@
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
-import cyclone from "@public/asset/international/cyclone.jpg";
-import entertainment from "@public/asset/international/entertainment.jpg";
-import help from "@public/asset/international/help.jpg";
-import unity from "@public/asset/international/unity.jpg";
 import { ChevronsRight } from "lucide-react";
+import { sortByDate } from "@/util/sort";
+import { useSpecificNewsData } from "@/hooks/useSpecificNewsData";
+import truncateText from "@/util/truncate";
+import { getCategory } from "@/util/getCategory";
 
-const international_news = [
-  {
-    id: 1,
-    category: "জলবায়ু",
-    title: "জলবায়ু সংবেদনশীলতার উপর গুরুত্বারোপ",
-    description:
-      "জাতিসংঘের আন্তর্জাতিক আদালতে আফ্রিকান দেশগুলো প্রধান জলবায়ু ক্ষতির জন্য দেশগুলোকে আইনীভাবে দায়বদ্ধ করার উপর গুরুত্ব দেয়। জাতিসংঘের আন্তর্জাতিক আদালতে আফ্রিকান দেশগুলো প্রধান জলবায়ু ক্ষতির জন্য দেশগুলোকে আইনীভাবে দায়বদ্ধ করার উপর গুরুত্ব দেয়। জাতিসংঘের আন্তর্জাতিক আদালতে আফ্রিকান দেশগুলো প্রধান জলবায়ু ক্ষতির জন্য দেশগুলোকে আইনীভাবে দায়বদ্ধ করার উপর গুরুত্ব দেয়।",
-    date: "2024-12-06",
-    news_type: "trending",
-    published_time: "09:00",
-    image: cyclone,
-  },
-  {
-    id: 2,
-    category: "দুর্যোগ",
-    title: "আবারো সুনামি আঘাত হানে শ্রীলঙ্কায়",
-    description:
-      "একটি বিধ্বংসী সুনামি শ্রীলঙ্কার উপকূলীয় অঞ্চলে আঘাত হানে, ২০০৪ সালের স্মৃতি ফিরিয়ে আনে উল্লেখযোগ্য প্রাণহানি এবং পরিবেশ ক্ষতিসহ।",
-    date: "2024-12-06",
-    news_type: "normal",
-    published_time: "12:00",
-    image: cyclone,
-  },
-  {
-    id: 3,
-    category: "মানবাধিকার",
-    title: "সিরিয়ার আটক কেন্দ্রে নির্যাতনের প্রমাণ উন্মোচিত",
-    description:
-      "জাতিসংঘ সিরিয়ার ১০০টিরও বেশি আটক কেন্দ্রে নির্যাতনের বিস্তারিত প্রকাশ করে, যা বিশ্বজুড়ে নিন্দার সৃষ্টি করেছে।",
-    date: "2024-12-06",
-    news_type: "normal",
-    published_time: "14:30",
-    image: help,
-  },
-  {
-    id: 4,
-    category: "প্রব্রজন",
-    title: "জাতিসংঘের আঞ্চলিক শরণার্থী সহায়তা",
-    description:
-      "ল্যাটিন আমেরিকায় শরণার্থীদের চাকরি এবং নিরাপত্তা সমস্যার সমাধানে জাতিসংঘ $১.৪ বিলিয়ন পরিকল্পনা ঘোষণা করেছে।",
-    date: "2024-12-06",
-    news_type: "normal",
-    published_time: "16:00",
-    image: unity,
-  },
-  {
-    id: 5,
-    category: "সংস্কৃতি",
-    title: "নতুন ইউনেস্কো ঐতিহ্য স্বীকৃতি",
-    description:
-      "ইউনেস্কো রুয়ান্ডার ইন্তোর নৃত্য এবং জাপানের সাকে তৈরি করার মতো ঐতিহ্যবাহী সংস্কৃতিকে বৈশ্বিক সম্পদ হিসেবে স্বীকৃতি প্রদান করেছে।",
-    date: "2024-12-06",
-    news_type: "normal",
-    published_time: "18:45",
-    image: entertainment,
-  },
-];
 
 const NewsCard = () => {
-  const trendingNews = international_news.find(
-    (news) => news.news_type === "trending"
-  );
+   const basePath = '/international';
+    const category = getCategory(basePath);
+  
+  const { newsData, loading, error } = useSpecificNewsData(category)
+  if (loading) {
+    return <h3>Loading.......</h3>
+  }
+  if (error) {
+    return <h3>Oops! data not found.</h3>
+  }
 
-  const normalNews = international_news.filter(
-    (news) => news.news_type === "normal"
-  );
+  const sortNewsData = sortByDate(newsData, 'postDate')
+
 
   return (
     <div>
@@ -91,55 +40,61 @@ const NewsCard = () => {
         </p>
       </div>
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        {trendingNews && (
-          <div className="bg-white overflow-hidden">
+        {sortNewsData?.slice(0, 1)?.map((news) => (
+          <div key={news._id} className="bg-white overflow-hidden">
             <div className="relative w-full aspect-[2/1] overflow-hidden">
-              <Image
-                src={trendingNews.image}
-                alt={trendingNews.title}
-                placeholder="blur"
-                fill
-                className="w-full h-full object-cover transition-transform duration-700 hover:scale-110"
-              />
+
+              {news.images?.[0] && (
+                <Image
+                  src={news.images[0]}
+                  alt={news.newsTitle || "News Image"}
+                  className="w-full h-full object-cover transition-transform duration-700 hover:scale-110"
+                  width={500}
+                  height={1000}
+                />
+              )}
             </div>
             <div className="pt-4">
               <h2 className="text-2xl font-bold mb-3 hover:text-blue-600">
-                <Link href={`/view_details`}>{trendingNews.title}</Link>
+                <Link href={`/international/${news.slug}`}>{news.newsTitle}</Link>
               </h2>
               <p className="text-sm text-gray-600 mb-2">
-                {trendingNews?.description}
+                {truncateText(news?.description, 400)}
               </p>
-               <div className="flex justify-between text-xs text-gray-500">
+              <div className="flex justify-between text-xs text-gray-500">
                 <p>
-                  {trendingNews.date} • {trendingNews.published_time}
+                  {news.postDate}
                 </p>
                 <p className="text-blue-600 text-sm">
-                  <Link href={`/view_details`}>আরো পড়ুন</Link>
+                  <Link href={`/international`}>আরো পড়ুন</Link>
                 </p>
               </div>
             </div>
           </div>
-        )}
+        ))}
 
         {/* Normal News Section */}
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-          {normalNews.map((news) => (
+          {sortNewsData.map((news) => (
             <div
-              key={news.id}
+              key={news._id}
               className="bg-white overflow-hidden flex flex-row lg:flex-col"
             >
               <div className="relative w-1/2 lg:w-full aspect-[3/2] overflow-hidden">
-                <Image
-                  src={news.image}
-                  alt={news.title}
-                  placeholder="blur"
-                  fill
-                  className="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
-                />
+
+                {news.images?.[0] && (
+                  <Image
+                    src={news.images[0]}
+                    alt={news.newsTitle || "News Image"}
+                    className="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
+                    width={500}
+                    height={1000}
+                  />
+                )}
               </div>
               <div className="flex-1 ps-2 lg:pt-4 flex flex-col justify-between">
                 <h3 className="text-lg font-semibold mb-2 hover:text-blue-600">
-                  <Link href={`/view_details`}>{news.title}</Link>
+                  <Link href={`/international/${news.slug}`}>{news.newsTitle}</Link>
                 </h3>
               </div>
             </div>

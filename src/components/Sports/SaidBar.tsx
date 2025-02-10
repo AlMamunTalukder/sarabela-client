@@ -1,15 +1,17 @@
 "use client";
 import { useSpecificNewsData } from "@/hooks/useSpecificNewsData";
+import { formatDate } from "@/util/formateDate";
 import { sortByDate } from "@/util/sort";
 import Image from "next/image";
 import Link from "next/link";
 interface TopNewsProps {
   basePath?: string;
+  category: string;
 }
-const SaidBar = ({ basePath = "/international" }: TopNewsProps) => {
+const SaidBar = ({ category, basePath = "/international" }: TopNewsProps) => {
 
 
-  const { newsData, loading, error } = useSpecificNewsData()
+  const { newsData, loading, error } = useSpecificNewsData(category)
   if (loading) {
     return <h3>Loading.......</h3>
   }
@@ -32,7 +34,7 @@ const SaidBar = ({ basePath = "/international" }: TopNewsProps) => {
               <h1 className="font-semibold text-gray-800 hover:text-blue-600 cursor-pointer">
                 <Link href={`${basePath}/${news.slug}`}>{news?.newsTitle}</Link>
               </h1>
-              <p className="truncate">{news?.postDate}</p>
+              <p className="truncate">{formatDate(news?.postDate)}</p>
             </div>
             <div className="flex-1 h-24  flex-shrink-0 overflow-hidden  hover:scale-105 duration-300">
               {news.images?.[0] && (

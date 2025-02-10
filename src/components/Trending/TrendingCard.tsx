@@ -3,7 +3,7 @@ import { TNews } from "@/types";
 import truncateText from "@/util/truncate";
 import Image from "next/image";
 import Link from "next/link";
-
+import parse from 'html-react-parser'
 type NewsProps = {
   data: TNews[]
 }
@@ -28,7 +28,7 @@ const TrendingCard = ({ data }: NewsProps) => {
             <h3 className="text-lg font-semibold text-gray-800 hover:text-blue-500">
               <Link href={`/international/${news.slug}`}>{news.newsTitle}</Link>
             </h3>
-            <p className="text-sm text-gray-600 mt-2">{truncateText(news.description, 100)}</p>
+            <p className="text-sm text-gray-600 mt-2">  {news?.description ? parse(truncateText(news.description, 100)) : ""}</p>
           </div>
         </div>
       ))}

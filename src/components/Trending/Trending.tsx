@@ -5,20 +5,24 @@ import SectionHeader from "./SectionHeader";
 import { useSpecificNewsData } from "@/hooks/useSpecificNewsData";
 import { sortByDate } from "@/util/sort";
 import SaidTabs from "../LeadNews/SaidTabs";
+import { getCategory } from "@/util/getCategory";
 
 
 const Trending = () => {
-  
-    const { newsData, loading, error } = useSpecificNewsData()
-    if (loading) {
-      return <h3>Loading.......</h3>
-    }
-    if (error) {
-      return <h3>Oops! data not found.</h3>
-    }
-  
-    const sortNewsData = sortByDate(newsData, 'postDate')
-  
+  const basePath = '/international';
+  const category = getCategory(basePath);
+
+
+  const { newsData, loading, error } = useSpecificNewsData(category)
+  if (loading) {
+    return <h3>Loading.......</h3>
+  }
+  if (error) {
+    return <h3>Oops! data not found.</h3>
+  }
+
+  const sortNewsData = sortByDate(newsData, 'postDate')
+
   return (
     <div className="pt-4">
       <div className="flex flex-col lg:flex-row-reverse justify-between gap-4">
@@ -50,7 +54,7 @@ const Trending = () => {
 
         {/* Table Section */}
         <div className="lg:w-1/4 w-full mt-4 lg:mt-0">
-          <SaidTabs basePath='/international'/>
+          <SaidTabs category={category} basePath={basePath} />
         </div>
       </div>
     </div>

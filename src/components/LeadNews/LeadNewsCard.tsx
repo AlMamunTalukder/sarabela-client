@@ -2,7 +2,8 @@ import React from 'react';
 import Link from "next/link";
 import { TNews } from '@/types';
 import Image from 'next/image';
-
+import truncateText from '@/util/truncate';
+import parse from 'html-react-parser'
 type NewsProps = {
   newsData: TNews[]
 }
@@ -21,7 +22,7 @@ const LeadNewsCard = ({ newsData }: NewsProps) => {
           <div className="w-full overflow-hidden">
             <div className="h-36 rouned-md w-full relative aspect-[3/2] transform transition-transform duration-500 hover:scale-105">
 
-             
+
               <Image
                 src={news.images?.[0] || "/placeholder.svg"}
                 alt={news.newsTitle}
@@ -37,7 +38,7 @@ const LeadNewsCard = ({ newsData }: NewsProps) => {
             <h2 className="text-xl font-bold hover:text-blue-600 transition-colors">
               {news.newsTitle}
             </h2>
-            <p className="text-sm text-gray-600 mt-2">{news.description}</p>
+            <p className="text-sm text-gray-600 mt-2">  {news?.description ? parse(truncateText(news.description, 150)) : ""}</p>
           </div>
         </Link>
       ))}
