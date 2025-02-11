@@ -27,11 +27,11 @@ const SaidTabs = ({sortNewsData,category,basePath}:SportProps) => {
       </TabsList>
       <TabsContent value="Read">
         {/* this is last news  */}
-        <ReadNews sortNewsData={sortNewsData} category={category} basePath={basePath}/>
+        <ReadNews  category={category} basePath={basePath}/>
       </TabsContent>
       <TabsContent value="Discussed">
         {/* this is important news */}
-        <Discussed sortNewsData={sortNewsData} category={category} basePath={basePath}/>
+        <Discussed  category={category} basePath={basePath}/>
       </TabsContent>
       <TabsContent value="GoodNews">
         {/* this is important news */}

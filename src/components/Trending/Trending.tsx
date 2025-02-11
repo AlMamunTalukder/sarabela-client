@@ -13,7 +13,7 @@ const Trending = () => {
   const category = getCategory(basePath);
 
 
-  const { newsData, loading, error } = useSpecificNewsData(category)
+  const { newsData, loading, error } = useSpecificNewsData({category:category})
   if (loading) {
     return <h3>Loading.......</h3>
   }
@@ -54,7 +54,7 @@ const Trending = () => {
 
         {/* Table Section */}
         <div className="lg:w-1/4 w-full mt-4 lg:mt-0">
-          <SaidTabs category={category} basePath={basePath} />
+          <SaidTabs />
         </div>
       </div>
     </div>
