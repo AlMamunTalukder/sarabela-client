@@ -22,7 +22,7 @@ import {
   Moon,
 } from "lucide-react";
 import Image from "next/image";
-import logo from "@public/asset/dailyTimes24.png";
+import logo from "@public/asset/logo/logo3.png";
 import { usePathname } from "next/navigation";
 import { useDispatch, useSelector } from "react-redux";
 import { toggleDarkMode } from "@/lib/themeSlice";

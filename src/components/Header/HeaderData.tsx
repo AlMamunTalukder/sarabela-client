@@ -17,7 +17,7 @@ const HeaderData = () => {
 
     return (
         <div className="col-span-2 flex">
-            {sortNewsData?.slice(0,2)?.map((item) => (
+            {sortNewsData?.slice(0, 2)?.map((item) => (
                 <div
                     key={item._id}
                     className="gap-2 border-s-2 border-gray-300 dark:border-gray-700 px-2 flex"
