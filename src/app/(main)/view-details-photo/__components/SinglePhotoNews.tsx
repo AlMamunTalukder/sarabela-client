@@ -102,7 +102,7 @@ const relatedNews = [
 ];
 
 const Page = () => {
-co
+
 const { photoNewsData} = usePhotonewsData();
 
   console.log(photoNewsData);
