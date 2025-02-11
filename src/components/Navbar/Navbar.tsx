@@ -82,7 +82,10 @@ const Navbar: React.FC = () => {
   }, [pathname]);
 
   return (
-    <div ref={navRef} className="bg-white dark:bg-gray-400 border-b  shadow-sm">
+    <div
+      ref={navRef}
+      className="dark:text-black bg-white dark:bg-gray-400 border-b  shadow-sm"
+    >
       {/* Mobile Top Bar */}
       <div className="lg:hidden mx-auto px-4">
         <div className="flex justify-between items-center py-2 border-b border-red-500">
@@ -97,7 +100,7 @@ const Navbar: React.FC = () => {
           </div>
           <button
             onClick={() => setIsOpen(!isOpen)}
-            className="text-white focus:outline-none"
+            className=" focus:outline-none"
           >
             {isOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
@@ -120,10 +123,10 @@ const Navbar: React.FC = () => {
                   item.nested ? (
                     <NavigationMenuItem key={item.href}>
                       <NavigationMenuTrigger className="px-3 py-2 text-black hover:text-red-500 ">
-                        {item.label}
+                        {item?.label}
                       </NavigationMenuTrigger>
                       <NavigationMenuContent>
-                        <ul className="grid grid-cols-4 gap-4 w-[750px] p-4 ">
+                        <ul className="grid dark:bg-gray-400 text-black grid-cols-4 gap-4 w-[750px] p-4 ">
                           {item.nested.map((nestedItem) => (
                             <ListItem
                               className="hover:text-red-500"
@@ -160,7 +163,7 @@ const Navbar: React.FC = () => {
               <div>
                 <Popover open={isSearchOpen} onOpenChange={setIsSearchOpen}>
                   <PopoverTrigger asChild>
-                    <button className="p-2 rounded-full bg-gray-200 dark:bg-gray-700 hover:bg-red-400 transition-colors">
+                    <button className="p-2 rounded-full bg-gray-200 dark:bg-gray-200 hover:bg-red-400 transition-colors">
                       <Search size={15} />
                     </button>
                   </PopoverTrigger>
@@ -174,19 +177,19 @@ const Navbar: React.FC = () => {
             </div>
             {socialLinks.map((link) => (
               <Link key={link.id} href={link.link}>
-                <div className="p-2 rounded-full bg-gray-200 dark:bg-gray-700 hover:bg-red-400 transition-colors">
+                <div className="p-2 rounded-full bg-gray-200 dark:bg-gray-200 hover:bg-red-400 transition-colors">
                   {link.icon}
                 </div>
               </Link>
             ))}
 
             <div className="border-s-2 px-2 flex gap-2">
-              <button className="p-2 rounded-full bg-gray-200 dark:bg-gray-700">
+              <button className="p-2 rounded-full bg-gray-200 dark:bg-gray-200">
                 <UserRound size={15} />
               </button>
               <button
                 onClick={() => dispatch(toggleDarkMode())}
-                className="p-2 rounded-full bg-gray-200 dark:bg-gray-700"
+                className="p-2 rounded-full bg-gray-200 dark:bg-gray-200"
               >
                 {mode ? (
                   <Sun size={15} className="text-yellow-400" />

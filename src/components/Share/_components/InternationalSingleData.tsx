@@ -64,7 +64,7 @@ const SingleDetails = ({ basePath }: TopNewsProps) => {
                 <div className="flex flex-col lg:flex-row gap-8">
 
                     <div className="w-full lg:w-3/4">
-                        <div className="bg-white">
+                        <div className="">
                             <div className="space-y-6">
 
                                 <div className="overflow-hidden">
@@ -84,7 +84,7 @@ const SingleDetails = ({ basePath }: TopNewsProps) => {
 
                     <div className="hidden lg:block w-full lg:w-1/4">
                         <div className="sticky top-[70px]">
-                            <div className="bg-white py-2">
+                            <div className="py-2">
                                 <SaidBar category={category} basePath={basePath} />
                             </div>
                         </div>

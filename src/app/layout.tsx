@@ -21,7 +21,7 @@ export default function RootLayout({
   return (
     <html lang="en">      
       <Providers>
-        <body className={`bg-white dark:bg-gray-900 text-gray-900 dark:text-white ${tiro_Bangla.className}`}>{children}</body>
+        <body className={`bg-white dark:bg-gray-800  dark:text-white ${tiro_Bangla.className}`}>{children}</body>
       </Providers>
     </html>
   );
