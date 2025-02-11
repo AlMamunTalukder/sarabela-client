@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 "use client";
 import SaidBar from "@/components/Sports/SaidBar";
 import image1 from "@public/asset/Gallery/image-6.jpg";
@@ -105,7 +106,6 @@ const Page = () => {
 
 const { photoNewsData} = usePhotonewsData();
 
-  console.log(photoNewsData);
 
   return (
     <main className="min-h-screen">

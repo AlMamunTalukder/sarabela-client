@@ -21,7 +21,7 @@ const Page = () => {
           <OtherNews category={category} basePath="/national" />
         </div>
         <div className="w-full lg:w-1/4 lg:sticky lg:top-20 lg:self-start lg:order-2 order-1">
-          <SideTabs category={category} basePath="/international" />
+          <SideTabs category={category} basePath={basePath} />
         </div>
       </div>
     </div>

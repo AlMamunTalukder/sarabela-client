@@ -8,10 +8,10 @@ interface TopNewsProps {
   basePath?: string;
   category: string;
 }
-const SaidBar = ({ category, basePath = "/international" }: TopNewsProps) => {
+const SaidBar = ({ category, basePath = "/education" }: TopNewsProps) => {
 
 
-  const { newsData, loading, error } = useSpecificNewsData(category)
+  const { newsData, loading, error } = useSpecificNewsData({ category: category })
   if (loading) {
     return <h3>Loading.......</h3>
   }
@@ -20,6 +20,7 @@ const SaidBar = ({ category, basePath = "/international" }: TopNewsProps) => {
   }
 
   const sortNewsData = sortByDate(newsData, 'postDate')
+  console.log('education data', sortNewsData)
 
   return (
     <div

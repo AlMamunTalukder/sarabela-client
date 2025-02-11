@@ -1,17 +1,27 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 "use client";
-import { TNews } from "@/types";
+import { useSpecificNewsData } from "@/hooks/useSpecificNewsData";
 import { formatDate } from "@/util/formateDate";
+import { sortByDate } from "@/util/sort";
 import truncateText from "@/util/truncate";
 import parse from 'html-react-parser'
 import Link from "next/link";
 type BaseProps = {
   basePath: string
   category: string,
-  sortNewsData:TNews[]
 }
 
-const Discussed = ({ sortNewsData,category, basePath }: BaseProps) => {
+const Discussed = ({ category, basePath }: BaseProps) => {
+  const { newsData, loading, error } = useSpecificNewsData({ category: category, newsTag: "Discussed" });
+
+  if (loading) {
+    return <h3>Loading.......</h3>
+  }
+  if (error) {
+    return <h3>Oops! data not found.</h3>
+  }
+
+  const sortNewsData = sortByDate(newsData, 'postDate')
 
   return (
     <div

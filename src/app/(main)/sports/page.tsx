@@ -12,7 +12,6 @@ const Page = () => {
   const basePath = usePathname();
   const category = getCategory(basePath);
 
-  console.log(category);
 
   return (
     <div className="max-w-7xl mx-auto p-2">
