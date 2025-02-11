@@ -26,7 +26,6 @@ import logo from "@public/asset/dailyTimes24.png";
 import { usePathname } from "next/navigation";
 import { useDispatch, useSelector } from "react-redux";
 import { toggleDarkMode } from "@/lib/themeSlice";
-import { Button } from "../ui/button";
 import { Popover, PopoverTrigger } from "@radix-ui/react-popover";
 import SearchCombobox from "../Form-Inputs/SearchCombobox";
 
