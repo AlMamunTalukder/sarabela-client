@@ -1,4 +1,4 @@
-'use client'
+"use client";
 import TrendingCard from "./TrendingCard";
 import SectionHeader from "./SectionHeader";
 
@@ -6,22 +6,22 @@ import { useSpecificNewsData } from "@/hooks/useSpecificNewsData";
 import { sortByDate } from "@/util/sort";
 import SaidTabs from "../LeadNews/SaidTabs";
 import { getCategory } from "@/util/getCategory";
-
+import Loading from "../Share/_components/Loading";
 
 const Trending = () => {
-  const basePath = '/international';
+  const basePath = "/international";
   const category = getCategory(basePath);
 
-
-  const { newsData, loading, error } = useSpecificNewsData({category})
+  const { newsData, loading, error } = useSpecificNewsData({ category });
   if (loading) {
-    return <h3>Loading.......</h3>
+    return <Loading />;
   }
   if (error) {
-    return <h3>Oops! data not found.</h3>
+    return <h3>Oops! data not found.</h3>;
   }
 
-  const sortNewsData = sortByDate(newsData, 'postDate')
+  const sortNewsData = sortByDate(newsData, "postDate");
+  console.log(sortNewsData);
 
   return (
     <div className="pt-4">

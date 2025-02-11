@@ -1,5 +1,4 @@
 'use client'
-
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import SaidBar from "@/components/Sports/SaidBar";
 import PaginationPages from "@/util/PaginationPages";

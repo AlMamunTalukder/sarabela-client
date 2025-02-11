@@ -4,23 +4,24 @@ import { formatDate } from "@/util/formateDate";
 import { sortByDate } from "@/util/sort";
 import Image from "next/image";
 import Link from "next/link";
+import Loading from "../Share/_components/Loading";
 interface TopNewsProps {
   basePath?: string;
   category: string;
 }
 const SaidBar = ({ category, basePath = "/sports" }: TopNewsProps) => {
-
-
-  const { newsData, loading, error } = useSpecificNewsData({ category: category })
+  const { newsData, loading, error } = useSpecificNewsData({
+    category: category,
+  });
   if (loading) {
-    return <h3>Loading.......</h3>
+    return <Loading />;
   }
   if (error) {
-    return <h3>Oops! data not found.</h3>
+    return <h3>Oops! data not found.</h3>;
   }
 
-  const sortNewsData = sortByDate(newsData, 'postDate')
-  console.log('education data', sortNewsData)
+  const sortNewsData = sortByDate(newsData, "postDate");
+  console.log("education data", sortNewsData);
 
   return (
     <div
@@ -32,23 +33,24 @@ const SaidBar = ({ category, basePath = "/sports" }: TopNewsProps) => {
         {sortNewsData?.slice(0, 6)?.map((news, index) => (
           <div key={index} className="flex gap-4 items-start border-b pb-4">
             <div className="w-1/2">
-              <h1 className="font-semibold text-gray-800 hover:text-blue-600 cursor-pointer">
+              <h1 className="font-semibold  hover:text-blue-600 cursor-pointer">
                 <Link href={`${basePath}/${news.slug}`}>{news?.newsTitle}</Link>
               </h1>
               <p className="truncate">{formatDate(news?.postDate)}</p>
             </div>
-            <div className="flex-1 h-24  flex-shrink-0 overflow-hidden  hover:scale-105 duration-300">
-              {news.images?.[0] && (
-                <Image
-                  src={news.images[0]}
-                  alt={news.newsTitle || "News Image"}
-                  blurDataURL="/placeholder.jpg"
-                  className="w-full h-full object-cover"
-                  width={500}
-                  height={200}
-
-                />
-              )}
+            <div className="flex-1 overflow-hidden  hover:scale-105 duration-300">
+              <div className="relative aspect-[3/2]">
+                {news.images?.[0] && (
+                  <Image
+                    src={news.images[0]}
+                    alt={news.newsTitle || "News Image"}
+                    blurDataURL="/placeholder.jpg"
+                    objectFit="cover"
+                    layout="fill"
+                    fill
+                  />
+                )}
+              </div>
             </div>
           </div>
         ))}
