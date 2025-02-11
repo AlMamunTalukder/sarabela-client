@@ -5,6 +5,7 @@ import DateAndTime from "@/lib/dateAndTime";
 import Link from "next/link";
 import banner from "@public/asset/banner.jpg";
 import logo from '../../../public/asset/logo/logo2.png'
+import HeaderData from "./HeaderData";
 
 const topNews = [
   {
@@ -26,24 +27,25 @@ const topNews = [
 ];
 
 const Header = () => {
+
   return (
     <section className="hidden lg:block border-b-2 bg-white dark:bg-gray-600">
       <div className="max-w-7xl mx-auto grid grid-cols-4 items-center justify-between gap-2">
         {/* Logo and Date */}
         <div className="flex items-center grid-cols-1 gap-2">
-          <Link href="/"  className="relative w-full aspect-[3/2]">
+          <Link href="/" className="relative w-full aspect-[3/2]">
             <Image
               src={logo}
               alt="daily times 24"
               objectFit="fill"
               fill
               priority
-    
+
             />
           </Link>
           <div className="text-gray-800 dark:text-gray-300">
             <DateAndTime />
-          </div> 
+          </div>
         </div>
 
         {/* Banner */}
@@ -57,31 +59,7 @@ const Header = () => {
         </div>
 
         {/* Top News */}
-        <div className="col-span-2 flex">
-          {topNews.map((item) => (
-            <div
-              key={item.id}
-              className="gap-2 border-s-2 border-gray-300 dark:border-gray-700 px-2 flex"
-            >
-              <div>
-                <Image
-                  src={item.image}
-                  alt={item.title}
-                  className="object-cover"
-                  placeholder="blur"
-                  blurDataURL={item?.title}
-                  width={80}
-                  height={40}
-                />
-              </div>
-              <div className="col-span-1 flex-1">
-                <h2 className="text-sm font-semibold hover:text-blue-500 dark:hover:text-blue-400 text-gray-900 dark:text-gray-200">
-                  <Link href={`view_details`}>{item.title}</Link>
-                </h2>
-              </div>
-            </div>
-          ))}
-        </div>
+        <HeaderData />
       </div>
     </section>
   );
