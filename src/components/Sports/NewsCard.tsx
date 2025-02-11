@@ -47,7 +47,7 @@ const NewsCard = ({ newsData }: NewsProps) => {
         {newsData?.slice(0, 2)?.map((news) => (
           <div key={news._id} className="col-span-1">
             <Link href={`sports/${news.slug}`} className="block group">
-              <article className="bg-white overflow-hidden">
+              <article className="overflow-hidden">
                 <div className="flex flex-row sm:flex-row lg:flex-col h-full">
                   {/* Image container */}
                   <div className="w-1/3 sm:w-1/2 lg:w-full relative">
@@ -71,10 +71,10 @@ const NewsCard = ({ newsData }: NewsProps) => {
                   {/* Content container */}
                   <div className="w-2/3 sm:w-1/2 lg:w-full px-2">
                     <div className="space-y-2">
-                      <h2 className="text-base sm:text-lg font-bold text-gray-800 group-hover:text-blue-600 transition-colors line-clamp-2">
+                      <h2 className="text-base sm:text-lg font-bold group-hover:text-blue-600 transition-colors line-clamp-2">
                         {news.newsTitle}
                       </h2>
-                      <p className="text-sm text-gray-600 line-clamp-2 sm:line-clamp-3 lg:line-clamp-4">
+                      <p className="text-sm  line-clamp-2 sm:line-clamp-3 lg:line-clamp-4">
                         {parse(truncateText(news?.description, 100))}
                       </p>
 

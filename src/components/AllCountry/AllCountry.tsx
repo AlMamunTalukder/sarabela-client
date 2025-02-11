@@ -11,9 +11,11 @@ import {
 
 const AllCountry = () => {
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-5 gap-4 bg-blue-200 py-6 px-2">
+    <div className="grid grid-cols-1 lg:grid-cols-5 gap-4 dark:bg-gray-500 bg-blue-200 py-6 px-2">
       <div className="flex items-center justify-center">
-        <h1 className="text-2xl font-bold text-center text-blue-900">এলাকা নির্বাচন করুন</h1>
+        <h1 className="text-2xl font-bold text-center dark:text-blue-300 text-blue-900">
+          এলাকা নির্বাচন করুন
+        </h1>
       </div>
 
       <div className="flex justify-center">

@@ -8,9 +8,9 @@ import DailyIslam from "../News/DailyIslam";
 const SaidTabs = () => {
 
   return (
-    <Tabs defaultValue="last" defaultChecked className="bg-white">
+    <Tabs defaultValue="latest" defaultChecked>
       <TabsList>
-        <TabsTrigger value="last" className="font-semibold">
+        <TabsTrigger value="latest" className="font-semibold">
           সর্বশেষ
         </TabsTrigger>
         <TabsTrigger value="important" className="font-semibold">
@@ -20,8 +20,8 @@ const SaidTabs = () => {
           দৈনন্দিন ইসলাম
         </TabsTrigger>
       </TabsList>
-      <TabsContent value="last">
-        <LastNews tagName="last" />
+      <TabsContent value="latest">
+        <LastNews tagName="latest" />
       </TabsContent>
       <TabsContent value="important">
         <ImportantNews/>

@@ -1,7 +1,8 @@
 "use client";
-
 import { Facebook, Twitter, Linkedin, Youtube } from "lucide-react";
 import Link from "next/link";
+import logo from "@public/asset/logo/logo3.png";
+import Image from "next/image";
 
 const socialLinks = [
   {
@@ -34,15 +35,19 @@ const Footer = () => {
   return (
     <footer className="bg-[#141E46] text-gray-100">
       <div className="max-w-7xl mx-auto px-4 py-8">
-        <div className="grid grid-cols-1 lg:grid-cols-4 gap-4">
+        <div className="grid grid-cols-1 lg:grid-cols-4 items-center gap-4">
           {/* Logo */}
           <div className="lg:col-span-3">
-            <Link href="/" aria-label="Go to Home Page">
-              <h1 className="text-3xl font-extrabold text-white">
-                Daily Times <span className="text-red-500">24</span>
-              </h1>
-              <p className="text-red-500">সত্যের সন্ধানে সব সময়</p>
-            </Link>
+            <div className="relative">
+              <Image
+                src={logo}
+                alt="brand logo"
+                placeholder="blur"
+                objectFit="cover"
+                width={170}
+                height={170}
+              />
+            </div>
           </div>
 
           {/* Social Links */}
@@ -153,11 +158,11 @@ const Footer = () => {
 
         {/* Bottom Section */}
         <div className="py-8">
-        <hr className="border-gray-600" />
+          <hr className="border-gray-600" />
         </div>
         <div className="flex justify-between items-center text-gray-400 text-sm">
           <p>
-            &copy; {new Date().getFullYear()} Daily Time 24. All Rights
+            &copy; {new Date().getFullYear()} Sharabela24. All Rights
             Reserved.
           </p>
           <p>
