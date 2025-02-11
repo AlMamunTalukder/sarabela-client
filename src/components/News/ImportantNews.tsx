@@ -1,28 +1,27 @@
 "use client";
-import { sortByDate } from "@/util/sort";
+
 import truncateText from "@/util/truncate";
 import Link from "next/link";
 import parse from "html-react-parser";
 import { formatDate } from "@/util/formateDate";
-import useNewsTagsData from "@/hooks/useNewsTagsData";
-// import { getCategory } from "@/util/getCategory";
+import { useSpecificNewsData } from "@/hooks/useSpecificNewsData";
+import { sortByDate } from "@/util/sort";
 
 type tagsProps = {
-  tagName: string;
+  category: string;
+  basePath: string;
 };
-const ImportantNews = ({ tagName }:tagsProps) => {
-  const { newsData, loading, error } = useNewsTagsData(tagName);
+const ImportantNews = ({ basePath, category }: tagsProps) => {
+  const { newsData, loading, error } = useSpecificNewsData({ category: category, newsTag: "important" });
 
   if (loading) {
-    return <h3>Loading.......</h3>;
+    return <h3>Loading.......</h3>
   }
   if (error) {
-    return <h3>Oops! Data not found.</h3>;
+    return <h3>Oops! data not found.</h3>
   }
 
-  const sortNewsData = sortByDate(newsData, "postDate");
-
-  console.log(newsData);
+  const sortNewsData = sortByDate(newsData, 'postDate')
 
   return (
     <div
@@ -31,13 +30,13 @@ const ImportantNews = ({ tagName }:tagsProps) => {
     >
       <ul className="divide-y divide-gray-200">
         {sortNewsData?.map((news) => {
-          // const basePath = getCategory(news?.category);
+
           return (
             <li
               key={news?._id}
               className="py-3 md:py-4 hover:bg-gray-50 transition-colors duration-200 rounded-lg"
             >
-              <Link href={`/international/${news?.slug}`} className="block space-y-1">
+              <Link href={`${basePath}/${news?.slug}`} className="block space-y-1">
                 <h3
                   className="text-sm md:text-base lg:text-lg font-semibold text-gray-800 
                   line-clamp-1 hover:text-blue-600 transition-colors"
