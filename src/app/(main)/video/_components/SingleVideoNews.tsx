@@ -71,7 +71,7 @@ const category = ''
                                     {singleNewsData ? <NewsCard/> : <p>Loading news...</p>}
                                     <Feedback />
                                     <Advertisements />
-                                    <RelatedNews category={category} basePath={basePath} />
+                                    <RelatedNews category="/video" basePath={basePath} />
                                     <PaginationPages />
                                 </div>
 
@@ -85,7 +85,7 @@ const category = ''
                     <div className="hidden lg:block w-full lg:w-1/4">
                         <div className="sticky top-[70px]">
                             <div className="bg-white py-2">
-                                <SaidBar category={category} basePath={basePath} />
+                                <SaidBar category="/video" basePath={basePath} />
                             </div>
                         </div>
                     </div>

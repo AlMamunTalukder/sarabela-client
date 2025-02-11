@@ -13,7 +13,7 @@ const Trending = () => {
   const category = getCategory(basePath);
 
 
-  const { newsData, loading, error } = useSpecificNewsData({category:category})
+  const { newsData, loading, error } = useSpecificNewsData({category})
   if (loading) {
     return <h3>Loading.......</h3>
   }

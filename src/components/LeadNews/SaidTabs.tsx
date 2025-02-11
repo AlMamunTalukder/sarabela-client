@@ -24,7 +24,7 @@ const SaidTabs = () => {
         <LastNews tagName="last" />
       </TabsContent>
       <TabsContent value="important">
-        <ImportantNews category="" basePath=""/>
+        <ImportantNews/>
       </TabsContent>
       <TabsContent  value="dailyIslam">
         <DailyIslam tagName="daily-islam" />

@@ -1,9 +1,6 @@
-// Add the "use client" directive to indicate this component is client-side only
 "use client";
 
 import * as React from "react";
-import { Check } from "lucide-react";
-import { cn } from "@/lib/utils";
 import {
   Command,
   CommandEmpty,
@@ -13,33 +10,29 @@ import {
 } from "@/components/ui/command";
 import { PopoverContent } from "@/components/ui/popover";
 import { CommandList } from "cmdk";
+import Link from "next/link";
 
 type SearchItem = {
-  value: string;
-  label: string;
+  id: number;
+  title: string;
 };
 
 const searchItems: SearchItem[] = [
-  {
-    value: "next",
-    label: "Next.js",
-  },
-  {
-    value: "sveltekit",
-    label: "SvelteKit",
-  },
-  {
-    value: "nuxt",
-    label: "Nuxt.js",
-  },
-  {
-    value: "remix",
-    label: "Remix",
-  },
-  {
-    value: "astro",
-    label: "Astro",
-  },
+  { id: 1, title: "আমাদের সম্পর্কে" },
+  { id: 2, title: "যোগাযোগ করুন" },
+  { id: 3, title: "ব্লগ পোস্ট" },
+  { id: 4, title: "সেবাসমূহ" },
+  { id: 5, title: "সর্বশেষ সংবাদ" },
+  { id: 6, title: "আমাদের টিম" },
+  { id: 7, title: "প্রকল্পসমূহ" },
+  { id: 8, title: "গ্যালারি" },
+  { id: 9, title: "প্রশ্ন ও উত্তর" },
+  { id: 10, title: "কর্মজীবন" },
+  { id: 11, title: "নীতিমালা" },
+  { id: 12, title: "গ্রাহক সেবা" },
+  { id: 13, title: "প্রশিক্ষণ কোর্স" },
+  { id: 14, title: "ইভেন্টসমূহ" },
+  { id: 15, title: "সাফল্যের গল্প" },
 ];
 
 interface SearchComboboxProps {
@@ -52,37 +45,22 @@ const SearchCombobox: React.FC<SearchComboboxProps> = ({
   setIsOpen,
   placeholder = "Search...",
 }) => {
-  const [selectedValue, setSelectedValue] = React.useState<string | null>(null);
-
   return (
     <PopoverContent
-      className="w-[400px] p-2 mt-4"
+      className="w-[400px] h-[500px] p-2 mt-4"
       align="center"
       sideOffset={5}
     >
       <Command>
-        <CommandInput placeholder={placeholder} className="h-9" autoFocus />
+        <CommandInput placeholder={placeholder} autoFocus />
         <CommandEmpty>No results found.</CommandEmpty>
         <CommandList>
           <CommandGroup>
-            {searchItems?.map((item, idx) => (
-              <CommandItem
-                key={idx}
-                value={item.value}
-                onSelect={(currentValue) => {
-                  const newValue =
-                    currentValue === selectedValue ? "" : currentValue;
-                  setSelectedValue(newValue);
-                  setIsOpen(false);
-                }}
-              >
-                {item.label}
-                <Check
-                  className={cn(
-                    "ml-auto h-4 w-4",
-                    selectedValue === item.value ? "opacity-100" : "opacity-0"
-                  )}
-                />
+            {searchItems.map((item) => (
+              <CommandItem key={item.id} onSelect={() => setIsOpen(false)}>
+                <Link href={`/search/${item.id}`} onClick={() => setIsOpen(false)}>
+                  {item.title}
+                </Link>
               </CommandItem>
             ))}
           </CommandGroup>

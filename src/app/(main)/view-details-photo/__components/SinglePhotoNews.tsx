@@ -130,7 +130,7 @@ const { photoNewsData} = usePhotonewsData();
           <div className="hidden lg:block w-full lg:w-1/4">
             <div className="sticky top-[70px]">
               <div className="bg-white py-2">
-                <SaidBar basePath={bashPath} category={category} />
+                <SaidBar category="/photo" />
               </div>
             </div>
           </div>
