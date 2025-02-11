@@ -27,7 +27,7 @@ const SaidTabs = () => {
       </TabsContent>
       <TabsContent value="GoodNews">
         {/* this is important news */}
-        <GoodNews tagName={sortNewsData}/>
+        <GoodNews tagName={`good-news`}/>
       </TabsContent>
     </Tabs>
   );

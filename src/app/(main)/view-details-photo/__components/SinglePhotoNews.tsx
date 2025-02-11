@@ -103,7 +103,8 @@ const relatedNews = [
 ];
 
 const Page = () => {
-
+const category = ''
+const bashPath = ''
 const { photoNewsData} = usePhotonewsData();
 
 

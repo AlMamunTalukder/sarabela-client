@@ -18,7 +18,7 @@ interface TopNewsProps {
 const SingleDetails = ({ basePath }: TopNewsProps) => {
     const params = useParams();
     const encodedSlug = Array.isArray(params?.slug) ? params.slug.join("/") : params?.slug || "";
-
+const category = ''
     const decodedSlug = encodedSlug ? decodeURIComponent(encodedSlug) : "";
     const [singleNewsData, setSingleNewsData] = useState<TNews | null>(null);
     const [loading, setLoading] = useState(false)

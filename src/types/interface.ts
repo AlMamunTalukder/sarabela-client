@@ -71,6 +71,6 @@ export type TPhotoNews = {
   description:string,
   imgTagline:string,
   images:[string]
-  postDate:Date,
+  postDate:string,
   adminName:string,
 };

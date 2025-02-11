@@ -6,6 +6,7 @@ import DailyIslam from "../News/DailyIslam";
 
 
 const SaidTabs = () => {
+
   return (
     <Tabs defaultValue="latest" defaultChecked>
       <TabsList>

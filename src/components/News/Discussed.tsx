@@ -6,6 +6,7 @@ import { sortByDate } from "@/util/sort";
 import truncateText from "@/util/truncate";
 import parse from "html-react-parser";
 import Link from "next/link";
+import Loading from "../Share/_components/Loading";
 
 type tagsProps = {
   tagName: string;
@@ -14,7 +15,7 @@ const Discussed = ({ tagName }: tagsProps) => {
   const { newsData, loading, error } = useSpecificNewsData(tagName);
 
   if (loading) {
-    return <h3>Loading.......</h3>;
+    return <Loading/>
   }
   if (error) {
     return <h3>Oops! data not found.</h3>;
@@ -32,16 +33,16 @@ const Discussed = ({ tagName }: tagsProps) => {
         {sortNewsData.map((news, index) => (
           <li
             key={index}
-            className="border-b last:border-b-0 pb-4 last:pb-0 hover:bg-gray-50 transition"
+            className="border-b last:border-b-0 pb-4 last:pb-0 transition"
           >
             <Link href={`international/${news.slug}`} className="block">
-              <h3 className="text-lg font-semibold text-gray-800 hover:text-blue-500">
+              <h3 className="text-lg font-semibold  hover:text-blue-500">
                 {news.newsTitle}
               </h3>
-              <p className="text-sm text-gray-600 line-clamp-2">
+              <p className="text-sm line-clamp-2">
                 {parse(truncateText(news?.description, 200))}
               </p>
-              <span className="text-xs text-gray-500">
+              <span className="text-xs">
                 {formatDate(news.postDate)}
               </span>
             </Link>

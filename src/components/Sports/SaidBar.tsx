@@ -8,7 +8,7 @@ interface TopNewsProps {
   basePath?: string;
   category: string;
 }
-const SaidBar = ({ category, basePath = "/education" }: TopNewsProps) => {
+const SaidBar = ({ category, basePath = "/sports" }: TopNewsProps) => {
 
 
   const { newsData, loading, error } = useSpecificNewsData({ category: category })

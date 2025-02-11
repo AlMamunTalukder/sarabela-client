@@ -6,14 +6,12 @@ import { ChevronsRight } from "lucide-react";
 import { useSpecificNewsData } from "@/hooks/useSpecificNewsData";
 import { sortByDate } from "@/util/sort";
 import { getCategory } from "@/util/getCategory";
-import truncateText from "@/util/truncate";
-import parse from "html-react-parser";
 import Loading from "../Share/_components/Loading";
 const EntertainmentNewsCard = () => {
   const basePath = "/entertainment";
   const category = getCategory(basePath);
 
-  const { newsData, loading, error } = useSpecificNewsData({ category });
+  const { newsData, loading, error } = useSpecificNewsData({category:category});
   if (loading) {
     return <Loading />;
   }
