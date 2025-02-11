@@ -2,29 +2,25 @@
 "use client";
 import truncateText from "@/util/truncate";
 import Link from "next/link";
-import parse from 'html-react-parser'
+import parse from "html-react-parser";
 import { formatDate } from "@/util/formateDate";
 import { TNews } from "@/types";
 import { useSpecificNewsData } from "@/hooks/useSpecificNewsData";
 import { sortByDate } from "@/util/sort";
-type BaseProps = {
-  basePath: string
-  category: string,
 
-}
+type tagsProps = {
+  tagName: string;
+};
+const ReadNews = ({ tagName }: tagsProps) => {
+  const { newsData, loading, error } = useSpecificNewsData(tagName);
+  if (loading) {
+    return <h3>Loading.......</h3>;
+  }
+  if (error) {
+    return <h3>Oops! data not found.</h3>;
+  }
 
-const ReadNews = ({ category, basePath }: BaseProps) => {
-    const { newsData, loading, error } = useSpecificNewsData({ category: category, newsTag: "Most read" });
-  
-    if (loading) {
-      return <h3>Loading.......</h3>
-    }
-    if (error) {
-      return <h3>Oops! data not found.</h3>
-    }
-  
-    const sortNewsData = sortByDate(newsData, 'postDate')
-  
+  const sortNewsData = sortByDate(newsData, "postDate");
 
   return (
     <div
@@ -45,7 +41,9 @@ const ReadNews = ({ category, basePath }: BaseProps) => {
               <p className="text-sm text-gray-600 line-clamp-2">
                 {parse(truncateText(news?.description, 200))}
               </p>
-              <span className="text-xs text-gray-500">{formatDate(news.postDate)}</span>
+              <span className="text-xs text-gray-500">
+                {formatDate(news.postDate)}
+              </span>
             </Link>
           </li>
         ))}

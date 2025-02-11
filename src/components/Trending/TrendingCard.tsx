@@ -12,7 +12,7 @@ const TrendingCard = ({ data }: NewsProps) => {
   return (
     <div className="grid">
       {data.map((news) => (
-        <div key={news._id} className=" flex flex-row bg-white pt-2">
+        <div key={news._id} className=" flex flex-row  pt-2">
 
           {news.images?.[0] && (
             <Image
@@ -25,10 +25,10 @@ const TrendingCard = ({ data }: NewsProps) => {
             />
           )}
           <div className="ms-4">
-            <h3 className="text-lg font-semibold text-gray-800 hover:text-blue-500">
+            <h3 className="text-lg font-semibold hover:text-blue-500">
               <Link href={`/international/${news.slug}`}>{news.newsTitle}</Link>
             </h3>
-            <p className="text-sm text-gray-600 mt-2">  {news?.description ? parse(truncateText(news.description, 100)) : ""}</p>
+            <p className="text-sm mt-2">  {news?.description ? parse(truncateText(news.description, 100)) : ""}</p>
           </div>
         </div>
       ))}

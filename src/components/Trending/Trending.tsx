@@ -38,7 +38,7 @@ const Trending = () => {
             </div>
           </div>
 
-          <div className="hidden lg:block border-s border-black"></div>
+          <div className="hidden lg:block border-s dark:border-gray-300 border-black"></div>
           {/* Normal News Section */}
           <div>
             <SectionHeader title="গুরুত্বপূর্ণ" />
@@ -49,7 +49,7 @@ const Trending = () => {
               <TrendingCard data={sortNewsData} />
             </div>
           </div>
-          <div className="hidden lg:block border-s border-black"></div>
+          <div className="hidden lg:block border-s dark:border-gray-300 border-black"></div>
         </div>
 
         {/* Table Section */}

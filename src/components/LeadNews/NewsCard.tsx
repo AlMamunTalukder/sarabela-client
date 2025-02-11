@@ -59,27 +59,23 @@ const NewsCard = () => {
         <div className="lg:col-span-2">
           {sortNewsData?.slice(0, 1)?.map((news) => (
             <div key={news._id}>
-              <Link
-                href={`/international/${news.slug}`}
-                className="block group"
-              >
-                <div className="relative aspect-[4/3] overflow-hidden">
-                  <div className="relative w-full aspect-[3/2] transform transition-transform duration-500 group-hover:scale-110">
+             <Link href={`sports/${news.slug}`} className="block group">
+                <div className="relative aspect-[3/2] overflow-hidden">
+                  <div className="relative w-full h-full transform transition-transform duration-500 group-hover:scale-105">
+
                     {news?.images?.[0] && (
                       <Image
                         src={news?.images[0]}
                         alt={news?.newsTitle || "News Image"}
-                        placeholder="blur"
-                        blurDataURL="/placeholder.jpg"
-                        objectFit="fill"
-                        fill
-                        priority
-
+                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 100vw"
+                        width={500}
+                        height={500}
+                        className="object-cover w-full h-full "
                       />
                     )}
                   </div>
-                  <div className="absolute bottom-0 p-4 bg-white w-full">
-                    <h1 className="text-2xl lg:text-4xl font-semibold group-hover:text-yellow-500 transition-colors">
+                  <div className="absolute bottom-0 p-4 bg-gradient-to-t from-black to-transparent w-full">
+                    <h1 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-white group-hover:text-yellow-400 transition-colors">
                       {news.newsTitle}
                     </h1>
                   </div>

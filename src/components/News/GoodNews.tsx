@@ -4,19 +4,14 @@ import { TNews } from "@/types";
 import { formatDate } from "@/util/formateDate";
 import truncateText from "@/util/truncate";
 import Link from "next/link";
-import parse from 'html-react-parser'
+import parse from "html-react-parser";
 
-type SportProps = {
-  basePath: string
-  category: string,
-  sortNewsData: TNews[]
-}
 const GoodNews = ({ sortNewsData, category, basePath }: SportProps) => {
   return (
     <div
       className="p-4 max-h-[200px] lg:max-h-[650px] overflow-y-auto [&::-webkit-scrollbar]:hidden 
-          [-ms-overflow-style:none] 
-          [scrollbar-width:none]"
+        [-ms-overflow-style:none] 
+        [scrollbar-width:none]"
     >
       <ul className="space-y-4">
         {sortNewsData.map((news, index) => (
@@ -24,15 +19,16 @@ const GoodNews = ({ sortNewsData, category, basePath }: SportProps) => {
             key={index}
             className="border-b last:border-b-0 pb-4 last:pb-0 hover:bg-gray-50 transition"
           >
-            <Link href='' className="block">
+            <Link href={`international/${news.slug}`} className="block">
               <h3 className="text-lg font-semibold text-gray-800 hover:text-blue-500">
                 {news.newsTitle}
               </h3>
               <p className="text-sm text-gray-600 line-clamp-2">
                 {parse(truncateText(news?.description, 200))}
-
               </p>
-              <span className="text-xs text-gray-500">{formatDate(news.postDate)}</span>
+              <span className="text-xs text-gray-500">
+                {formatDate(news.postDate)}
+              </span>
             </Link>
           </li>
         ))}

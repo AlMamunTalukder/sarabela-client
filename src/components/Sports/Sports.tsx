@@ -43,7 +43,7 @@ const Sports = () => {
       <div className="flex flex-col lg:flex-row justify-between gap-3 my-4">
         {/* Trending News Section */}
         <div className="lg:order-1 order-3 lg:w-3/12 w-full lg:mt-0 mt-4">
-          <SaidTabs sortNewsData={sortNewsData} category={category} basePath={basePath} />
+          <SaidTabs/>
         </div>
 
 
