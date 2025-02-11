@@ -10,7 +10,7 @@ interface TopNewsProps {
 }
 
 const OtherNews = ({ category, basePath = "/international" }: TopNewsProps) => {
-  const { newsData, loading, error } = useSpecificNewsData(category)
+  const { newsData, loading, error } = useSpecificNewsData({category})
   if (loading) {
     return <h3>Loading.......</h3>
   }

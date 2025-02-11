@@ -23,7 +23,7 @@ const SaidTabs = () => {
         <LastNews tagName="last" />
       </TabsContent>
       <TabsContent value="important">
-        <ImportantNews tagName="important"/>
+        <ImportantNews/>
       </TabsContent>
       <TabsContent  value="dailyIslam">
         <DailyIslam tagName="daily-islam" />

@@ -9,6 +9,7 @@ interface TopNewsProps {
 const PhotoNewsSidebar = ({ basePath = "/photo" }: TopNewsProps) => {
 
   const { photoNewsData, loading, error } = usePhotonewsData()
+
   if (loading) {
     return <h3>Loading.......</h3>
   }
@@ -31,7 +32,7 @@ const PhotoNewsSidebar = ({ basePath = "/photo" }: TopNewsProps) => {
               <h1 className="font-semibold text-gray-800 hover:text-blue-600 cursor-pointer">
                 <Link href={`${basePath}/${news.slug}`}>{news?.title}</Link>
               </h1>
-              <p className="truncate">{news?.postDate}</p>
+              <p className="truncate">{news?.postDate.toLocaleString()}</p>
             </div>
             <div className="flex-1 h-24  flex-shrink-0 overflow-hidden  hover:scale-105 duration-300">
               {news.images?.[0] && (

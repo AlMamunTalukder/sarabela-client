@@ -13,7 +13,7 @@ const NewsCard = () => {
   const basePath = '/national';
   const category = getCategory(basePath);
 
-  const { newsData, loading, error } = useSpecificNewsData(category)
+  const { newsData, loading, error } = useSpecificNewsData({category})
   if (loading) {
     return <h3>Loading.......</h3>
   }

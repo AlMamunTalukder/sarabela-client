@@ -29,7 +29,7 @@ const SaidBar = ({ category, basePath = "/education" }: TopNewsProps) => {
         [scrollbar-width:none] border border-black"
     >
       <div className="grid grid-cols-1 gap-4">
-        {sortNewsData?.map((news, index) => (
+        {sortNewsData?.slice(0, 6)?.map((news, index) => (
           <div key={index} className="flex gap-4 items-start border-b pb-4">
             <div className="w-1/2">
               <h1 className="font-semibold text-gray-800 hover:text-blue-600 cursor-pointer">

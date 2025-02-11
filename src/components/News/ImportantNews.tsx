@@ -7,21 +7,19 @@ import { formatDate } from "@/util/formateDate";
 import { useSpecificNewsData } from "@/hooks/useSpecificNewsData";
 import { sortByDate } from "@/util/sort";
 
-type tagsProps = {
-  category: string;
-  basePath: string;
-};
-const ImportantNews = ({ basePath, category }: tagsProps) => {
-  const { newsData, loading, error } = useSpecificNewsData({ category: category, newsTag: "important" });
+const ImportantNews = () => {
+  const { newsData, loading, error } = useSpecificNewsData({
+    newsTag: "important",
+  });
 
   if (loading) {
-    return <h3>Loading.......</h3>
+    return <h3>Loading.......</h3>;
   }
   if (error) {
-    return <h3>Oops! data not found.</h3>
+    return <h3>Oops! data not found.</h3>;
   }
 
-  const sortNewsData = sortByDate(newsData, 'postDate')
+  const sortNewsData = sortByDate(newsData, "postDate");
 
   return (
     <div
@@ -30,13 +28,15 @@ const ImportantNews = ({ basePath, category }: tagsProps) => {
     >
       <ul className="divide-y divide-gray-200">
         {sortNewsData?.map((news) => {
-
           return (
             <li
               key={news?._id}
               className="py-3 md:py-4 hover:bg-gray-50 transition-colors duration-200 rounded-lg"
             >
-              <Link href={`${basePath}/${news?.slug}`} className="block space-y-1">
+              <Link
+                href={`international/${news?.slug}`}
+                className="block space-y-1"
+              >
                 <h3
                   className="text-sm md:text-base lg:text-lg font-semibold text-gray-800 
                   line-clamp-1 hover:text-blue-600 transition-colors"
@@ -44,7 +44,9 @@ const ImportantNews = ({ basePath, category }: tagsProps) => {
                   {news?.newsTitle}
                 </h3>
                 <p className="text-xs md:text-sm text-gray-600 line-clamp-2">
-                  {news?.description ? parse(truncateText(news.description, 200)) : ""}
+                  {news?.description
+                    ? parse(truncateText(news.description, 200))
+                    : ""}
                 </p>
                 <div className="flex justify-between items-center text-xs md:text-sm text-gray-500">
                   <span>{formatDate(news?.postDate)}</span>
