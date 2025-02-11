@@ -13,7 +13,7 @@ type tagsProps = {
   tagName: string;
 };
 const GoodNews = ({ tagName }: tagsProps) => {
-  const { newsData, loading, error } = useSpecificNewsData(tagName);
+  const { newsData, loading, error } = useSpecificNewsData({});
 
   if (loading) {
     return <Loading/>;

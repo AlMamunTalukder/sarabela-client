@@ -4,6 +4,7 @@ import ReadNews from "../News/ReadNews";
 import Discussed from "../News/Discussed";
 import GoodNews from "../News/GoodNews";
 const SaidTabs = () => {
+  const category = ''
   return (
     <Tabs defaultValue="Read" defaultChecked>
       <TabsList>
@@ -19,11 +20,11 @@ const SaidTabs = () => {
       </TabsList>
       <TabsContent value="Read">
         {/* this is last news  */}
-        <ReadNews tagName={'most-readable'}/>
+        <ReadNews category={category} basePath='' />
       </TabsContent>
       <TabsContent value="Discussed">
         {/* this is important news */}
-        <Discussed  tagName={`discussed`}/>
+        <Discussed category={category} basePath='basePath'/>
       </TabsContent>
       <TabsContent value="GoodNews">
         {/* this is important news */}

@@ -162,7 +162,7 @@ const Footer = () => {
         </div>
         <div className="flex justify-between items-center text-gray-400 text-sm">
           <p>
-            &copy; {new Date().getFullYear()} Sharabela24. All Rights
+            &copy; {new Date().getFullYear()} sarabelanews24. All Rights
             Reserved.
           </p>
           <p>
