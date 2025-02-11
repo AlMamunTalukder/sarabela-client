@@ -14,17 +14,17 @@ type BaseProps = {
 }
 
 const ReadNews = ({ category, basePath }: BaseProps) => {
-    const { newsData, loading, error } = useSpecificNewsData({ category: category, newsTag: "Most read" });
-  
-    if (loading) {
-      return <h3>Loading.......</h3>
-    }
-    if (error) {
-      return <h3>Oops! data not found.</h3>
-    }
-  
-    const sortNewsData = sortByDate(newsData, 'postDate')
-  
+  const { newsData, loading, error } = useSpecificNewsData({ category: category, newsTag: "Most read" });
+
+  if (loading) {
+    return <h3>Loading.......</h3>
+  }
+  if (error) {
+    return <h3>Oops! data not found.</h3>
+  }
+
+  const sortNewsData = sortByDate(newsData, 'postDate')
+  console.log(sortNewsData)
 
   return (
     <div
