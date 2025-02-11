@@ -21,7 +21,7 @@ export const useSpecificNewsData = ({ category, newsTag }: UseSpecificNewsDataPr
 
             try {
                 //  base URL
-                const url = new URL(`${process.env.NEXT_PUBLIC_BASE_API_URL}/news`);
+                const url = new URL(`https://api.sarabelanews24.com/api/v1/news`);
                 const params = new URLSearchParams({
                     limit: "4",
                     fields: newsFields,

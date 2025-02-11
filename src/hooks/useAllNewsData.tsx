@@ -15,7 +15,7 @@ export const useAllNewsData = () => {
     useEffect(() => {
         const fetchNewsData = async () => {
             try {
-                const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_API_URL}/news?limit=4&fields=${newsFields}`, {
+                const response = await fetch(`https://api.sarabelanews24.com/api/v1/news?limit=4&fields=${newsFields}`, {
                     cache: "no-store",
                 });
                 const data = await response.json();
