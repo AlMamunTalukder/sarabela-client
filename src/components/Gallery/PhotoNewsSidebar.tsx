@@ -33,9 +33,9 @@ const PhotoNewsSidebar = ({ photoNewsData }: PhotoProps) => {
                     </div>
                     <div className="pt-2">
                         <p className="font-semibold hover:text-blue-500">
-                            <Link href={`/photo/${newsItem?.slug}`}>
+                            {/* <Link href={`/photo/${newsItem?.slug}`}>
                                 {newsItem?.title}
-                            </Link>
+                            </Link> */}
                         </p>
                     </div>
                 </div>

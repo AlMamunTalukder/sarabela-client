@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { TNews } from "@/types";
 import { newsFields } from "@/util/fields";
 import { useEffect, useState } from "react";

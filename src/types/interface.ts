@@ -65,6 +65,7 @@ export type TVideoNews = {
 };
 
 export type TPhotoNews = {
+  [x: string]: any;
   _id:string;
   title: string;
   description:string,
