@@ -4,16 +4,16 @@ import truncateText from "@/util/truncate";
 import Link from "next/link";
 import parse from "html-react-parser";
 import { formatDate } from "@/util/formateDate";
-import UseNewsTagsData from "@/hooks/useNewsTagsData";
-import { getCategory } from "@/util/getCategory";
+
 import Loading from "../Share/_components/Loading";
+import { useSpecificNewsData } from "@/hooks/useSpecificNewsData";
 
-type tagsProps = {
-  tagName: string;
-};
 
-const LastNews = ({ tagName }: tagsProps) => {
-  const { newsData, loading, error } = UseNewsTagsData(tagName);
+
+const LastNews = () => {
+const basePath = ''
+  const category = 'জাতীয়'
+  const { newsData, loading, error } = useSpecificNewsData({ category: category, newsTag: 'latest' });
 
   if (loading) {
     return <Loading />;
@@ -31,7 +31,8 @@ const LastNews = ({ tagName }: tagsProps) => {
     >
       <ul className="divide-y divide-gray-200">
         {sortNewsData?.map((news) => {
-          const basePath = getCategory(news.category);
+
+       
           return (
             <li
               key={news?._id}

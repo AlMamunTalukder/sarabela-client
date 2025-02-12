@@ -3,7 +3,7 @@
 import SaidBar from "@/components/Sports/SaidBar";
 import PaginationPages from "@/util/PaginationPages";
 import NewsCard from "./NewsCard";
-import Feedback from "./Feedback";
+import Feedback from "./Comment/Feedback";
 import Advertisements from "./Advertisment";
 import { useEffect, useState } from "react";
 import { useParams, } from "next/navigation";
@@ -22,13 +22,13 @@ const SingleDetails = ({ basePath }: TopNewsProps) => {
     const [singleNewsData, setSingleNewsData] = useState<TNews | null>(null);
     const [loading, setLoading] = useState(false)
     const [error, setError] = useState<string | null>(null);
-
+    console.log('sport news', singleNewsData)
 
     useEffect(() => {
         const fetchData = async () => {
             try {
                 setLoading(true)
-                const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_API_URL}/news/${decodedSlug}`);
+                const res = await fetch(`https://api.sarabelanews24.com/api/v1/news/${decodedSlug}`);
                 if (!res.ok) {
                     throw new Error(`HTTP error! status: ${res.status}`);
                 }

@@ -12,7 +12,7 @@ type BaseProps = {
 }
 
 const Discussed = ({ category, basePath }: BaseProps) => {
-  const { newsData, loading, error } = useSpecificNewsData({ category: category, newsTag: "Discussed" });
+  const { newsData, loading, error } = useSpecificNewsData({ category: category, newsTag: "discussed" });
 
   if (loading) {
     return <h3>Loading.......</h3>

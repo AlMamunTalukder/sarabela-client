@@ -9,8 +9,7 @@ import AllCountry from "@/components/AllCountry/AllCountry";
 import PhotoGallery from "@/components/Gallery/PhotoGallery";
 import VideoGallery from "@/components/Gallery/VideoGallery";
 import Advertisement_1 from "@/util/Advertisement_1";
-import banner from "@public/asset/banner.jpg";
-
+import banner from "@public/asset/sarabelanews24-banner.png";
 const Page = () => {
   return (
     <div className="max-w-7xl mx-auto px-4">

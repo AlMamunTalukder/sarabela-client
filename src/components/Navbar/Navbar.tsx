@@ -26,9 +26,6 @@ import logo from "@public/asset/logo/logo3.png";
 import { usePathname } from "next/navigation";
 import { useDispatch, useSelector } from "react-redux";
 import { toggleDarkMode } from "@/lib/themeSlice";
-import { Popover, PopoverTrigger } from "@radix-ui/react-popover";
-import SearchCombobox from "../Form-Inputs/SearchCombobox";
-
 interface SocialLink {
   id: string;
   icon: React.ReactNode;
@@ -71,7 +68,6 @@ const navItems: NavItem[] = [
 
 const Navbar: React.FC = () => {
   const [isOpen, setIsOpen] = React.useState(false);
-  const [isSearchOpen, setIsSearchOpen] = React.useState(false);
   const navRef = React.useRef<HTMLDivElement>(null);
   const pathname = usePathname();
   const dispatch = useDispatch();
@@ -142,11 +138,10 @@ const Navbar: React.FC = () => {
                     <NavigationMenuItem key={item.href}>
                       <Link
                         href={item.href}
-                        className={`px-3 py-2 hover:text-red-500 ${
-                          pathname === item.href
-                            ? "border-b-2 border-black text-red-500"
-                            : ""
-                        }`}
+                        className={`px-3 py-2 hover:text-red-500 ${pathname === item.href
+                          ? "border-b-2 border-black text-red-500"
+                          : ""
+                          }`}
                       >
                         {item.label}
                       </Link>
@@ -160,20 +155,11 @@ const Navbar: React.FC = () => {
           {/* Search and Social */}
           <div className="flex items-center space-x-4">
             <div className="border-e-2 pe-2">
-              <div>
-                <Popover open={isSearchOpen} onOpenChange={setIsSearchOpen}>
-                  <PopoverTrigger asChild>
-                    <button className="p-2 rounded-full bg-gray-200 dark:bg-gray-200 hover:bg-red-400 transition-colors">
-                      <Search size={15} />
-                    </button>
-                  </PopoverTrigger>
-                  <SearchCombobox
-                    isOpen={isSearchOpen}
-                    setIsOpen={setIsSearchOpen}
-                    placeholder="Search news..."
-                  />
-                </Popover>
-              </div>
+              <Link href='/search'>
+                <button className="p-2 rounded-full bg-gray-200 dark:bg-gray-200 hover:bg-red-400 transition-colors">
+                  <Search size={15} />
+                </button>
+              </Link>
             </div>
             {socialLinks.map((link) => (
               <Link key={link.id} href={link.link}>
@@ -240,11 +226,10 @@ const Navbar: React.FC = () => {
                   ) : (
                     <Link
                       href={item.href}
-                      className={`block px-2 py-2 rounded ${
-                        pathname === item.href
-                          ? "text-blue-600 font-medium"
-                          : "text-gray-700 hover:text-blue-600"
-                      }`}
+                      className={`block px-2 py-2 rounded ${pathname === item.href
+                        ? "text-blue-600 font-medium"
+                        : "text-gray-700 hover:text-blue-600"
+                        }`}
                     >
                       {item.label}
                     </Link>

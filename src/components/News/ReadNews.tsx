@@ -4,7 +4,6 @@ import truncateText from "@/util/truncate";
 import Link from "next/link";
 import parse from 'html-react-parser'
 import { formatDate } from "@/util/formateDate";
-import { TNews } from "@/types";
 import { useSpecificNewsData } from "@/hooks/useSpecificNewsData";
 import { sortByDate } from "@/util/sort";
 type BaseProps = {
@@ -12,9 +11,8 @@ type BaseProps = {
   category: string,
 
 }
-
 const ReadNews = ({ category, basePath }: BaseProps) => {
-  const { newsData, loading, error } = useSpecificNewsData({ category: category, newsTag: "Most read" });
+  const { newsData, loading, error } = useSpecificNewsData({ category: category, newsTag: "latest" });
 
   if (loading) {
     return <h3>Loading.......</h3>
@@ -24,7 +22,6 @@ const ReadNews = ({ category, basePath }: BaseProps) => {
   }
 
   const sortNewsData = sortByDate(newsData, 'postDate')
-  console.log(sortNewsData)
 
   return (
     <div

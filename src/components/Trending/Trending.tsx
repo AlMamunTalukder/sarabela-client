@@ -21,7 +21,6 @@ const Trending = () => {
   }
 
   const sortNewsData = sortByDate(newsData, "postDate");
-  console.log(sortNewsData);
 
   return (
     <div className="pt-4">

@@ -11,9 +11,9 @@ interface TopNewsProps {
   basePath?: string;
   category: string;
 }
-const TopNews = ({ category, basePath = "/international" }: TopNewsProps) => {
+const TopNews = ({ category, basePath}: TopNewsProps) => {
 
-  const { newsData, loading, error } = useSpecificNewsData({category:category})
+  const { newsData, loading, error } = useSpecificNewsData({category:category,})
   if (loading) {
     return <h3>Loading.......</h3>
   }

@@ -11,6 +11,7 @@ interface NewsCardProps {
   news?: TNews & { videoUrl?: string }
 }
 
+
 const NewsCard: React.FC<NewsCardProps> = ({ news }: NewsCardProps) => {
   const [isPlaying, setIsPlaying] = useState(false)
 

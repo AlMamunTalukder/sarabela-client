@@ -1,5 +1,3 @@
-'use client';
-
 import { TNews } from "@/types";
 import { newsFields } from "@/util/fields";
 import { useEffect, useState } from "react";
@@ -7,9 +5,11 @@ import { useEffect, useState } from "react";
 interface UseSpecificNewsDataProps {
     category?: string;
     newsTag?: string;
+    limit?: string;
+    searchTerm?: string;
 }
 
-export const useSpecificNewsData = ({ category, newsTag }: UseSpecificNewsDataProps) => {
+export const useSpecificNewsData = ({ category, newsTag, limit, searchTerm }: UseSpecificNewsDataProps) => {
     const [newsData, setNewsData] = useState<TNews[]>([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
@@ -20,24 +20,14 @@ export const useSpecificNewsData = ({ category, newsTag }: UseSpecificNewsDataPr
             setError(null);
 
             try {
-                //  base URL
                 const url = new URL(`https://api.sarabelanews24.com/api/v1/news`);
-                const params = new URLSearchParams({
-                    limit: "4",
-                    fields: newsFields,
-                });
+                const params = new URLSearchParams({ fields: newsFields });
 
-                //  append category if it's provided
-                if (category) {
-                    params.append("category", category);
-                }
+                if (category) params.append("category", category);
+                if (limit) params.append("limit", limit);
+                if (newsTag) params.append("newsTag", newsTag);
+                if (searchTerm) params.append("searchTerm", searchTerm); // Add search term
 
-                //  append newsTag if it's provided
-                if (newsTag) {
-                    params.append("newsTag", newsTag);
-                }
-
-                // Append the query parameters to the URL
                 url.search = params.toString();
 
                 const response = await fetch(url.toString(), { cache: "no-store" });
@@ -61,7 +51,7 @@ export const useSpecificNewsData = ({ category, newsTag }: UseSpecificNewsDataPr
         };
 
         fetchNewsData();
-    }, [category, newsTag]);
+    }, [category, newsTag, searchTerm]); // Add searchTerm as a dependency
 
     return { newsData, loading, error };
 };
