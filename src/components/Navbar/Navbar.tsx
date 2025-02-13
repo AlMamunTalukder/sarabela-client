@@ -170,9 +170,11 @@ const Navbar: React.FC = () => {
             ))}
 
             <div className="border-s-2 px-2 flex gap-2">
-              <button className="p-2 rounded-full bg-gray-200 dark:bg-gray-200">
-                <UserRound size={15} />
-              </button>
+              <Link href={"/login"}>
+                <button className="p-2 rounded-full bg-gray-200 dark:bg-gray-200">
+                  <UserRound size={15} />
+                </button>
+              </Link>
               <button
                 onClick={() => dispatch(toggleDarkMode())}
                 className="p-2 rounded-full bg-gray-200 dark:bg-gray-200"
