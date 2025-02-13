@@ -141,27 +141,41 @@ const Navbar: React.FC = () => {
             </button>
           </div>
         </div>
-        <nav className="flex items-center bg-gray-50/50 py-2 px-4 justify-center ">
-          <Link href="/photo/গোলাপ-জার্বেরা-চন্দ্রমল্লিকার-বাগানে" className="flex items-center gap-2 hover:opacity-80">
-            <Camera className="w-4 h-4 text-red-500" />
-            <span className="text-sm font-medium">ছবি</span>
-          </Link>
+        <div className="bg-gray-50/50">
+          <div className="container mx-auto flex items-center  justify-center gap-x-2 px-2 ">
+            {/* Breaking News Bar */}
+            {/* <div className="flex items-center py-2 border-b border-gray-200">
+             
+              <div className="overflow-hidden flex-1">
+                <div className="animate-marquee whitespace-nowrap">
+                  <span className="text-sm font-medium text-red-500">ব্রেকিং নিউজ: </span>
+                </div>
+              </div>
+            </div> */}
 
-          <Separator orientation="vertical" className="mx-4 h-4" />
+            {/* Navigation Bar */}
+            <nav className="flex items-center justify-center py-3 ">
+              <Link href="/photo/গোলাপ-জার্বেরা-চন্দ্রমল্লিকার-বাগানে" className="flex items-center gap-1 hover:opacity-80">
+                <Camera className="w-4 h-4 text-red-500" />
+                <span className="text-sm font-medium">ছবি</span>
+              </Link>
 
-          <Link href="/video/ডিবি-জমটুপি-পরিয়ে-বিবস্ত্র-করে-ছাত্রদলের-আরিফকে-পেটায়" className="flex items-center gap-2 hover:opacity-80">
-            <Video className="w-4 h-4 text-red-500" />
-            <span className="text-sm font-medium">ভিডিও</span>
-          </Link>
+              <Separator orientation="vertical" className="mx-4 h-4" />
 
-          <Separator orientation="vertical" className="mx-4 h-4" />
+              <Link href="/video/ডিবি-জমটুপি-পরিয়ে-বিবস্ত্র-করে-ছাত্রদলের-আরিফকে-পেটায়" className="flex items-center gap-1 hover:opacity-80">
+                <Video className="w-4 h-4 text-red-500" />
+                <span className="text-sm font-medium">ভিডিও</span>
+              </Link>
 
-          <Link href="/video/ডিবি-জমটুপি-পরিয়ে-বিবস্ত্র-করে-ছাত্রদলের-আরিফকে-পেটায়" className="flex items-center gap-2 hover:opacity-80">
-            <Video className="w-4 h-4 text-red-500" />
-            <span className="text-sm font-medium">ভিডিও</span>
-          </Link>
-        </nav>
+              <Separator orientation="vertical" className="mx-4 h-4" />
 
+              <Link href="/video/ডিবি-জমটুপি-পরিয়ে-বিবস্ত্র-করে-ছাত্রদলের-আরিফকে-পেটায়" className="flex items-center gap-1 hover:opacity-80">
+                <Video className="w-4 h-4 text-red-500" />
+                <span className="text-sm font-medium">ভিডিও</span>
+              </Link>
+            </nav>
+          </div>
+        </div>
       </div>
 
       {/* Desktop Navigation */}

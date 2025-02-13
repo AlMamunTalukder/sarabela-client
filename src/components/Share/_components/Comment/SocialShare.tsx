@@ -13,11 +13,11 @@ export default function SocialShare() {
     if (action === "increase" && fontSize < 24) {
       setFontSize((prev) => prev + 2)
       document.body.style.fontSize = `${fontSize + 2}px`
-      toast.success("Font size increased")
+      // toast.success("Font size increased")
     } else if (action === "decrease" && fontSize > 12) {
       setFontSize((prev) => prev - 2)
       document.body.style.fontSize = `${fontSize - 2}px`
-      toast.success("Font size decreased")
+      // toast.success("Font size decreased")
     }
   }
 
