@@ -9,12 +9,13 @@ import img from "../../../assets/login.gif";
 // import fb from "../../../../public/asset/Economy/agriculture.jpg";
 import { Form } from "@/components/ui/form";
 import { useForm } from "react-hook-form";
-import TextInput from "@/util/TextInput";
+// import TextInput from "@/util/TextInput";
 import { LockKeyhole, User } from "lucide-react";
-import axios from "axios";
 import { setCookie } from "@/axios/Cookies";
-import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
+import axios from "axios";
+import { useRouter } from "next/navigation";
+import TextInput from "@/util/TextInput";
 
 type Inputs = {
   name: string;
@@ -31,6 +32,7 @@ const LogIn = () => {
   });
 
   const onSubmit = async (data: Inputs) => {
+    console.log(data)
     try {
       const res = await axios.post('http://localhost:5000/api/v1/auth/login', data);
       console.log('response ', res)
@@ -53,7 +55,7 @@ const LogIn = () => {
       if (res.data.success) {
         toast.success('Login successfully!');
       } else {
-        toast.error(res.data.message || 'Registration failed!');
+        toast.error(res.data.message || 'Login failed!');
       }
     } catch (err: any) {
       if (err.response?.data?.errorSources) {
@@ -85,42 +87,41 @@ const LogIn = () => {
                 </div>
                 <div className="w-auto space-y-8 mt-5">
                   <h2 className="text-3xl font-bold">Log In</h2>
-                  <div className="flex gap-2 items-center border border-b-[1px] border-white border-b-gray-300 ">
-                    <User />
-                    <TextInput
-                      control={form.control}
-                      type="text"
-                      name="name"
-                      placeholder="Name"
-                      className="w-full"
-                      rules={{
-                        required: "Name is required",
-                      }}
-                    />
-                  </div>
-                  <div className="space-y-1">
-                    <div className="flex gap-2 items-center border border-b-[1px] border-white border-b-gray-300">
-                      <LockKeyhole />
+                  <div className="space-y-5">
+
+
+                    <div className="relative flex-grow">
+                      <div className="absolute p-2">
+                        <User className="h-4 md:h-5 w-4 md:w-5" />
+                      </div>
+
                       <TextInput
                         control={form.control}
-                        type="password"
-                        name="password"
-                        placeholder="Password"
-                        className="w-full"
-                        rules={{
-                          required: "Password is required",
-                        }}
+                        placeholder="Name"
+                        className="pl-10 py-3 w-full border  focus:ring-1 rounded"
+                        type="text"
+                        name="name"
                       />
                     </div>
+                    <div className="space-y-1">
+                      <div className="relative flex-grow">
+                        <div className="absolute p-2">
+                          <LockKeyhole className="h-4 md:h-5 w-4 md:w-5" />
+                        </div>
 
-                    <Link
-                      href={"#"}
-                      className="text-yellow-500 text-right justify-end text-xs font-bold"
-                    >
-                      {" "}
-                      Forgot Password?
-                    </Link>
+                        <TextInput
+                          control={form.control}
+                          className="pl-10 py-3 w-full border  focus:ring-1 rounded"
+                          type="password"
+                          name="password"
+                          placeholder="Password"
+                        />
+                      </div>
+
+
+                    </div>
                   </div>
+
                   <div className="flex gap-2 text-sm font-light">
                     <input type="checkbox" value="" /> Remember me
                   </div>
@@ -143,27 +144,7 @@ const LogIn = () => {
                   </h2>
                 </div>
 
-                {/* <div className="flex items-center gap-2">
-                  <h2 className="text-sm">Or, Log In with - </h2>
-                  <Link href={"#"}>
-                    <Image
-                      src={google}
-                      className="h-5 w-5 rounded"
-                      alt="this is google"
-                      height={100}
-                      width={100}
-                    />
-                  </Link>
-                  <Link href={"#"}>
-                    <Image
-                      src={fb}
-                      className="h-5 w-5 rounded"
-                      alt="this is facebook"
-                      height={100}
-                      width={100}
-                    />
-                  </Link>
-                </div> */}
+
               </div>
             </div>
           </div>

@@ -1,15 +1,18 @@
-"use client";
-import { useSpecificVideoNewsData } from "@/hooks/useSpecificVideoNewsData";
-import { sortByDate } from "@/util/sort";
-import Image from "next/image";
-import Link from "next/link";
+"use client"
+import { useSpecificVideoNewsData } from "@/hooks/useSpecificVideoNewsData"
+import { sortByDate } from "@/util/sort"
+import Link from "next/link"
+import dynamic from "next/dynamic"
+
+const ReactPlayer = dynamic(() => import("react-player/lazy"), { ssr: false })
+
 interface TopNewsProps {
-  basePath?: string;
+  basePath?: string
 }
+
 const VideoNewsSidebar = ({ basePath = "/video" }: TopNewsProps) => {
-
-
   const { videoNewsData, loading, error } = useSpecificVideoNewsData()
+
   if (loading) {
     return <h3>Loading.......</h3>
   }
@@ -17,7 +20,7 @@ const VideoNewsSidebar = ({ basePath = "/video" }: TopNewsProps) => {
     return <h3>Oops! data not found.</h3>
   }
 
-  const sortNewsData = sortByDate(videoNewsData, 'postDate')
+  const sortNewsData = sortByDate(videoNewsData, "postDate")
 
   return (
     <div
@@ -34,16 +37,15 @@ const VideoNewsSidebar = ({ basePath = "/video" }: TopNewsProps) => {
               </h1>
               <p className="truncate">{news?.postDate}</p>
             </div>
-            <div className="flex-1 h-24  flex-shrink-0 overflow-hidden  hover:scale-105 duration-300">
-              {news.images?.[0] && (
-                <Image
-                  src={news.images[0]}
-                  alt={news.newsTitle || "News Image"}
-                  blurDataURL="/placeholder.jpg"
-                  className="w-full h-full object-cover"
-                  width={500}
-                  height={200}
-
+            <div className="flex-1 h-24 flex-shrink-0 overflow-hidden hover:scale-105 duration-300">
+              {news.videoUrl && (
+                <ReactPlayer
+                  url={news.videoUrl}
+                  width="100%"
+                  height="100%"
+                  light={news.images?.[0] || true}
+                  playIcon={<PlayIcon />}
+                  controls={true}
                 />
               )}
             </div>
@@ -51,7 +53,18 @@ const VideoNewsSidebar = ({ basePath = "/video" }: TopNewsProps) => {
         ))}
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default VideoNewsSidebar;
+const PlayIcon = () => (
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white" className="w-12 h-12">
+    <path
+      fillRule="evenodd"
+      d="M4.5 5.653c0-1.426 1.529-2.33 2.779-1.643l11.54 6.348c1.295.712 1.295 2.573 0 3.285L7.28 19.991c-1.25.687-2.779-.217-2.779-1.643V5.653z"
+      clipRule="evenodd"
+    />
+  </svg>
+)
+
+export default VideoNewsSidebar
+

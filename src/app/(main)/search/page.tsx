@@ -39,6 +39,7 @@ const Page = () => {
               className="w-full h-[60px] rounded-md"
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
+              
             />
           </div>
           <Button type="submit" className="h-[60px]">
