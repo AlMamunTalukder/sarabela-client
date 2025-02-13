@@ -9,8 +9,9 @@ import img from "../../../assets/login.gif";
 // import fb from "../../../../public/asset/Economy/agriculture.jpg";
 import { Form } from "@/components/ui/form";
 import { useForm } from "react-hook-form";
-import TextInput from "@/util/TextInput";
+// import TextInput from "@/util/TextInput";
 import { LockKeyhole, Mail } from "lucide-react";
+import { Input } from "@/components/ui/input";
 
 type Inputs = {
   email: string;
@@ -42,42 +43,45 @@ const LogIn = () => {
                 </div>
                 <div className="w-auto space-y-8 mt-5">
                   <h2 className="text-3xl font-bold">Log In</h2>
-                  <div className="flex gap-2 items-center border border-b-[1px] border-white border-b-gray-300 ">
-                    <Mail />
-                    <TextInput
-                      control={form.control}
-                      type="email"
-                      name="email"
-                      placeholder="Email"
-                      className="w-full"
-                      rules={{
-                        required: "Email is required",
-                      }}
-                    />
-                  </div>
-                  <div className="space-y-1">
-                    <div className="flex gap-2 items-center border border-b-[1px] border-white border-b-gray-300">
-                      <LockKeyhole />
-                      <TextInput
-                        control={form.control}
-                        type="password"
-                        name="password"
-                        placeholder="Password"
-                        className="w-full"
-                        rules={{
-                          required: "Password is required",
-                        }}
+                  <div className="space-y-5">
+
+
+                    <div className="relative flex-grow">
+                      <div className="absolute p-2">
+                        <Mail className="h-4 md:h-5 w-4 md:w-5" />
+                      </div>
+
+                      <Input
+                        placeholder="Email"
+                        className="pl-10 py-3 w-full border  focus:ring-1 rounded"
+                        type="email"
+                        name="email"
                       />
                     </div>
+                    <div className="space-y-1">
+                      <div className="relative flex-grow">
+                        <div className="absolute p-2">
+                          <LockKeyhole className="h-4 md:h-5 w-4 md:w-5" />
+                        </div>
 
-                    <Link
-                      href={"#"}
-                      className="text-yellow-500 text-right justify-end text-xs font-bold"
-                    >
-                      {" "}
-                      Forgot Password?
-                    </Link>
+                        <Input
+                          className="pl-10 py-3 w-full border  focus:ring-1 rounded"
+                          type="password"
+                          name="password"
+                          placeholder="Password"
+                        />
+                      </div>
+
+                      <Link
+                        href={"#"}
+                        className="text-yellow-500 text-xs font-bold flex justify-end"
+                      >
+                        {" "}
+                        Forgot Password?
+                      </Link>
+                    </div>
                   </div>
+
                   <div className="flex gap-2 text-sm font-light">
                     <input type="checkbox" value="" /> Remember me
                   </div>
