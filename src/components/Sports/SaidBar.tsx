@@ -21,7 +21,6 @@ const SaidBar = ({ category, basePath = "/sports" }: TopNewsProps) => {
   }
 
   const sortNewsData = sortByDate(newsData, "postDate");
-  console.log("education data", sortNewsData);
 
   return (
     <div

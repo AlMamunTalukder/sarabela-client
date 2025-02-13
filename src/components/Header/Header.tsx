@@ -3,7 +3,7 @@
 import Image from "next/image";
 import DateAndTime from "@/lib/dateAndTime";
 import Link from "next/link";
-import banner from "@public/asset/banner.jpg";
+import banner from "@public/asset/sarabelanews24-banner.png";
 import logo from '../../../public/asset/logo/logo2.png'
 import HeaderData from "./HeaderData";
 

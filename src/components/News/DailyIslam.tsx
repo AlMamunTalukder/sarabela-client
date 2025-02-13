@@ -5,13 +5,15 @@ import Link from "next/link";
 import parse from "html-react-parser";
 import { formatDate } from "@/util/formateDate";
 import UseNewsTagsData from "@/hooks/useNewsTagsData";
-import { getCategory } from "@/util/getCategory";
 import Loading from "../Share/_components/Loading";
+import { usePathname } from "next/navigation";
 
 type tagsProps = {
   tagName: string;
 };
 const DailyIslam = ({ tagName }: tagsProps) => {
+    const basePath = usePathname();
+
   const { newsData, loading, error } = UseNewsTagsData(tagName);
   if (loading) {
     return <Loading />;
@@ -29,7 +31,7 @@ const DailyIslam = ({ tagName }: tagsProps) => {
     >
       <ul className="divide-y divide-gray-200">
         {sortNewsData?.map((news) => {
-          const basePath = getCategory(news?.category);
+         
           return (
             <li
               key={news?._id}

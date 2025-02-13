@@ -1,4 +1,4 @@
-export const getCategory = (basePath: string = "general"): string => {
+export const getCategory = (basePath: string = "national"): string => {
   switch (basePath) {
     case "/international":
       return "আর্ন্তজাতিক";
@@ -23,6 +23,6 @@ export const getCategory = (basePath: string = "general"): string => {
     case "/sports":
       return "খেলাধুলা";
     default:
-      return "general";
+      return "national";
   }
 };

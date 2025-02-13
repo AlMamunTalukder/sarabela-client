@@ -7,11 +7,13 @@ import { formatDate } from "@/util/formateDate";
 import { useSpecificNewsData } from "@/hooks/useSpecificNewsData";
 import { sortByDate } from "@/util/sort";
 import Loading from "../Share/_components/Loading";
+type BaseProps = {
+  basePath: string
+  category: string,
 
-const ImportantNews = () => {
-  const { newsData, loading, error } = useSpecificNewsData({
-    newsTag: "important",
-  });
+}
+const ImportantNews = ({ category, basePath }: BaseProps) => {
+  const { newsData, loading, error } = useSpecificNewsData({ category: category, newsTag: 'important' });
 
   if (loading) {
     return <Loading />;
@@ -35,7 +37,7 @@ const ImportantNews = () => {
               className="py-3 md:py-4 transition-colors duration-200"
             >
               <Link
-                href={`international/${news?.slug}`}
+                href={`${basePath}/${news?.slug}`}
                 className="block space-y-1"
               >
                 <h3
