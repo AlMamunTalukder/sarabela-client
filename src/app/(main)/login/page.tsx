@@ -34,7 +34,7 @@ const LogIn = () => {
   const onSubmit = async (data: Inputs) => {
     console.log(data)
     try {
-      const res = await axios.post('http://localhost:5000/api/v1/auth/login', data);
+      const res = await axios.post('https://api.sarabelanews24.com/api/v1/auth/login', data);
       console.log('response ', res)
 
       // Correctly accessing the accessToken

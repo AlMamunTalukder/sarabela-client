@@ -62,7 +62,7 @@ const Feedback = ({id}:IdParams) => {
 
     try {
       const response = await axios.post(
-        `http://localhost:5000/api/v1/comment/create-comment/${id}`,
+        `https://api.sarabelanews24.com/api/v1/comment/create-comment/${id}`,
         commentData,
         {
           headers: {

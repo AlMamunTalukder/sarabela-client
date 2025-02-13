@@ -69,7 +69,8 @@ const category = ''
 
                                 <div className="overflow-hidden">
                                     {singleNewsData ? <NewsCard/> : <p>Loading news...</p>}
-                                    <Feedback />
+                                    {singleNewsData?._id && <Feedback id={singleNewsData._id} />}
+
                                     <Advertisements />
                                     <RelatedNews category="/video" basePath={basePath} />
                                     <PaginationPages />

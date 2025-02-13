@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 "use client"
 
 import type React from "react"
@@ -114,7 +115,7 @@ export default function CommentSection() {
           </div>
 
           {/* Comments List */}
-          <CommentList comments={comments} onLike={handleLike} />
+          <CommentList  />
         </div>
       </CardContent>
     </Card>
