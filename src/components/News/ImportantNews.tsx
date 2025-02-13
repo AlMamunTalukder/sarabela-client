@@ -7,13 +7,14 @@ import { formatDate } from "@/util/formateDate";
 import { useSpecificNewsData } from "@/hooks/useSpecificNewsData";
 import { sortByDate } from "@/util/sort";
 import Loading from "../Share/_components/Loading";
-type BaseProps = {
-  basePath: string
-  category: string,
+import { getEnglishCategory } from "@/util/getEnglishCategory";
+// type BaseProps = {
+//   basePath: string
+//   category: string,
 
-}
-const ImportantNews = ({ category, basePath }: BaseProps) => {
-  const { newsData, loading, error } = useSpecificNewsData({ category: category, newsTag: 'important' });
+// }
+const ImportantNews = () => {
+  const { newsData, loading, error } = useSpecificNewsData({newsTag: 'important' });
 
   if (loading) {
     return <Loading />;
@@ -24,6 +25,9 @@ const ImportantNews = ({ category, basePath }: BaseProps) => {
 
   const sortNewsData = sortByDate(newsData, "postDate");
 
+  const searchCategory = newsData && newsData[0] ? newsData[0]?.category?.name : ''
+  const basePath = getEnglishCategory(searchCategory)
+  console.log('this is for navigate category ', basePath)
   return (
     <div
       className="w-full max-h-[200px] lg:max-h-[700px] px-2 md:px-4 overflow-y-auto 

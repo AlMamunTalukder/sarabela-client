@@ -6,7 +6,6 @@ import DailyIslam from "../News/DailyIslam";
 
 
 const SaidTabs = () => {
-const category = ''
 
   return (
     <Tabs defaultValue="latest" defaultChecked>
@@ -25,7 +24,7 @@ const category = ''
         <LastNews/>
       </TabsContent>
       <TabsContent value="important">
-        <ImportantNews basePath="" category={category}/>
+        <ImportantNews/>
       </TabsContent>
       <TabsContent  value="dailyIslam">
         <DailyIslam tagName="daily-islam" />

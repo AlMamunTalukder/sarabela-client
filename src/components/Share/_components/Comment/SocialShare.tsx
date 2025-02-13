@@ -7,7 +7,7 @@ import { useState } from "react"
 import toast from "react-hot-toast"
 
 export default function SocialShare() {
-  const [fontSize, setFontSize] = useState(16) // Default font size
+  const [fontSize, setFontSize] = useState(16)
 
   const handleFontSize = (action: "increase" | "decrease") => {
     if (action === "increase" && fontSize < 24) {
@@ -22,6 +22,7 @@ export default function SocialShare() {
   }
 
   const handleShare = async (platform: string) => {
+  
     const url = window.location.href
     const title = document.title
 
