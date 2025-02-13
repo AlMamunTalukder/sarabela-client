@@ -10,6 +10,7 @@ import { useParams, } from "next/navigation";
 import { TNews } from "@/types";
 import RelatedNews from "./RelatedNews";
 import { getCategory } from "@/util/getCategory";
+import SocialShare from "./Comment/SocialShare";
 interface TopNewsProps {
     basePath?: string;
 }
@@ -60,9 +61,9 @@ const SingleDetails = ({ basePath }: TopNewsProps) => {
 
     return (
         <main className="min-h-screen">
+
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="flex flex-col lg:flex-row gap-8">
-
                     <div className="w-full lg:w-3/4">
                         <div className="">
                             <div className="space-y-6">

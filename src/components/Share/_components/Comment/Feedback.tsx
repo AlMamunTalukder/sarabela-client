@@ -7,7 +7,6 @@ import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import SocialShare from "./SocialShare"
 import { CommentList } from "./CommentList"
 import { Comment } from "@/types"
 
@@ -54,8 +53,7 @@ const Feedback = () => {
   
   return (
     <div className=" mx-auto my-8 p-6 bg-white rounded-xl shadow-sm">
-      {/* Social Media Section */}
-      <SocialShare/>
+   
 
       {/* Comments Header */}
       <div className="flex items-center justify-between mb-6">

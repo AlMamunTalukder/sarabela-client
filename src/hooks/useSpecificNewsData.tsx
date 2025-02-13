@@ -9,7 +9,7 @@ interface UseSpecificNewsDataProps {
     searchTerm?: string;
 }
 
-export const useSpecificNewsData = ({ category, newsTag, limit, searchTerm }: UseSpecificNewsDataProps) => {
+export const useSpecificNewsData = ({ category, newsTag, limit='6', searchTerm }: UseSpecificNewsDataProps) => {
     const [newsData, setNewsData] = useState<TNews[]>([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
@@ -26,7 +26,7 @@ export const useSpecificNewsData = ({ category, newsTag, limit, searchTerm }: Us
                 if (category) params.append("category", category);
                 if (limit) params.append("limit", limit);
                 if (newsTag) params.append("newsTag", newsTag);
-                if (searchTerm) params.append("searchTerm", searchTerm); // Add search term
+                if (searchTerm) params.append("searchTerm", searchTerm); 
 
                 url.search = params.toString();
 
