@@ -10,20 +10,63 @@ import img from "../../../assets/login.gif";
 import { Form } from "@/components/ui/form";
 import { useForm } from "react-hook-form";
 import TextInput from "@/util/TextInput";
-import { LockKeyhole, Mail } from "lucide-react";
+import { LockKeyhole, User } from "lucide-react";
+import axios from "axios";
+import { setCookie } from "@/axios/Cookies";
+import { useRouter } from "next/navigation";
+import toast from "react-hot-toast";
 
 type Inputs = {
-  email: string;
+  name: string;
   password: string;
 };
 
 const LogIn = () => {
+  const router = useRouter()
   const form = useForm<Inputs>({
     defaultValues: {
-      email: "",
+      name: "",
       password: "",
     },
   });
+
+  const onSubmit = async (data: Inputs) => {
+    try {
+      const res = await axios.post('http://localhost:5000/api/v1/auth/login', data);
+      console.log('response ', res)
+
+      // Correctly accessing the accessToken
+      const accessToken = res?.data?.data?.accessToken;
+
+      if (accessToken) {
+        // Storing the accessToken in a cookie
+        setCookie("sarabela-news", accessToken, { expires: 7 }); // Expires in 7 days
+
+        // Optional: Store in localStorage if needed
+        localStorage.setItem("sarabela-news", accessToken);
+
+        // Navigate to dashboard
+        router.push("/");
+      }
+
+      // Display success or error messages based on the response
+      if (res.data.success) {
+        toast.success('Login successfully!');
+      } else {
+        toast.error(res.data.message || 'Registration failed!');
+      }
+    } catch (err: any) {
+      if (err.response?.data?.errorSources) {
+        // Map the error messages and display them
+        const errorMessages = err.response.data.errorSources
+          .map((error: { message: string }) => error.message)
+          .join(', ');
+        toast.error(errorMessages || 'Failed to register');
+      } else {
+        toast.error(err.response?.data?.message || 'Failed to register');
+      }
+    }
+  };
   return (
     <>
       <div className="  max-w-7xl mx-auto ">
@@ -43,15 +86,15 @@ const LogIn = () => {
                 <div className="w-auto space-y-8 mt-5">
                   <h2 className="text-3xl font-bold">Log In</h2>
                   <div className="flex gap-2 items-center border border-b-[1px] border-white border-b-gray-300 ">
-                    <Mail />
+                    <User />
                     <TextInput
                       control={form.control}
-                      type="email"
-                      name="email"
-                      placeholder="Email"
+                      type="text"
+                      name="name"
+                      placeholder="Name"
                       className="w-full"
                       rules={{
-                        required: "Email is required",
+                        required: "Name is required",
                       }}
                     />
                   </div>
@@ -82,7 +125,7 @@ const LogIn = () => {
                     <input type="checkbox" value="" /> Remember me
                   </div>
 
-                  <Button type="submit">Log In</Button>
+                  <Button onClick={form.handleSubmit(onSubmit)} type="submit">Log In</Button>
                 </div>
               </div>
 

@@ -1,7 +1,8 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 "use client"
 
 import type React from "react"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { Send } from "lucide-react"
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
@@ -9,56 +10,85 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { CommentList } from "./CommentList"
 import { Comment } from "@/types"
+import { getCookie } from "@/axios/Cookies"
+import { jwtDecode } from "jwt-decode"
+import axios from "axios"
 
 
+type IdParams = {
+  id:string;
+}
 
-const Feedback = () => {
+const Feedback = ({id}:IdParams) => {
+  const [decodedToken, setDecodedToken] = useState<any>(null);
 
-  const [comment, setComment] = useState("")
-  const [comments, setComments] = useState<Comment[]>([
-    {
-      id: "1",
-      text: "This is a great article! Thanks for sharing.",
-      author: {
-        name: "John Doe",
-        avatar: "/placeholder.svg?height=40&width=40",
-      },
-      createdAt: new Date(Date.now() - 1000 * 60 * 60),
-      likes: 0
-    },
-  ])
+  useEffect(() => {
+    const token = getCookie("sarabela-news");
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault()
-    if (comment.trim()) {
-      const newComment: Comment = {
-        id: Date.now().toString(),
-        text: comment,
-        author: {
-          name: "You",
-          avatar: "/placeholder.svg?height=40&width=40",
-        },
-        createdAt: new Date(),
-        likes: 0
+    if (token) {
+      try {
+        const decoded = jwtDecode(token);
+        setDecodedToken(decoded);
+        console.log('Decoded Token:', decoded);
+      } catch (error) {
+        console.error('Invalid token:', error);
       }
-      setComments([newComment, ...comments])
-      setComment("")
     }
-  }
-  const handleLike = (commentId: string) => {
-    setComments(comments.map((comment) =>
-      comment.id === commentId ? { ...comment, likes: comment.likes + 1 } : comment
-    ));
+  }, []);
+  console.log(decodedToken)
+
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+
+    const commentText = (e.target as any).comments.value.trim();
+
+    if (!commentText) return;
+
+    if (!decodedToken || !decodedToken.userId) {
+      console.error("User ID is missing. Cannot submit comment.");
+      return;
+    }
+
+    const commentData = {
+      user: decodedToken.userId,
+      replyComments: [],
+      comments: commentText,
+    };
+    console.log(commentData)
+
+    const token = getCookie("sarabela-news"); 
+    console.log('decoded token therer ',decodedToken)
+
+    try {
+      const response = await axios.post(
+        `http://localhost:5000/api/v1/comment/create-comment/${id}`,
+        commentData,
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `${token}`,
+          },
+        }
+      );
+
+      console.log("Comment posted successfully:", response.data);
+    } catch (error) {
+      console.error("Error submitting comment:", error);
+    }
+
   };
-  
+
+
+
   return (
     <div className=" mx-auto my-8 p-6 bg-white rounded-xl shadow-sm">
-   
+
 
       {/* Comments Header */}
       <div className="flex items-center justify-between mb-6">
         <h2 className="text-xl font-semibold">
-          {comments.length} {comments.length === 1 ? "Comment" : "Comments"}
+          {/* {comments.length} {comments.length === 1 ? "Comment" : "Comments"} */}
         </h2>
         <Select defaultValue="newest">
           <SelectTrigger className="w-[140px]">
@@ -82,16 +112,16 @@ const Feedback = () => {
           <div className="flex-1 space-y-4">
             <Input
               type="text"
-              value={comment}
+              name="comments"
               placeholder="Write your comment here..."
-              onChange={(e) => setComment(e.target.value)}
+
               className="w-full min-h-[80px] p-4 resize-none"
             />
             <div className="flex justify-end">
               <Button
                 type="submit"
                 className="px-6 py-2 bg-primary hover:bg-primary/90 text-primary-foreground transition-colors duration-200"
-                disabled={!comment.trim()}
+              // disabled={!comments.trim()}
               >
                 <Send className="w-4 h-4 mr-2" />
                 <span>Comment</span>
@@ -102,7 +132,7 @@ const Feedback = () => {
       </form>
 
       {/* Comments List */}
-      <CommentList comments={comments} onLike={handleLike}/>
+      <CommentList/>
     </div>
   )
 }

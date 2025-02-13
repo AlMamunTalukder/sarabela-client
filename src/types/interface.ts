@@ -86,3 +86,15 @@ export interface Comment {
   createdAt: Date
   likes: number
 }
+
+export interface TComments {
+  _id: string;
+  user: {
+    name: string;
+    avatar?: string;
+  };
+  news: string;
+  comments: string;
+  replyComments: string[];
+  createdAt: string;
+}

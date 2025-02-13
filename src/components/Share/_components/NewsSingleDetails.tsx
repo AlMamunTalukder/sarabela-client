@@ -10,7 +10,6 @@ import { useParams, } from "next/navigation";
 import { TNews } from "@/types";
 import RelatedNews from "./RelatedNews";
 import { getCategory } from "@/util/getCategory";
-import SocialShare from "./Comment/SocialShare";
 interface TopNewsProps {
     basePath?: string;
 }
@@ -41,7 +40,7 @@ const NewsSingleDetails = ({ basePath }: TopNewsProps) => {
                     setError("Data not found");
                 }
             } catch (error) {
-      
+
                 setError("An error occurred while fetching data.");
             } finally {
                 setLoading(false)
@@ -59,6 +58,8 @@ const NewsSingleDetails = ({ basePath }: TopNewsProps) => {
         return <h1>Oops! data not found.</h1>;
     }
 
+    console.log('this is for comment ', singleNewsData)
+
     return (
         <main className="min-h-screen">
 
@@ -67,10 +68,10 @@ const NewsSingleDetails = ({ basePath }: TopNewsProps) => {
                     <div className="w-full lg:w-3/4">
                         <div className="">
                             <div className="space-y-6">
-
                                 <div className="overflow-hidden">
                                     {singleNewsData ? <NewsCard news={singleNewsData} /> : <p>Loading news...</p>}
-                                    <Feedback />
+                                    {singleNewsData?._id && <Feedback id={singleNewsData._id} />}
+
                                     <Advertisements />
                                     <RelatedNews category={category} basePath={basePath} />
                                     <PaginationPages />
