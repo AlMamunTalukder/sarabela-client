@@ -1,7 +1,6 @@
 "use client";
 import { useSpecificNewsData } from "@/hooks/useSpecificNewsData";
 import Marquee from "react-fast-marquee";
-import { getEnglishCategory } from "./getEnglishCategory";
 import Link from "next/link";
 import { getCategory } from "./getCategory";
 
@@ -24,12 +23,11 @@ const BreakingNews = () => {
       <Marquee pauseOnHover={true} speed={50}>
         
         {newsData.map((news, index) => {
-          const category = getCategory(news.category?.name)
-          console.log('breaking news data for ',news)
-          console.log('breaking news data for ',category)
+          const basePath = getCategory(news?.category?.name);
+
           return (
             <div key={index} style={{ marginRight: "50px", fontSize: "16px" }}>
-            <Link href={`${category}/${news.slug}`} style={{ color: "#fff", textDecoration: "none" }}>
+            <Link href={`${basePath}/${news.slug}`} style={{ color: "#fff", textDecoration: "none" }}>
               {news.newsTitle}
             </Link>
           </div>

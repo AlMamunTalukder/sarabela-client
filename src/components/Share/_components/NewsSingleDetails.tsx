@@ -14,7 +14,7 @@ import SocialShare from "./Comment/SocialShare";
 interface TopNewsProps {
     basePath?: string;
 }
-const SingleDetails = ({ basePath }: TopNewsProps) => {
+const NewsSingleDetails = ({ basePath }: TopNewsProps) => {
     const params = useParams();
 
     const encodedSlug = Array.isArray(params?.slug) ? params.slug.join("/") : params?.slug || "";
@@ -23,7 +23,7 @@ const SingleDetails = ({ basePath }: TopNewsProps) => {
     const [singleNewsData, setSingleNewsData] = useState<TNews | null>(null);
     const [loading, setLoading] = useState(false)
     const [error, setError] = useState<string | null>(null);
-    console.log('sport news', singleNewsData)
+
 
     useEffect(() => {
         const fetchData = async () => {
@@ -41,7 +41,7 @@ const SingleDetails = ({ basePath }: TopNewsProps) => {
                     setError("Data not found");
                 }
             } catch (error) {
-                console.error("Error fetching data:", error);
+      
                 setError("An error occurred while fetching data.");
             } finally {
                 setLoading(false)
@@ -96,4 +96,4 @@ const SingleDetails = ({ basePath }: TopNewsProps) => {
     );
 };
 
-export default SingleDetails;
+export default NewsSingleDetails;

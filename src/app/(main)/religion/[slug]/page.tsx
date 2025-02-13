@@ -1,8 +1,8 @@
 import React from 'react';
-import SingleDetails from '../../../../components/Share/_components/InternationalSingleData';
+import NewsSingleDetails from '../../../../components/Share/_components/NewsSingleDetails';
 const page = () => {
     return (
-        <SingleDetails basePath="/religion"/>
+        <NewsSingleDetails basePath="/religion"/>
     );
 };
 

@@ -5,7 +5,7 @@ import React from 'react';
 const page = () => {
     return (
         <>
-         <NewsSingleDetails basePath="/international"/>   
+            <NewsSingleDetails basePath="/job" />
         </>
     );
 };

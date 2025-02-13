@@ -35,7 +35,7 @@ const SingleDetails = () => {
                     setError("Data not found");
                 }
             } catch (error) {
-                console.error("Error fetching data:", error);
+   
                 setError("An error occurred while fetching data.");
             } finally {
                 setLoading(false)

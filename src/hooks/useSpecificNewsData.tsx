@@ -9,7 +9,7 @@ interface UseSpecificNewsDataProps {
     searchTerm?: string;
 }
 
-export const useSpecificNewsData = ({ category, newsTag, limit='6', searchTerm }: UseSpecificNewsDataProps) => {
+export const useSpecificNewsData = ({ category, newsTag, limit, searchTerm }: UseSpecificNewsDataProps) => {
     const [newsData, setNewsData] = useState<TNews[]>([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
