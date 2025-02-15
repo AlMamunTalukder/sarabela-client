@@ -3,69 +3,93 @@
 
 import { Facebook, MessageCircle, Twitter, Linkedin, Link2, Printer, Share2 } from "lucide-react"
 import { Button } from "@/components/ui/button"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import toast from "react-hot-toast"
+import axios from "axios"
+import { useGetShareCountsQuery, useShareNewsMutation } from "@/redux/dailynews/shareApi"
 
-export default function SocialShare() {
+type NewsIdParams = {
+  newsId: string;
+}
+export default function SocialShare({ newsId }: NewsIdParams) {
   const [fontSize, setFontSize] = useState(16)
 
+  const { data: shareCounts = {}, isLoading, error } = useGetShareCountsQuery(newsId);
+  const [shareNews] = useShareNewsMutation();
   const handleFontSize = (action: "increase" | "decrease") => {
     if (action === "increase" && fontSize < 24) {
       setFontSize((prev) => prev + 2)
       document.body.style.fontSize = `${fontSize + 2}px`
-      // toast.success("Font size increased")
     } else if (action === "decrease" && fontSize > 12) {
       setFontSize((prev) => prev - 2)
       document.body.style.fontSize = `${fontSize - 2}px`
-      // toast.success("Font size decreased")
     }
   }
 
+
   const handleShare = async (platform: string) => {
-  
-    const url = window.location.href
-    const title = document.title
+    const url = window.location.href;
+    const title = document.title;
+
 
     switch (platform) {
       case "Facebook":
-        window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`, "_blank")
-        break
+        window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`, "_blank");
+        break;
       case "Messenger":
-        window.open(`https://www.facebook.com/dialog/send?link=${encodeURIComponent(url)}&app_id=YOUR_APP_ID`, "_blank")
-        break
+        window.open(`https://www.facebook.com/dialog/send?link=${encodeURIComponent(url)}&app_id=YOUR_APP_ID`, "_blank");
+        break;
       case "WhatsApp":
-        window.open(`https://api.whatsapp.com/send?text=${encodeURIComponent(url)}`, "_blank")
-        break
+        window.open(`https://api.whatsapp.com/send?text=${encodeURIComponent(url)}`, "_blank");
+        break;
       case "Twitter":
         window.open(
           `https://twitter.com/intent/tweet?url=${encodeURIComponent(url)}&text=${encodeURIComponent(title)}`,
-          "_blank",
-        )
-        break
+          "_blank"
+        );
+        break;
       case "LinkedIn":
-        window.open(`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(url)}`, "_blank")
-        break
+        window.open(`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(url)}`, "_blank");
+        break;
       case "Print":
-        window.print()
-        break
+        window.print();
+        break;
       default:
         if (navigator.share) {
           try {
             await navigator.share({
               title,
               url,
-            })
+            });
           } catch (err: any) {
-            toast.error("Error sharing content")
+            toast.error("Error sharing content");
           }
         }
     }
 
-    toast.success(`Shared on ${platform}`)
-  }
+    const shareData = { newsId, platform }
+
+    try {
+      const res = await shareNews(shareData).unwrap()
+      if (res.success) {
+
+        toast.success(`${platform} share recorded!`);
+      }
+    } catch (error) {
+      console.error("Error sharing:", error);
+      toast.error("Failed to share");
+    }
+  };
+
+
 
   return (
     <div className="flex items-center gap-2 justify-end mt-10 flex-wrap">
+
+      <div className="flex flex-col items-center">
+        {shareCounts?.data?.totalShares || 0}
+        <span className="text-[12px] text-gray-500 ">Shares</span>
+      </div>
       <Button
         variant="ghost"
         size="icon"

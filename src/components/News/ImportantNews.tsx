@@ -27,7 +27,7 @@ const ImportantNews = () => {
 
   const searchCategory = newsData && newsData[0] ? newsData[0]?.category?.name : ''
   const basePath = getEnglishCategory(searchCategory)
-  console.log('this is for navigate category ', basePath)
+
   return (
     <div
       className="w-full max-h-[200px] lg:max-h-[700px] px-2 md:px-4 overflow-y-auto 

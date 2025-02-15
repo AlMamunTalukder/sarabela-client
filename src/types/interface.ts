@@ -30,7 +30,17 @@ export type TNews = {
   metaTitle: string;
   metaKeywords: string[];
   metaDescription: string;
+  comments: {
+    _id: string;
+    user: {
+      name: string;
+      avatar: string;
+    };
+    comments: string;
+    createdAt: Date;
+  }[];
 };
+
 export type TVideoNews = {
   _id: string;
   reporterName: string;

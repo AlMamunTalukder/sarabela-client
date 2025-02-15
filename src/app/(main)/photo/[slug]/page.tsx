@@ -64,7 +64,8 @@ const SingleDetails = () => {
 
                                 <div className="overflow-hidden">
                                     {singleNewsData ? <NewsCard news={singleNewsData} /> : <p>Loading news...</p>}
-                                    {singleNewsData?._id && <Feedback id={singleNewsData._id} />}
+                                    {singleNewsData ? <Feedback news={singleNewsData}/> : <p>Loading news...</p>}
+
 
                                     <Advertisements />
                                     {/* <RelatedNews basePath='/photonews' /> */}

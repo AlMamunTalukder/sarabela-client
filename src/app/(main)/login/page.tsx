@@ -32,26 +32,18 @@ const LogIn = () => {
   });
 
   const onSubmit = async (data: Inputs) => {
-    console.log(data)
+
     try {
       const res = await axios.post('https://api.sarabelanews24.com/api/v1/auth/login', data);
-      console.log('response ', res)
 
-      // Correctly accessing the accessToken
       const accessToken = res?.data?.data?.accessToken;
 
       if (accessToken) {
-        // Storing the accessToken in a cookie
-        setCookie("sarabela-news", accessToken, { expires: 7 }); // Expires in 7 days
-
-        // Optional: Store in localStorage if needed
+        setCookie("sarabela-news", accessToken, { expires: 7 });
         localStorage.setItem("sarabela-news", accessToken);
-
-        // Navigate to dashboard
         router.push("/");
       }
 
-      // Display success or error messages based on the response
       if (res.data.success) {
         toast.success('Login successfully!');
       } else {
@@ -59,7 +51,7 @@ const LogIn = () => {
       }
     } catch (err: any) {
       if (err.response?.data?.errorSources) {
-        // Map the error messages and display them
+
         const errorMessages = err.response.data.errorSources
           .map((error: { message: string }) => error.message)
           .join(', ');

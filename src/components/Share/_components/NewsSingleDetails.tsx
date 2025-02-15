@@ -28,7 +28,7 @@ const NewsSingleDetails = ({ basePath }: TopNewsProps) => {
         const fetchData = async () => {
             try {
                 setLoading(true)
-                const res = await fetch(`https://api.sarabelanews24.com/api/v1/news/${decodedSlug}`);
+                const res = await fetch(`http://localhost:5000/api/v1/news/${decodedSlug}`);
                 if (!res.ok) {
                     throw new Error(`HTTP error! status: ${res.status}`);
                 }
@@ -58,8 +58,6 @@ const NewsSingleDetails = ({ basePath }: TopNewsProps) => {
         return <h1>Oops! data not found.</h1>;
     }
 
-    console.log('this is for comment ', singleNewsData)
-
     return (
         <main className="min-h-screen">
 
@@ -70,7 +68,8 @@ const NewsSingleDetails = ({ basePath }: TopNewsProps) => {
                             <div className="space-y-6">
                                 <div className="overflow-hidden">
                                     {singleNewsData ? <NewsCard news={singleNewsData} /> : <p>Loading news...</p>}
-                                    {singleNewsData?._id && <Feedback id={singleNewsData._id} />}
+                                    {singleNewsData ? <Feedback news={singleNewsData}/> : <p>Loading news...</p>}
+                                    
 
                                     <Advertisements />
                                     <RelatedNews category={category} basePath={basePath} />

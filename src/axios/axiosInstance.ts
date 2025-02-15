@@ -14,7 +14,7 @@ instance.defaults.timeout = 60000;
 // Add a request interceptor
 instance.interceptors.request.use(
   function (config) {
-    const accessToken = getFromLocalStorage(authKey);
+    const accessToken = getFromLocalStorage('sarabela-news');
    
     if (accessToken) {
       config.headers.Authorization = accessToken;

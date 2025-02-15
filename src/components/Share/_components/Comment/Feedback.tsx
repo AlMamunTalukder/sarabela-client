@@ -2,83 +2,48 @@
 "use client"
 
 import type React from "react"
-import { useEffect, useState } from "react"
 import { Send } from "lucide-react"
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { CommentList } from "./CommentList"
-import { Comment } from "@/types"
-import { getCookie } from "@/axios/Cookies"
-import { jwtDecode } from "jwt-decode"
-import axios from "axios"
+import { useCreateCommentMutation } from "@/redux/dailynews/commentApi"
+import toast from "react-hot-toast"
+import { TNews } from "@/types"
 
 
-type IdParams = {
-  id:string;
+type NewsParams = {
+  news: TNews
 }
 
-const Feedback = ({id}:IdParams) => {
-  const [decodedToken, setDecodedToken] = useState<any>(null);
+const Feedback = ({ news }: NewsParams) => {
 
-  useEffect(() => {
-    const token = getCookie("sarabela-news");
-
-    if (token) {
-      try {
-        const decoded = jwtDecode(token);
-        setDecodedToken(decoded);
-        console.log('Decoded Token:', decoded);
-      } catch (error) {
-        console.error('Invalid token:', error);
-      }
-    }
-  }, []);
-  console.log(decodedToken)
-
-
+  const [createComment] = useCreateCommentMutation()
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    const commentText = (e.target as any).comments.value.trim();
-
+    const commentText = (e.target as HTMLFormElement).comments.value.trim();
     if (!commentText) return;
 
-    if (!decodedToken || !decodedToken.userId) {
-      console.error("User ID is missing. Cannot submit comment.");
-      return;
-    }
-
     const commentData = {
-      user: decodedToken.userId,
-      replyComments: [],
       comments: commentText,
     };
-    console.log(commentData)
-
-    const token = getCookie("sarabela-news"); 
-    console.log('decoded token therer ',decodedToken)
 
     try {
-      const response = await axios.post(
-        `https://api.sarabelanews24.com/api/v1/comment/create-comment/${id}`,
+      const res = await createComment({
         commentData,
-        {
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `${token}`,
-          },
-        }
-      );
-
-      console.log("Comment posted successfully:", response.data);
-    } catch (error) {
-      console.error("Error submitting comment:", error);
+        id: news._id as string,
+      }).unwrap();
+      console.log('response comment', res);
+      if (res.success) {
+        toast.success('Comment created successfully');
+      }
+    } catch (err: any) {
+      console.error('Error creating comment:', err);
+      toast.error(err.data?.message || 'Failed to create comment. Please try again.');
     }
-
   };
-
 
 
   return (
@@ -132,7 +97,7 @@ const Feedback = ({id}:IdParams) => {
       </form>
 
       {/* Comments List */}
-      <CommentList/>
+      <CommentList news={news}/>
     </div>
   )
 }

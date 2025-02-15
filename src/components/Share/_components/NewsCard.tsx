@@ -21,10 +21,12 @@ const NewsCard: React.FC<NewsCardProps> = ({ news }: NewsCardProps) => {
     setIsPlaying(true)
   }
 
+
+
   return (
     <article className="pt-8">
       <h2 className="text-2xl md:text-4xl font-semibold text-gray-800">{news?.newsTitle}</h2>
-      <SocialShare />
+      <SocialShare newsId={news._id}/>
       <div className="relative w-full overflow-hidden aspect-[3/2] mt-5">
         {news?.videoUrl ? (
           <div className="relative w-full h-full">
@@ -70,12 +72,12 @@ const NewsCard: React.FC<NewsCardProps> = ({ news }: NewsCardProps) => {
             </CardContent>
 
             {news?.imageTagline && (
-             <CardFooter className="px-4 py-3 text-sm text-muted-foreground flex justify-center">
-             <p className="font-bengali text-center">
-               {news.imageTagline} <span className="text-gray-500">ছবি : সারাবেলানিউজ২৪</span>
-             </p>
-           </CardFooter>
-           
+              <CardFooter className="px-4 py-3 text-sm text-muted-foreground flex justify-center">
+                <p className="font-bengali text-center">
+                  {news.imageTagline} <span className="text-gray-500">ছবি : সারাবেলানিউজ২৪</span>
+                </p>
+              </CardFooter>
+
             )}
           </Card>
         )}
