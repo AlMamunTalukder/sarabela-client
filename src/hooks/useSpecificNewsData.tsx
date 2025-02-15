@@ -20,7 +20,7 @@ export const useSpecificNewsData = ({ category, newsTag, limit, searchTerm }: Us
             setError(null);
 
             try {
-                const url = new URL(`https://api.sarabelanews24.com/api/v1news`);
+                const url = new URL(`https://api.sarabelanews24.com/api/v1/news`);
                 const params = new URLSearchParams({ fields: newsFields });
 
                 if (category) params.append("category", category);
