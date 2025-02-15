@@ -8,17 +8,9 @@ const commentApi = baseApi.injectEndpoints({
         method: "POST",
         data: commentData,
       }),
-    }),
-    
-
-    getAllComment: builder.query({
-      query: (newsId) => ({
-        url: `/comment/${newsId}`,
-        method: "GET",
-      }),
-      providesTags: (result) => (result ? ["comment"] : []),
+      invalidatesTags: (result, error, { id }) => [{ type: "news", id }],
     }),
   }),
 });
 
-export const { useCreateCommentMutation, useGetAllCommentQuery } = commentApi;
+export const { useCreateCommentMutation } = commentApi;

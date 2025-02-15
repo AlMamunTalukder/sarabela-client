@@ -51,7 +51,7 @@ export const useSpecificNewsData = ({ category, newsTag, limit, searchTerm }: Us
         };
 
         fetchNewsData();
-    }, [category, newsTag, searchTerm]); // Add searchTerm as a dependency
+    }, [category, newsTag, searchTerm]);
 
     return { newsData, loading, error };
 };

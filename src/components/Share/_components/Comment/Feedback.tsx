@@ -8,9 +8,10 @@ import { Button } from "@/components/ui/button"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { CommentList } from "./CommentList"
-import { useCreateCommentMutation } from "@/redux/dailynews/commentApi"
+import { useCreateCommentMutation, } from "@/redux/dailynews/commentApi"
 import toast from "react-hot-toast"
 import { TNews } from "@/types"
+import { useGetSingleNewsQuery } from "@/redux/dailynews/news.api"
 
 
 type NewsParams = {
@@ -19,31 +20,34 @@ type NewsParams = {
 
 const Feedback = ({ news }: NewsParams) => {
 
-  const [createComment] = useCreateCommentMutation()
+  const [createComment] = useCreateCommentMutation();
+  const { refetch } = useGetSingleNewsQuery(news.slug);
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    const commentText = (e.target as HTMLFormElement).comments.value.trim();
+    const form = e.target as HTMLFormElement;
+    const commentText = form.comments.value.trim();
     if (!commentText) return;
-
-    const commentData = {
-      comments: commentText,
-    };
 
     try {
       const res = await createComment({
-        commentData,
+        commentData: { comments: commentText },
         id: news._id as string,
       }).unwrap();
-      console.log('response comment', res);
+
       if (res.success) {
-        toast.success('Comment created successfully');
+        toast.success("Comment added successfully");
+        form.reset();
+        refetch();
       }
     } catch (err: any) {
-      console.error('Error creating comment:', err);
-      toast.error(err.data?.message || 'Failed to create comment. Please try again.');
+      console.error("Error adding comment:", err);
+      toast.error(err.data?.message || "Failed to add comment.");
     }
   };
+
+
 
 
   return (
@@ -97,7 +101,7 @@ const Feedback = ({ news }: NewsParams) => {
       </form>
 
       {/* Comments List */}
-      <CommentList news={news}/>
+      <CommentList news={news} />
     </div>
   )
 }

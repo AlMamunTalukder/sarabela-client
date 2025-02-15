@@ -10,53 +10,17 @@ import { useParams, } from "next/navigation";
 import { TNews } from "@/types";
 import RelatedNews from "./RelatedNews";
 import { getCategory } from "@/util/getCategory";
+import { useGetSingleNewsQuery } from "@/redux/dailynews/news.api";
 interface TopNewsProps {
     basePath?: string;
 }
 const NewsSingleDetails = ({ basePath }: TopNewsProps) => {
     const params = useParams();
-
     const encodedSlug = Array.isArray(params?.slug) ? params.slug.join("/") : params?.slug || "";
     const category = getCategory(basePath);
     const decodedSlug = encodedSlug ? decodeURIComponent(encodedSlug) : "";
-    const [singleNewsData, setSingleNewsData] = useState<TNews | null>(null);
-    const [loading, setLoading] = useState(false)
-    const [error, setError] = useState<string | null>(null);
-
-
-    useEffect(() => {
-        const fetchData = async () => {
-            try {
-                setLoading(true)
-                const res = await fetch(`https://api.sarabelanews24.com/api/v1/news/${decodedSlug}`);
-                if (!res.ok) {
-                    throw new Error(`HTTP error! status: ${res.status}`);
-                }
-                const result = await res.json();
-
-                if (result?.data) {
-                    setSingleNewsData(result.data);
-                } else {
-                    setError("Data not found");
-                }
-            } catch (error) {
-
-                setError("An error occurred while fetching data.");
-            } finally {
-                setLoading(false)
-            }
-        };
-
-        fetchData();
-    }, [decodedSlug]);
-
-
-    if (loading) {
-        return <h2>Loading.......</h2>;
-    }
-    if (error) {
-        return <h1>Oops! data not found.</h1>;
-    }
+    const { data } = useGetSingleNewsQuery(decodedSlug)
+    const singleNewsData = data?.data
 
     return (
         <main className="min-h-screen">
@@ -68,9 +32,7 @@ const NewsSingleDetails = ({ basePath }: TopNewsProps) => {
                             <div className="space-y-6">
                                 <div className="overflow-hidden">
                                     {singleNewsData ? <NewsCard news={singleNewsData} /> : <p>Loading news...</p>}
-                                    {singleNewsData ? <Feedback news={singleNewsData}/> : <p>Loading news...</p>}
-                                    
-
+                                    {singleNewsData ? <Feedback news={singleNewsData} /> : <p>Loading news...</p>}
                                     <Advertisements />
                                     <RelatedNews category={category} basePath={basePath} />
                                     <PaginationPages />
