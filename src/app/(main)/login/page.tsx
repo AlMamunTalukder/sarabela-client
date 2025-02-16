@@ -9,7 +9,7 @@ import { LockKeyhole, User } from "lucide-react"
 import { setCookie } from "@/axios/Cookies"
 import toast from "react-hot-toast"
 import axios from "axios"
-import { useRouter } from "next/navigation"
+import { useRouter, useSearchParams } from "next/navigation"
 import TextInput from "@/util/TextInput"
 
 type Inputs = {
@@ -19,6 +19,9 @@ type Inputs = {
 
 const LogIn = () => {
   const router = useRouter()
+  const searchParams = useSearchParams()
+  const returnUrl = searchParams.get("returnUrl") || "/"
+
   const form = useForm<Inputs>({
     defaultValues: {
       name: "",
@@ -28,29 +31,32 @@ const LogIn = () => {
 
   const onSubmit = async (data: Inputs) => {
     try {
-      const res = await axios.post("http://localhost:5000/api/v1/auth/login", data)
+      const res = await axios.post("https://api.sarabelanews24.com/api/v1/auth/login", data)
 
       const accessToken = res?.data?.data?.accessToken
 
       if (accessToken) {
         setCookie("sarabela-news", accessToken, { expires: 7 })
         localStorage.setItem("sarabela-news", accessToken)
-        router.push("/")
-      }
 
-      if (res.data.success) {
-        toast.success("Login successfully!")
+        if (res.data.success) {
+          toast.success("Login successful!")
+          // Redirect to the return URL after successful login
+          router.push(returnUrl)
+        } else {
+          toast.error(res.data.message || "Login failed!")
+        }
       } else {
-        toast.error(res.data.message || "Login failed!")
+        toast.error("Login failed: No access token received")
       }
     } catch (err: any) {
       if (err.response?.data?.errorSources) {
         const errorMessages = err.response.data.errorSources
           .map((error: { message: string }) => error.message)
           .join(", ")
-        toast.error(errorMessages || "Failed to register")
+        toast.error(errorMessages || "Failed to login")
       } else {
-        toast.error(err.response?.data?.message || "Failed to register")
+        toast.error(err.response?.data?.message || "Failed to login")
       }
     }
   }
