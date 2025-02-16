@@ -1,7 +1,14 @@
 "use client";
 import * as React from "react";
 import Link from "next/link";
-import { NavigationMenu, NavigationMenuContent, NavigationMenuItem, NavigationMenuLink, NavigationMenuList, NavigationMenuTrigger } from "@/components/ui/navigation-menu";
+import {
+  NavigationMenu,
+  NavigationMenuContent,
+  NavigationMenuItem,
+  NavigationMenuLink,
+  NavigationMenuList,
+  NavigationMenuTrigger,
+} from "@/components/ui/navigation-menu";
 import {
   Facebook,
   Twitter,
@@ -19,8 +26,8 @@ import logo from "@public/asset/logo/logo3.png";
 import { usePathname } from "next/navigation";
 import { useDispatch, useSelector } from "react-redux";
 import { toggleDarkMode } from "@/lib/themeSlice";
-import { Camera, Video } from "lucide-react"
-import { Separator } from "@/components/ui/separator"
+import { Camera, Video } from "lucide-react";
+import { Separator } from "@/components/ui/separator";
 interface SocialLink {
   id: string;
   icon: React.ReactNode;
@@ -77,17 +84,15 @@ const Navbar: React.FC = () => {
       ref={navRef}
       className="dark:text-black bg-white dark:bg-gray-400 border-b shadow-sm"
     >
-      {/* Mobile Navigation */}
       <div className="lg:hidden">
-        {/* First Section - Logo, Search, User */}
         <div className="border-b border-gray-200 px-4 py-2">
           <div className="flex items-center justify-between">
             <Image
               src={logo}
               alt="Daily Times 24"
-              width={120}
+              width={150}
               height={50}
-              className="w-28"
+              className="w-36"
             />
             <div className="flex items-center gap-3">
               <Link href="/search">
@@ -116,29 +121,31 @@ const Navbar: React.FC = () => {
           </div>
         </div>
 
-        {/* Second Section - Category Menu and Toggle */}
-        <div className="px-4 py-2 border-b border-red-500 overflow-x-hidden">
+        <div className="px-4 py-2 shadow-md">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2 overflow-auto">
               {navItems.map((item) => (
                 <Link
                   key={item.href}
                   href={item.href}
-                  className={`whitespace-nowrap px-3 py-1 text-sm ${pathname === item.href
-                    ? "text-red-500 font-medium"
-                    : "text-gray-600"
-                    }`}
+                  className={`whitespace-nowrap px-3 py-1 text-sm ${
+                    pathname === item.href
+                      ? "text-red-500 font-medium"
+                      : "text-gray-600"
+                  }`}
                 >
                   {item.label}
                 </Link>
               ))}
             </div>
-            <button
-              onClick={() => setIsOpen(!isOpen)}
-              className="focus:outline-none ml-2"
-            >
-              {isOpen ? <X size={24} /> : <Menu size={24} />}
-            </button>
+            
+              <button
+                onClick={() => setIsOpen(!isOpen)}
+                className="focus:outline-none ml-2"
+              >
+                {isOpen ? <X size={24} /> : <Menu size={24} />}
+              </button>
+         
           </div>
         </div>
         <div className="bg-gray-50/50">
@@ -155,21 +162,30 @@ const Navbar: React.FC = () => {
 
             {/* Navigation Bar */}
             <nav className="flex items-center justify-center py-3 ">
-              <Link href="/photo/গোলাপ-জার্বেরা-চন্দ্রমল্লিকার-বাগানে" className="flex items-center gap-1 hover:opacity-80">
+              <Link
+                href="/photo/গোলাপ-জার্বেরা-চন্দ্রমল্লিকার-বাগানে"
+                className="flex items-center gap-1 hover:opacity-80"
+              >
                 <Camera className="w-4 h-4 text-red-500" />
                 <span className="text-sm font-medium">ছবি</span>
               </Link>
 
               <Separator orientation="vertical" className="mx-4 h-4" />
 
-              <Link href="/video/ডিবি-জমটুপি-পরিয়ে-বিবস্ত্র-করে-ছাত্রদলের-আরিফকে-পেটায়" className="flex items-center gap-1 hover:opacity-80">
+              <Link
+                href="/video/ডিবি-জমটুপি-পরিয়ে-বিবস্ত্র-করে-ছাত্রদলের-আরিফকে-পেটায়"
+                className="flex items-center gap-1 hover:opacity-80"
+              >
                 <Video className="w-4 h-4 text-red-500" />
                 <span className="text-sm font-medium">ভিডিও</span>
               </Link>
 
               <Separator orientation="vertical" className="mx-4 h-4" />
 
-              <Link href="/video/ডিবি-জমটুপি-পরিয়ে-বিবস্ত্র-করে-ছাত্রদলের-আরিফকে-পেটায়" className="flex items-center gap-1 hover:opacity-80">
+              <Link
+                href="/video/ডিবি-জমটুপি-পরিয়ে-বিবস্ত্র-করে-ছাত্রদলের-আরিফকে-পেটায়"
+                className="flex items-center gap-1 hover:opacity-80"
+              >
                 <Video className="w-4 h-4 text-red-500" />
                 <span className="text-sm font-medium">ভিডিও</span>
               </Link>
@@ -181,8 +197,6 @@ const Navbar: React.FC = () => {
       {/* Desktop Navigation */}
       <div className="hidden lg:block max-w-7xl mx-auto px-4 py-4">
         <div className="flex justify-between items-center">
-
-
           {/* Navigation Menu */}
           <div>
             <NavigationMenu>
@@ -210,10 +224,11 @@ const Navbar: React.FC = () => {
                     <NavigationMenuItem key={item.href}>
                       <Link
                         href={item.href}
-                        className={`px-3 py-2 hover:text-red-500 ${pathname === item.href
-                          ? "border-b-2 border-black text-red-500"
-                          : ""
-                          }`}
+                        className={`px-3 py-2 hover:text-red-500 ${
+                          pathname === item.href
+                            ? "border-b-2 border-black text-red-500"
+                            : ""
+                        }`}
                       >
                         {item.label}
                       </Link>
@@ -289,10 +304,11 @@ const Navbar: React.FC = () => {
                   ) : (
                     <Link
                       href={item.href}
-                      className={`block px-2 py-2 rounded ${pathname === item.href
-                        ? "text-blue-600 font-medium"
-                        : "text-gray-700 hover:text-blue-600"
-                        }`}
+                      className={`block px-2 py-2 rounded ${
+                        pathname === item.href
+                          ? "text-blue-600 font-medium"
+                          : "text-gray-700 hover:text-blue-600"
+                      }`}
                     >
                       {item.label}
                     </Link>
@@ -317,7 +333,6 @@ const Navbar: React.FC = () => {
     </div>
   );
 };
-
 
 interface ListItemProps extends React.AnchorHTMLAttributes<HTMLAnchorElement> {
   title: string;
