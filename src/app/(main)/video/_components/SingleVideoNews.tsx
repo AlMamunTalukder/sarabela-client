@@ -28,7 +28,7 @@ const category = ''
         const fetchData = async () => {
             try {
                 setLoading(true)
-                const res = await fetch(`https://api.sarabelanews24.com/api/v1/video-news/${decodedSlug}`);
+                const res = await fetch(`http://localhost:5000/api/v1/video-news/${decodedSlug}`);
                 if (!res.ok) {
                     throw new Error(`HTTP error! status: ${res.status}`);
                 }

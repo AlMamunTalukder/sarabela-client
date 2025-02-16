@@ -15,7 +15,7 @@ export const useSpecificVideoNewsData = (newsTag?: string) => {
     useEffect(() => {
         const fetchVideoNewsData = async () => {
             try {
-                const response = await fetch(`https://api.sarabelanews24.com/api/v1/video-news?limit=4&fields=${videoNewsFields}`, {
+                const response = await fetch(`http://localhost:5000/api/v1/video-news?limit=4&fields=${videoNewsFields}`, {
                     cache: "no-store",
                 });
                 const data = await response.json();

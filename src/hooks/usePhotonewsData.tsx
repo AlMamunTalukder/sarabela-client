@@ -12,7 +12,7 @@ export const usePhotonewsData = () => {
     useEffect(() => {
         const fetchNewsData = async () => {
             try {
-                const response = await fetch(`https://api.sarabelanews24.com/api/v1/photonews?limit=4&fields=${photoNewsFields}`, {
+                const response = await fetch(`http://localhost:5000/api/v1/photonews?limit=4&fields=${photoNewsFields}`, {
                     cache: "no-store",
                 });
                 const data = await response.json();

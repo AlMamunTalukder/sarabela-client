@@ -12,7 +12,7 @@ const useCommentsData = (tagName?:string) => {
     const fetchCommentData = async () => {
       try {
         const response = await fetch(
-          `https://api.sarabelanews24.com/api/v1/comment`,
+          `http://localhost:5000/api/v1/comment`,
           {
             cache: "no-store",
           }
