@@ -26,8 +26,9 @@ import logo from "@public/asset/logo/logo3.png";
 import { usePathname } from "next/navigation";
 import { useDispatch, useSelector } from "react-redux";
 import { toggleDarkMode } from "@/lib/themeSlice";
-import { Camera, Video } from "lucide-react";
-import { Separator } from "@/components/ui/separator";
+// import { Camera, Video } from "lucide-react";
+// import { Separator } from "@/components/ui/separator";
+import BreakingNews from "@/util/BreakingNews";
 interface SocialLink {
   id: string;
   icon: React.ReactNode;
@@ -138,58 +139,20 @@ const Navbar: React.FC = () => {
                 </Link>
               ))}
             </div>
-            
-              <button
-                onClick={() => setIsOpen(!isOpen)}
-                className="focus:outline-none ml-2"
-              >
-                {isOpen ? <X size={24} /> : <Menu size={24} />}
-              </button>
-         
+
+            <button
+              onClick={() => setIsOpen(!isOpen)}
+              className="focus:outline-none ml-2"
+            >
+              {isOpen ? <X size={24} /> : <Menu size={24} />}
+            </button>
           </div>
         </div>
         <div className="bg-gray-50/50">
+            <h1 style={{ background: "#333", color: "#fff", padding: "10px 0" }} className="absolute z-10 w-[100px]">ব্রেকিং নিউজ</h1>
           <div className="container mx-auto flex items-center  justify-center gap-x-2 px-2 ">
-            {/* Breaking News Bar */}
-            {/* <div className="flex items-center py-2 border-b border-gray-200">
-             
-              <div className="overflow-hidden flex-1">
-                <div className="animate-marquee whitespace-nowrap">
-                  <span className="text-sm font-medium text-red-500">ব্রেকিং নিউজ: </span>
-                </div>
-              </div>
-            </div> */}
-
-            {/* Navigation Bar */}
-            <nav className="flex items-center justify-center py-3 ">
-              <Link
-                href="/photo/গোলাপ-জার্বেরা-চন্দ্রমল্লিকার-বাগানে"
-                className="flex items-center gap-1 hover:opacity-80"
-              >
-                <Camera className="w-4 h-4 text-red-500" />
-                <span className="text-sm font-medium">ছবি</span>
-              </Link>
-
-              <Separator orientation="vertical" className="mx-4 h-4" />
-
-              <Link
-                href="/video/ডিবি-জমটুপি-পরিয়ে-বিবস্ত্র-করে-ছাত্রদলের-আরিফকে-পেটায়"
-                className="flex items-center gap-1 hover:opacity-80"
-              >
-                <Video className="w-4 h-4 text-red-500" />
-                <span className="text-sm font-medium">ভিডিও</span>
-              </Link>
-
-              <Separator orientation="vertical" className="mx-4 h-4" />
-
-              <Link
-                href="/video/ডিবি-জমটুপি-পরিয়ে-বিবস্ত্র-করে-ছাত্রদলের-আরিফকে-পেটায়"
-                className="flex items-center gap-1 hover:opacity-80"
-              >
-                <Video className="w-4 h-4 text-red-500" />
-                <span className="text-sm font-medium">ভিডিও</span>
-              </Link>
-            </nav>
+            <BreakingNews /> 
+            
           </div>
         </div>
       </div>
@@ -279,7 +242,7 @@ const Navbar: React.FC = () => {
 
       {/* Mobile Menu Dropdown */}
       {isOpen && (
-        <div className="lg:hidden bg-white absolute top-[116px] left-0 right-0 z-50">
+        <div className="lg:hidden bg-white absolute top-[135px] left-0 right-0 z-50">
           <div className="p-4">
             <div className="space-y-2">
               {navItems.map((item) => (

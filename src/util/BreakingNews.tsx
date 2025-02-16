@@ -19,7 +19,7 @@ const BreakingNews = () => {
 
   return (
     <div className="flex" style={{ background: "#333", color: "#fff", padding: "10px 0" }}>
-      <h2 style={{ textAlign: "center" }}>ব্রেকিং নিউজ</h2>
+      <h2 style={{ textAlign: "center" }} className="w-[180px] text-center  ">ব্রেকিং নিউজ</h2>
       <Marquee pauseOnHover={true} speed={50}>
         
         {newsData.map((news, index) => {

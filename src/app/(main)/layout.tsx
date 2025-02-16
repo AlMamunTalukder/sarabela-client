@@ -18,7 +18,7 @@ const Layout = ({ children }: { children: ReactNode }) => {
       <main className="flex-grow mb-[50px]">{children}</main>
 
       {/* Breaking News Ticker */}
-      <div className="fixed bottom-0 left-0 right-0 z-50">
+      <div className="hidden lg:flex fixed bottom-0 left-0 right-0 z-50">
         <BreakingNews />
       </div>
 
