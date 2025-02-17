@@ -1,6 +1,7 @@
 import Footer from "@/components/Footer/Footer";
 import Header from "@/components/Header/Header";
 import Navbar from "@/components/Navbar/Navbar";
+import ScrollToTop from "@/components/ScrolltoTop/ScrolltoTop";
 import BreakingNews from "@/components/Share/BreakingNews/BreakingNews";
 
 import React, { ReactNode } from "react";
@@ -26,6 +27,7 @@ const Layout = ({ children }: { children: ReactNode }) => {
       <footer className="relative z-30 mb-[50px]">
         <Footer />
       </footer>
+      <ScrollToTop />
     </div>
   );
 };
