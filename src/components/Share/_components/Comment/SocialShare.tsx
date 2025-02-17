@@ -7,6 +7,8 @@ import { useEffect, useState } from "react"
 import toast from "react-hot-toast"
 import axios from "axios"
 import { useGetShareCountsQuery, useShareNewsMutation } from "@/redux/dailynews/shareApi"
+import { FaFacebookMessenger } from "react-icons/fa6";
+import { FaFacebookF } from "react-icons/fa";
 
 type NewsIdParams = {
   newsId: string;
@@ -94,9 +96,10 @@ export default function SocialShare({ newsId }: NewsIdParams) {
         variant="ghost"
         size="icon"
         onClick={() => handleShare("Facebook")}
-        className="bg-[#3b5998] hover:bg-[#344e86] h-8 w-8 rounded-full p-0"
+        className="bg-[#1877F2] hover:bg-[#344e86] h-8 w-8 rounded-full p-0"
       >
-        <Facebook className="h-4 w-4 text-white" />
+        {/* <Facebook className="h-4 w-4 text-white" /> */}
+        <FaFacebookF className="h-4 w-4 text-white" />
       </Button>
 
       <Button
@@ -105,7 +108,8 @@ export default function SocialShare({ newsId }: NewsIdParams) {
         onClick={() => handleShare("Messenger")}
         className="bg-[#0084ff] hover:bg-[#0074e0] h-8 w-8 rounded-full p-0"
       >
-        <MessageCircle className="h-4 w-4 text-white" />
+        {/* <MessageCircle className="h-4 w-4 text-white" /> */}
+        <FaFacebookMessenger className="h-4 w-4 text-white" />
       </Button>
 
       <Button

@@ -1,7 +1,9 @@
 import Footer from "@/components/Footer/Footer";
 import Header from "@/components/Header/Header";
 import Navbar from "@/components/Navbar/Navbar";
-import BreakingNews from "@/util/BreakingNews";
+import ScrollToTop from "@/components/ScrolltoTop/ScrolltoTop";
+import BreakingNews from "@/components/Share/BreakingNews/BreakingNews";
+
 import React, { ReactNode } from "react";
 
 const Layout = ({ children }: { children: ReactNode }) => {
@@ -18,13 +20,14 @@ const Layout = ({ children }: { children: ReactNode }) => {
       <main className="flex-grow mb-[50px]">{children}</main>
 
       {/* Breaking News Ticker */}
-      <div className="fixed bottom-0 left-0 right-0 z-50">
+      <div className="hidden lg:flex fixed bottom-0 left-0 right-0 z-50">
         <BreakingNews />
       </div>
 
       <footer className="relative z-30 mb-[50px]">
         <Footer />
       </footer>
+      <ScrollToTop />
     </div>
   );
 };
