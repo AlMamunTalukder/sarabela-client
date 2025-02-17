@@ -1,0 +1,50 @@
+/* BreakingNews.css */
+.breaking-news-container {
+    display: flex;
+    background: #333;
+    color: #ffffff;
+    padding: 10px 0;
+  }
+  
+  .breaking-news-title {
+    width: 180px;
+    text-align: center;
+  }
+  
+  .breaking-news-item {
+    margin-right: 50px;
+    font-size: 16px;
+  }
+  
+  .breaking-news-item a {
+    color: #ffffff;
+    text-decoration: none;
+  }
+
+/* Mobile Styles */
+@media (max-width: 768px) {
+    .breaking-news-container {
+      display: flex;
+      background: #ffffff;
+      color: #ffffff; /* Change to black so text is visible */
+      padding: 10px 0;
+    }
+  
+    .breaking-news-title {
+      width: 100px;
+      font-size: 14px;
+    }
+  
+    .breaking-news-item {
+      font-size: 14px;
+      margin-right: 20px;
+    }
+  
+    .breaking-news-item a {
+        background: #ffffff !important;
+      color: #000000 !important; 
+    }
+  }
+  
+  
+
