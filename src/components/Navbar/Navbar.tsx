@@ -20,15 +20,15 @@ import {
   X,
   Sun,
   Moon,
-  ChevronsUpDown,
 } from "lucide-react";
 import Image from "next/image";
-import logo from "@public/asset/dailyTimes24.png";
+import logo from "@public/asset/logo/logo3.png";
 import { usePathname } from "next/navigation";
 import { useDispatch, useSelector } from "react-redux";
 import { toggleDarkMode } from "@/lib/themeSlice";
-import { Button } from "../ui/button";
-import MultipleField from "../Form-Inputs/MultipleField";
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "../ui/accordion";
+import BreakingNews from "@/components/Share/BreakingNews/BreakingNews";
+
 
 interface SocialLink {
   id: string;
@@ -70,33 +70,8 @@ const navItems: NavItem[] = [
   },
 ];
 
-const searchNews = [
-  {
-    value: "next.js",
-    label: "Next.js",
-  },
-  {
-    value: "sveltekit",
-    label: "SvelteKit",
-  },
-  {
-    value: "nuxt.js",
-    label: "Nuxt.js",
-  },
-  {
-    value: "remix",
-    label: "Remix",
-  },
-  {
-    value: "astro",
-    label: "Astro",
-  },
-];
-
 const Navbar: React.FC = () => {
   const [isOpen, setIsOpen] = React.useState(false);
-  const [isSearchBarOpen, setSearchBarOpen] = React.useState(false);
-  const [value, setValue] = React.useState("");
   const navRef = React.useRef<HTMLDivElement>(null);
   const pathname = usePathname();
   const dispatch = useDispatch();
@@ -109,51 +84,101 @@ const Navbar: React.FC = () => {
   return (
     <div
       ref={navRef}
-      className="bg-gradient-to-r from-blue-700 to-blue-600 lg:bg-blue-600"
+      className="dark:text-black bg-white dark:bg-gray-400 border-b shadow-sm"
     >
-      {/* Mobile Top Bar */}
-      <div className="lg:hidden mx-auto px-4">
-        <div className="flex justify-between items-center py-2 border-b border-blue-400">
-          <div className="flex items-center space-x-4">
+      <div className="lg:hidden">
+        <div className="border-b border-gray-200 px-4 py-2">
+          <div className="flex items-center justify-between">
             <Image
               src={logo}
               alt="Daily Times 24"
-              width={120}
+              width={150}
               height={50}
-              className="w-28"
+              className="w-36"
             />
+            <div className="flex items-center gap-3">
+              <Link href="/search">
+                <button className="p-2 rounded-full bg-gray-200 dark:bg-gray-200 hover:bg-red-400 transition-colors">
+                  <Search size={15} />
+                </button>
+              </Link>
+              |
+              <Link href="/login">
+                <button className="p-2 rounded-full bg-gray-200 dark:bg-gray-200 hover:bg-red-400 transition-colors">
+                  <UserRound size={15} />
+                </button>
+              </Link>
+              |
+              <button
+                onClick={() => dispatch(toggleDarkMode())}
+                className="p-2 rounded-full bg-gray-200 dark:bg-gray-200"
+              >
+                {mode ? (
+                  <Sun size={15} className="text-yellow-400" />
+                ) : (
+                  <Moon size={15} className="text-blue-400" />
+                )}
+              </button>
+            </div>
           </div>
-          <button
-            onClick={() => setIsOpen(!isOpen)}
-            className="text-white focus:outline-none"
-          >
-            {isOpen ? <X size={24} /> : <Menu size={24} />}
-          </button>
+        </div>
+
+        <div className="px-4 py-2 shadow-lg z-50 border-b">
+          <div className="flex items-center justify-between">
+          <div className="flex items-center gap-2 overflow-auto no-scrollbar">
+
+              {navItems.map((item) => (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  className={`whitespace-nowrap px-3 py-1 text-sm ${
+                    pathname === item.href
+                      ? "text-red-500 font-medium"
+                      : "text-gray-600"
+                  }`}
+                >
+                  {item.label}
+                </Link>
+              ))}
+            </div>
+
+            <button
+              onClick={() => setIsOpen(!isOpen)}
+              className="focus:outline-none ml-2"
+            >
+              {isOpen ? <X size={24} /> : <Menu size={24} />}
+            </button>
+          </div>
+        </div>
+
+
+        <div className="bg-gray-50/50">
+            <h1 style={{  padding: "8px 0" }} className="absolute z-10 w-[100px] bg-white text-black shadow-md ">ব্রেকিং নিউজ</h1>
+          <div className="container mx-auto flex items-center  justify-center gap-x-2 px-2 ">
+            <BreakingNews /> 
+            
+          </div>
         </div>
       </div>
 
       {/* Desktop Navigation */}
       <div className="hidden lg:block max-w-7xl mx-auto px-4 py-4">
         <div className="flex justify-between items-center">
-          {/* Logo Area */}
-          <div className="lg:hidden flex items-center space-x-4">
-            <Image src={logo} alt="Daily Times 24" width={120} height={50} />
-          </div>
-
           {/* Navigation Menu */}
           <div>
             <NavigationMenu>
-              <NavigationMenuList>
+              <NavigationMenuList className="flex items-center gap-4">
                 {navItems.map((item) =>
                   item.nested ? (
                     <NavigationMenuItem key={item.href}>
-                      <NavigationMenuTrigger className="px-3 py-2 text-white hover:text-blue-100 ">
+                      <NavigationMenuTrigger className="px-3 py-2 text-black hover:text-red-500">
                         {item.label}
                       </NavigationMenuTrigger>
                       <NavigationMenuContent>
-                        <ul className="grid grid-cols-4 gap-4 w-[750px] p-4">
+                        <ul className="grid dark:bg-gray-400 text-black grid-cols-4 gap-4 w-[750px] p-4">
                           {item.nested.map((nestedItem) => (
                             <ListItem
+                              className="hover:text-red-500"
                               key={nestedItem.href}
                               title={nestedItem.label}
                               href={nestedItem.href}
@@ -166,9 +191,9 @@ const Navbar: React.FC = () => {
                     <NavigationMenuItem key={item.href}>
                       <Link
                         href={item.href}
-                        className={`px-3 py-2 text-white hover:text-blue-100 ${
+                        className={`px-3 py-2 hover:text-red-500 ${
                           pathname === item.href
-                            ? "border-b-2 border-white"
+                            ? "border-b-2 border-black text-red-500"
                             : ""
                         }`}
                       >
@@ -184,41 +209,29 @@ const Navbar: React.FC = () => {
           {/* Search and Social */}
           <div className="flex items-center space-x-4">
             <div className="border-e-2 pe-2">
-              <div>
-                {/* Button to trigger search/popover */}
-                <Button
-                  variant="outline"
-                  role="combobox"
-                  aria-expanded={open}
-                  onClick={() => setSearchBarOpen(!isSearchBarOpen)} 
-                  className="w-[200px] justify-between"
-                >
-                  {value
-                    ? searchNews.find((framework) => framework.value === value)
-                        ?.label
-                    : "Select framework..."}
-                  <ChevronsUpDown className="opacity-50" />
-                </Button>
-                {isSearchBarOpen && (
-                  <MultipleField searchNews={searchNews} setValue={setValue} />
-                )}
-              </div>
+              <Link href="/search">
+                <button className="p-2 rounded-full bg-gray-200 dark:bg-gray-200 hover:bg-red-400 transition-colors">
+                  <Search size={15} />
+                </button>
+              </Link>
             </div>
             {socialLinks.map((link) => (
               <Link key={link.id} href={link.link}>
-                <div className="bg-white p-2 rounded-full text-blue-600 hover:bg-blue-50 transition-colors">
+                <div className="p-2 rounded-full bg-gray-200 dark:bg-gray-200 hover:bg-red-400 transition-colors">
                   {link.icon}
                 </div>
               </Link>
             ))}
 
             <div className="border-s-2 px-2 flex gap-2">
-              <button className="p-2 rounded-full bg-gray-200 dark:bg-gray-700">
-                <UserRound size={15} />
-              </button>
+              <Link href="/login">
+                <button className="p-2 rounded-full bg-gray-200 dark:bg-gray-200">
+                  <UserRound size={15} />
+                </button>
+              </Link>
               <button
                 onClick={() => dispatch(toggleDarkMode())}
-                className="p-2 rounded-full bg-gray-200 dark:bg-gray-700"
+                className="p-2 rounded-full bg-gray-200 dark:bg-gray-200"
               >
                 {mode ? (
                   <Sun size={15} className="text-yellow-400" />
@@ -231,70 +244,53 @@ const Navbar: React.FC = () => {
         </div>
       </div>
 
-      {/* Mobile Menu */}
+      {/* Mobile Menu Dropdown */}
       {isOpen && (
-        <div className="lg:hidden bg-white absolute top-[80px] left-0 right-0 z-50">
-          <div className="p-4">
-            <div className="relative mb-4">
-              <input
-                type="text"
-                placeholder="Search..."
-                className="w-full px-4 py-2 rounded-full border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
-              />
-              <Search
-                className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400"
-                size={18}
-              />
-            </div>
-            <div className="space-y-2">
-              {navItems.map((item) => (
-                <div key={item.href}>
-                  {item.nested ? (
-                    <div className="space-y-2">
-                      <div className="font-medium text-gray-800">
+          <div className="bg-white absolute top-[142px] left-0 right-0 z-50 p-4 shadow-md border">
+        
+            <div className="grid grid-cols-2 gap-2">
+              {navItems.map((item) =>
+                item.nested ? (
+                  <Accordion key={item.href} type="single" collapsible>
+                    <AccordionItem value={item.href}>
+                      <AccordionTrigger className="flex px-3 py-2 text-gray-800 hover:text-red-500">
                         {item.label}
-                      </div>
-                      <div className="pl-4 space-y-2">
-                        {item.nested.map((nestedItem) => (
-                          <Link
-                            key={nestedItem.href}
-                            href={nestedItem.href}
-                            className="block py-2 text-gray-600 hover:text-blue-600"
-                          >
-                            {nestedItem.label}
-                          </Link>
-                        ))}
-                      </div>
-                    </div>
-                  ) : (
-                    <Link
-                      href={item.href}
-                      className={`block px-2 py-2 rounded ${
-                        pathname === item.href
-                          ? "text-blue-600 font-medium"
-                          : "text-gray-700 hover:text-blue-600"
-                      }`}
-                    >
-                      {item.label}
-                    </Link>
-                  )}
-                </div>
-              ))}
-            </div>
-            <div className="mt-6 pt-6 border-t border-gray-200">
-              <div className="flex justify-center space-x-4">
-                {socialLinks.map((link) => (
-                  <Link key={link.id} href={link.link}>
-                    <div className="rounded-full bg-gray-500 p-2 text-white hover:bg-red-500 transition-colors">
-                      {link.icon}
-                    </div>
+                      </AccordionTrigger>
+                      <AccordionContent>
+                        <div className="space-y-2 pl-4">
+                          {item.nested.map((nestedItem) => (
+                            <Link
+                              key={nestedItem.href}
+                              href={nestedItem.href}
+                              className="block py-1 text-gray-600 hover:text-blue-600"
+                            >
+                              {nestedItem.label}
+                            </Link>
+                          ))}
+                        </div>
+                      </AccordionContent>
+                    </AccordionItem>
+                  </Accordion>
+                ) : (
+                  <Link
+                    key={item.href}
+                    href={item.href}
+                    className={`border-b px-3 py-2 rounded text-center ${
+                      pathname === item.href ? "text-red-500 font-medium" : "text-gray-700 hover:text-blue-600"
+                    }`}
+                  >
+                    {item.label}
                   </Link>
-                ))}
-              </div>
+                )
+              )}
             </div>
           </div>
-        </div>
-      )}
+        )}
+
+
+
+
+
     </div>
   );
 };

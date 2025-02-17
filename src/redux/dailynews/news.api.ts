@@ -1,54 +1,15 @@
 import { baseApi } from "../api/baseApi";
 
-
 const newsApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
-    createNews: builder.mutation({
-      query: (data) => ({
-        url: "/news",
-        method: "POST",
-        data,
-      }),
-      invalidatesTags: ["news"],
-    }),
-
-    deleteNews: builder.mutation({
-      query: (id) => ({
-        url: `/news/${id}`,
-        method: "DELETE",
-      }),
-      invalidatesTags: ["news"],
-    }),
-    getAllNews: builder.query({
-      query: () => ({
-        url: "/news",
-        method: "GET",
-    
-      }),
-      providesTags: ["news"],
-    }),
     getSingleNews: builder.query({
-      query: (id) => ({
-        url: `/news/${id}`,
+      query: (slug) => ({
+        url: `/news/${slug}`,
         method: "GET",
       }),
-      providesTags: ["news"],
-    }),
-    updateNews: builder.mutation({
-      query: ({ id, ...data }) => ({
-        url: `/news/${id}`,
-        method: "PATCH",
-        data,
-      }),
-      invalidatesTags: ["news"],
+      providesTags: (result, error, slug) => [{ type: "news", id: slug }],
     }),
   }),
 });
 
-export const {
-  useCreateNewsMutation, 
-  useDeleteNewsMutation, 
-  useGetAllNewsQuery,
-  useGetSingleNewsQuery,
-  useUpdateNewsMutation
-} = newsApi;
+export const { useGetSingleNewsQuery } = newsApi;

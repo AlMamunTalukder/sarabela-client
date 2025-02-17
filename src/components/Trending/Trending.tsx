@@ -1,4 +1,4 @@
-'use client'
+"use client";
 import TrendingCard from "./TrendingCard";
 import SectionHeader from "./SectionHeader";
 
@@ -6,22 +6,21 @@ import { useSpecificNewsData } from "@/hooks/useSpecificNewsData";
 import { sortByDate } from "@/util/sort";
 import SaidTabs from "../LeadNews/SaidTabs";
 import { getCategory } from "@/util/getCategory";
-
+import Loading from "../Share/_components/Loading";
 
 const Trending = () => {
-  const basePath = '/international';
+  const basePath = "/international";
   const category = getCategory(basePath);
 
-
-  const { newsData, loading, error } = useSpecificNewsData(category)
+  const { newsData, loading, error } = useSpecificNewsData({ category });
   if (loading) {
-    return <h3>Loading.......</h3>
+    return <Loading />;
   }
   if (error) {
-    return <h3>Oops! data not found.</h3>
+    return <h3>Oops! data not found.</h3>;
   }
 
-  const sortNewsData = sortByDate(newsData, 'postDate')
+  const sortNewsData = sortByDate(newsData, "postDate");
 
   return (
     <div className="pt-4">
@@ -38,7 +37,7 @@ const Trending = () => {
             </div>
           </div>
 
-          <div className="hidden lg:block border-s border-black"></div>
+          <div className="hidden lg:block border-s dark:border-gray-300 border-black"></div>
           {/* Normal News Section */}
           <div>
             <SectionHeader title="গুরুত্বপূর্ণ" />
@@ -49,12 +48,12 @@ const Trending = () => {
               <TrendingCard data={sortNewsData} />
             </div>
           </div>
-          <div className="hidden lg:block border-s border-black"></div>
+          <div className="hidden lg:block border-s dark:border-gray-300 border-black"></div>
         </div>
 
         {/* Table Section */}
         <div className="lg:w-1/4 w-full mt-4 lg:mt-0">
-          <SaidTabs category={category} basePath={basePath} />
+          <SaidTabs />
         </div>
       </div>
     </div>

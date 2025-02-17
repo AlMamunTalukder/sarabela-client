@@ -1,7 +1,7 @@
 export type TNews = {
   _id: string;
   reporterName: string;
-  videoUrl:string;
+  videoUrl: string;
   reporterType: string;
   reportedDate: Date;
   newsType: string;
@@ -12,7 +12,9 @@ export type TNews = {
   displayLocation: string;
   images: string[];
   photojournalistName: string;
-  category: string;
+  category: {
+    name: string;
+  };
   newsCategory: string;
   newsTitle: string;
   slug: string;
@@ -28,7 +30,17 @@ export type TNews = {
   metaTitle: string;
   metaKeywords: string[];
   metaDescription: string;
+  comments: {
+    _id: string;
+    user: {
+      name: string;
+      avatar: string;
+    };
+    comments: string;
+    createdAt: Date;
+  }[];
 };
+
 export type TVideoNews = {
   _id: string;
   reporterName: string;
@@ -61,5 +73,38 @@ export type TVideoNews = {
   metaTitle: string;
   metaKeywords: string[];
   metaDescription: string;
-  
 };
+
+export type TPhotoNews = {
+  [x: string]: any;
+  _id: string;
+  title: string;
+  description: string;
+  imgTagline: string;
+  images: [string];
+  postDate: string;
+  adminName: string;
+};
+
+export interface Comment {
+  id: string
+  text: string
+  author: {
+    name: string
+    avatar: string
+  }
+  createdAt: Date
+  likes: number
+}
+
+export interface TComments {
+  _id: string;
+  user: {
+    name: string;
+    avatar?: string;
+  };
+  news: string;
+  comments: string;
+  replyComments: string[];
+  createdAt: string;
+}

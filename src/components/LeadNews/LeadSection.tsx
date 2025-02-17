@@ -1,12 +1,7 @@
-
-import { getCategory } from "@/util/getCategory";
 import NewsCard from "./NewsCard";
 import SaidTabs from "./SaidTabs";
 
 const LeadSection = () => {
-  const basePath = '/international';
-  const category = getCategory(basePath);
-
   return (
     <div className="py-4">
       <div className="flex flex-col lg:flex-row gap-4">
@@ -17,7 +12,7 @@ const LeadSection = () => {
 
         {/* Sidebar Section */}
         <div className="w-full lg:w-1/4">
-          <SaidTabs category={category} basePath={basePath} />
+          <SaidTabs />
         </div>
       </div>
     </div>

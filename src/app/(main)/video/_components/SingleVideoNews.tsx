@@ -7,7 +7,7 @@ import PaginationPages from "@/util/PaginationPages";
 import { useEffect, useState } from "react";
 import { useParams, } from "next/navigation";
 import { TNews } from "@/types";
-import Feedback from "@/components/Share/_components/Feedback";
+import Feedback from "@/components/Share/_components/Comment/Feedback";
 import Advertisements from "@/components/Share/_components/Advertisment";
 import RelatedNews from "@/components/Share/_components/RelatedNews";
 import NewsCard from "@/components/LeadNews/NewsCard";
@@ -18,7 +18,7 @@ interface TopNewsProps {
 const SingleDetails = ({ basePath }: TopNewsProps) => {
     const params = useParams();
     const encodedSlug = Array.isArray(params?.slug) ? params.slug.join("/") : params?.slug || "";
-
+const category = ''
     const decodedSlug = encodedSlug ? decodeURIComponent(encodedSlug) : "";
     const [singleNewsData, setSingleNewsData] = useState<TNews | null>(null);
     const [loading, setLoading] = useState(false)
@@ -28,7 +28,7 @@ const SingleDetails = ({ basePath }: TopNewsProps) => {
         const fetchData = async () => {
             try {
                 setLoading(true)
-                const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_API_URL}/video-news/${decodedSlug}`);
+                const res = await fetch(`https://api.sarabelanews24.com/api/v1/video-news/${decodedSlug}`);
                 if (!res.ok) {
                     throw new Error(`HTTP error! status: ${res.status}`);
                 }
@@ -69,9 +69,10 @@ const SingleDetails = ({ basePath }: TopNewsProps) => {
 
                                 <div className="overflow-hidden">
                                     {singleNewsData ? <NewsCard/> : <p>Loading news...</p>}
-                                    <Feedback />
+                                    {singleNewsData ? <Feedback news={singleNewsData}/> : <p>Loading news...</p>}
+
                                     <Advertisements />
-                                    <RelatedNews basePath={basePath} />
+                                    <RelatedNews category="/video" basePath={basePath} />
                                     <PaginationPages />
                                 </div>
 
@@ -85,7 +86,7 @@ const SingleDetails = ({ basePath }: TopNewsProps) => {
                     <div className="hidden lg:block w-full lg:w-1/4">
                         <div className="sticky top-[70px]">
                             <div className="bg-white py-2">
-                                <SaidBar basePath={basePath} />
+                                <SaidBar category="/video" basePath={basePath} />
                             </div>
                         </div>
                     </div>

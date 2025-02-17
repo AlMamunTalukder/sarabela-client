@@ -1,16 +1,12 @@
-"use client";
+import Loading from "@/components/Share/_components/Loading";
+import React from "react";
 
-import dynamic from "next/dynamic";
-import loading from "@public/Loading.json";
-
-const Lottie = dynamic(() => import("lottie-react"), { ssr: false });
-
-const Loading = () => {
+const loading = () => {
   return (
-    <div className="h-screen flex flex-col justify-center items-center">
-      <Lottie animationData={loading} />
+    <div>
+      <Loading />
     </div>
   );
 };
 
-export default Loading;
+export default loading;

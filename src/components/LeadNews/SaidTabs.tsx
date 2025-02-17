@@ -4,15 +4,13 @@ import LastNews from "../News/LastNews";
 import ImportantNews from "../News/ImportantNews";
 import DailyIslam from "../News/DailyIslam";
 
-type BaseProps = {
-  basePath: string;
-  category: string;
-}
-const SaidTabs = ({ category, basePath }: BaseProps) => {
+
+const SaidTabs = () => {
+
   return (
-    <Tabs defaultValue="last" defaultChecked className="bg-white">
+    <Tabs defaultValue="latest" defaultChecked>
       <TabsList>
-        <TabsTrigger value="last" className="font-semibold">
+        <TabsTrigger value="latest" className="font-semibold">
           সর্বশেষ
         </TabsTrigger>
         <TabsTrigger value="important" className="font-semibold">
@@ -22,14 +20,14 @@ const SaidTabs = ({ category, basePath }: BaseProps) => {
           দৈনন্দিন ইসলাম
         </TabsTrigger>
       </TabsList>
-      <TabsContent value="last">
-        <LastNews category={category} basePath={basePath} />
+      <TabsContent value="latest">
+        <LastNews/>
       </TabsContent>
       <TabsContent value="important">
-        <ImportantNews category={category} basePath={basePath} />
+        <ImportantNews/>
       </TabsContent>
       <TabsContent  value="dailyIslam">
-        <DailyIslam category={category} basePath={basePath} />
+        <DailyIslam tagName="daily-islam" />
       </TabsContent>
     </Tabs>
   );

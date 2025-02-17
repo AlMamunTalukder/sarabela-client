@@ -3,17 +3,10 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import ReadNews from "../News/ReadNews";
 import Discussed from "../News/Discussed";
 import GoodNews from "../News/GoodNews";
-import { TNews } from "@/types";
-
-type SportProps = {
-  basePath: string
-  category: string,
-  sortNewsData:TNews[]
-}
-const SaidTabs = ({sortNewsData,category,basePath}:SportProps) => {
-
+const SaidTabs = () => {
+  const category = ''
   return (
-    <Tabs defaultValue="Read" defaultChecked className="bg-white">
+    <Tabs defaultValue="Read" defaultChecked>
       <TabsList>
         <TabsTrigger value="Read" className="font-semibold">
           পঠিত
@@ -27,15 +20,15 @@ const SaidTabs = ({sortNewsData,category,basePath}:SportProps) => {
       </TabsList>
       <TabsContent value="Read">
         {/* this is last news  */}
-        <ReadNews sortNewsData={sortNewsData} category={category} basePath={basePath}/>
+        <ReadNews category={category} basePath='' />
       </TabsContent>
       <TabsContent value="Discussed">
         {/* this is important news */}
-        <Discussed sortNewsData={sortNewsData} category={category} basePath={basePath}/>
+        <Discussed category={category} basePath='basePath'/>
       </TabsContent>
       <TabsContent value="GoodNews">
         {/* this is important news */}
-        <GoodNews sortNewsData={sortNewsData} category={category} basePath={basePath}/>
+        <GoodNews tagName={`good-news`}/>
       </TabsContent>
     </Tabs>
   );

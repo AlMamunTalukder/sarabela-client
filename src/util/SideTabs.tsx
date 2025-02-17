@@ -1,13 +1,15 @@
+'use client'
+
 import Discussed from "@/components/News/Discussed";
 import ImportantNews from "@/components/News/ImportantNews";
 import ReadNews from "@/components/News/ReadNews";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-
 interface TopNewsProps {
   basePath?: string;
   category: string;
 }
 const SideTabs = ({ category, basePath = "/" }: TopNewsProps) => {
+
   return (
     <Tabs defaultValue="most_read" defaultChecked className="bg-white">
       <TabsList>
@@ -24,8 +26,9 @@ const SideTabs = ({ category, basePath = "/" }: TopNewsProps) => {
       <TabsContent value="most_read">
         <ReadNews category={category} basePath={basePath} />
       </TabsContent>
+
       <TabsContent value="important">
-        <ImportantNews category={category} basePath={basePath} />
+        <ImportantNews />
       </TabsContent>
       <TabsContent value="discussed">
         <Discussed category={category} basePath={basePath} />
