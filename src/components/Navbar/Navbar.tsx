@@ -125,17 +125,16 @@ const Navbar: React.FC = () => {
 
         <div className="px-4 py-2 shadow-lg z-50 border-b">
           <div className="flex items-center justify-between">
-          <div className="flex items-center gap-2 overflow-auto no-scrollbar">
+            <div className="flex items-center gap-2 overflow-auto no-scrollbar font-bold ">
 
               {navItems.map((item) => (
                 <Link
                   key={item.href}
                   href={item.href}
-                  className={`whitespace-nowrap px-3 py-1 text-sm ${
-                    pathname === item.href
-                      ? "text-red-500 font-medium"
-                      : "text-gray-600"
-                  }`}
+                  className={`whitespace-nowrap px-3 py-1 text-sm ${pathname === item.href
+                    ? "text-red-500 font-medium"
+                    : ""
+                    }`}
                 >
                   {item.label}
                 </Link>
@@ -152,17 +151,17 @@ const Navbar: React.FC = () => {
         </div>
 
 
-        <div className="bg-gray-50/50">
-            <h1 style={{  padding: "8px 0" }} className="absolute z-10 w-[100px] bg-white text-black shadow-md ">ব্রেকিং নিউজ</h1>
+        <div className="bg-gray-50/50 ">
+          <h1 style={{ padding: "8px 0" }} className="absolute z-10  pl-3 w-[90px] bg-white text-black shadow-md">ব্রেকিং নিউজ</h1>
           <div className="container mx-auto flex items-center  justify-center gap-x-2 px-2 ">
-            <BreakingNews /> 
-            
+            <BreakingNews />
+
           </div>
         </div>
       </div>
 
       {/* Desktop Navigation */}
-      <div className="hidden lg:block max-w-7xl mx-auto px-4 py-4">
+      <div className="hidden lg:block max-w-7xl mx-auto px-4 py-4 font-bold ">
         <div className="flex justify-between items-center">
           {/* Navigation Menu */}
           <div>
@@ -191,11 +190,10 @@ const Navbar: React.FC = () => {
                     <NavigationMenuItem key={item.href}>
                       <Link
                         href={item.href}
-                        className={`px-3 py-2 hover:text-red-500 ${
-                          pathname === item.href
-                            ? "border-b-2 border-black text-red-500"
-                            : ""
-                        }`}
+                        className={`px-3 py-2 hover:text-red-500 ${pathname === item.href
+                          ? "border-b-2 border-black text-red-500"
+                          : ""
+                          }`}
                       >
                         {item.label}
                       </Link>
@@ -207,7 +205,7 @@ const Navbar: React.FC = () => {
           </div>
 
           {/* Search and Social */}
-          <div className="flex items-center space-x-4">
+          <div className="flex items-center space-x-4 ">
             <div className="border-e-2 pe-2">
               <Link href="/search">
                 <button className="p-2 rounded-full bg-gray-200 dark:bg-gray-200 hover:bg-red-400 transition-colors">
@@ -246,46 +244,45 @@ const Navbar: React.FC = () => {
 
       {/* Mobile Menu Dropdown */}
       {isOpen && (
-          <div className="bg-white absolute top-[142px] left-0 right-0 z-50 p-4 shadow-md border">
-        
-            <div className="grid grid-cols-2 gap-2">
-              {navItems.map((item) =>
-                item.nested ? (
-                  <Accordion key={item.href} type="single" collapsible>
-                    <AccordionItem value={item.href}>
-                      <AccordionTrigger className="flex px-3 py-2 text-gray-800 hover:text-red-500">
-                        {item.label}
-                      </AccordionTrigger>
-                      <AccordionContent>
-                        <div className="space-y-2 pl-4">
-                          {item.nested.map((nestedItem) => (
-                            <Link
-                              key={nestedItem.href}
-                              href={nestedItem.href}
-                              className="block py-1 text-gray-600 hover:text-blue-600"
-                            >
-                              {nestedItem.label}
-                            </Link>
-                          ))}
-                        </div>
-                      </AccordionContent>
-                    </AccordionItem>
-                  </Accordion>
-                ) : (
-                  <Link
-                    key={item.href}
-                    href={item.href}
-                    className={`border-b px-3 py-2 rounded text-center ${
-                      pathname === item.href ? "text-red-500 font-medium" : "text-gray-700 hover:text-blue-600"
+        <div className="bg-white absolute top-[142px] left-0 right-0 z-50 p-4 shadow-md border font-bold ">
+
+          <div className="grid grid-cols-2 gap-2">
+            {navItems.map((item) =>
+              item.nested ? (
+                <Accordion key={item.href} type="single" collapsible>
+                  <AccordionItem value={item.href}>
+                    <AccordionTrigger className="flex px-3 py-2 text-gray-800 hover:text-red-500">
+                      {item.label}
+                    </AccordionTrigger>
+                    <AccordionContent>
+                      <div className="space-y-2 pl-4">
+                        {item.nested.map((nestedItem) => (
+                          <Link
+                            key={nestedItem.href}
+                            href={nestedItem.href}
+                            className="block py-1 text-gray-600 hover:text-blue-600"
+                          >
+                            {nestedItem.label}
+                          </Link>
+                        ))}
+                      </div>
+                    </AccordionContent>
+                  </AccordionItem>
+                </Accordion>
+              ) : (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  className={`border-b px-3 py-2 rounded text-center ${pathname === item.href ? "text-red-500 font-medium" : "text-gray-700 hover:text-blue-600"
                     }`}
-                  >
-                    {item.label}
-                  </Link>
-                )
-              )}
-            </div>
+                >
+                  {item.label}
+                </Link>
+              )
+            )}
           </div>
-        )}
+        </div>
+      )}
 
 
 
