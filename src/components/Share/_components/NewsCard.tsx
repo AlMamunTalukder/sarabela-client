@@ -26,7 +26,7 @@ const NewsCard: React.FC<NewsCardProps> = ({ news }: NewsCardProps) => {
   return (
     <article className="pt-8">
       <h2 className="text-2xl md:text-4xl font-semibold text-gray-800">{news?.newsTitle}</h2>
-      <SocialShare newsId={news._id}/>
+      <SocialShare newsId={news._id} />
       <div className="relative w-full overflow-hidden aspect-[3/2] mt-5">
         {news?.videoUrl ? (
           <div className="relative w-full h-full">

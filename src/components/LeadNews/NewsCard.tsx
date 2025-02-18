@@ -5,61 +5,62 @@ import Link from "next/link";
 import LeadNewsCard from "./LeadNewsCard";
 import { sortByDate } from "@/util/sort";
 import { useSpecificNewsData } from "@/hooks/useSpecificNewsData";
-import { getCategory } from "@/util/getCategory";
+import { getEnglishCategory } from "@/util/getEnglishCategory";
 
 const NewsCard = () => {
   const basePath = "/international";
-  const category = getCategory(basePath);
-
-  const { newsData, loading, error } = useSpecificNewsData({category:category});
+  const { newsData, loading, error } = useSpecificNewsData({ currentNews: 'true' });
+  const searchCategory = newsData && newsData[0] ? newsData[0]?.category?.name : ''
+  const category = getEnglishCategory(searchCategory)
   if (loading) {
     return <h3>Loading.......</h3>;
   }
   if (error) {
     return <h3>Oops! data not found.</h3>;
   }
-
   const sortNewsData = sortByDate(newsData, "postDate");
-
   return (
     <div className="flex flex-col gap-4">
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
         {/* Side News */}
         <div className="hidden lg:flex flex-col gap-4 border-e border-gray-500 pe-2">
-          {newsData?.slice(0, 3)?.map((news) => (
-            <Link
-              key={news._id}
-              href={`/international/${news.slug}`}
-              className="group flex flex-row-reverse gap-2 border-b  border-gray-200 p-1"
-            >
-              <div className="w-full overflow-hidden">
-                <div className="relative w-full aspect-[3/2] transform transition-transform duration-500 hover:scale-105">
-                  {news.images && news.images.length > 0 && (
-                    <Image
-                      src={news?.images[0] || "/placeholder.svg"}
-                      alt={news?.newsTitle}
-                      objectFit="fill"
-                      fill
-                      priority
-                      placeholder="blur"
-                      blurDataURL="/placeholder.svg"
-                    />
-                  )}
+          {newsData?.slice(0, 3)?.map((news) => {
+            const category = getEnglishCategory(searchCategory)
+            return (
+              <Link
+                key={news._id}
+                href={`${basePath}/${news.slug}`}
+                className="group flex flex-row-reverse gap-2 border-b  border-gray-200 p-1"
+              >
+                <div className="w-full overflow-hidden">
+                  <div className="relative w-full aspect-[3/2] transform transition-transform duration-500 hover:scale-105">
+                    {news.images && news.images.length > 0 && (
+                      <Image
+                        src={news?.images[0] || "/placeholder.svg"}
+                        alt={news?.newsTitle}
+                        objectFit="fill"
+                        fill
+                        priority
+                        placeholder="blur"
+                        blurDataURL="/placeholder.svg"
+                      />
+                    )}
+                  </div>
                 </div>
-              </div>
-              <div className="w-full ps-2 lg:pt-2">
-                <h2 className="text-xl font-bold hover:text-blue-600 transition-colors">
-                  {news.newsTitle}
-                </h2>
-              </div>
-            </Link>
-          ))}
+                <div className="w-full ps-2 lg:pt-2">
+                  <h2 className="text-xl font-bold hover:text-blue-600 transition-colors">
+                    {news.newsTitle}
+                  </h2>
+                </div>
+              </Link>
+            )
+          })}
         </div>
 
         <div className="lg:col-span-2">
           {sortNewsData?.slice(0, 1)?.map((news) => (
             <div key={news._id}>
-             <Link href={`sports/${news.slug}`} className="block group">
+              <Link href={`sports/${news.slug}`} className="block group">
                 <div className="relative aspect-[3/2] overflow-hidden">
                   <div className="relative w-full h-full transform transition-transform duration-500 group-hover:scale-105">
 
