@@ -28,7 +28,7 @@ const Trending = () => {
         <div className="w-full lg:w-3/4 flex flex-col lg:flex-row  justify-between gap-4">
           {/* Trending News Section */}
           <div>
-            <SectionHeader title="সম্বার" />
+            <SectionHeader title="সম্ভার" />
             <div
               className="flex flex-col gap-6 w-full max-h-[300px]   lg:max-h-[400px]   overflow-y-auto 
         [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]"

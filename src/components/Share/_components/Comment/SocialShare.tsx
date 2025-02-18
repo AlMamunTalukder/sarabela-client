@@ -148,7 +148,7 @@ export default function SocialShare({ newsId }: NewsIdParams) {
           navigator.clipboard.writeText(window.location.href)
           toast.success("Link copied to clipboard!")
         }}
-        className="bg-gray-800 hover:bg-gray-700 h-8 w-8 rounded-full p-0"
+        className="dark:bg-gray-500 bg-gray-800 hover:bg-gray-700 h-8 w-8 rounded-full p-0"
       >
         <Link2 className="h-4 w-4 text-white" />
       </Button>
@@ -157,7 +157,7 @@ export default function SocialShare({ newsId }: NewsIdParams) {
         variant="ghost"
         size="icon"
         onClick={() => handleShare("Print")}
-        className="bg-gray-800 hover:bg-gray-700 h-8 w-8 rounded-full p-0"
+        className="dark:bg-gray-500 bg-gray-800 hover:bg-gray-700 h-8 w-8 rounded-full p-0"
       >
         <Printer className="h-4 w-4 text-white" />
       </Button>
@@ -166,7 +166,7 @@ export default function SocialShare({ newsId }: NewsIdParams) {
         variant="ghost"
         size="icon"
         onClick={() => handleShare("Other")}
-        className="bg-gray-800 hover:bg-gray-700 h-8 w-8 rounded-full p-0"
+        className="dark:bg-gray-500 bg-gray-800 hover:bg-gray-700 h-8 w-8 rounded-full p-0"
       >
         <Share2 className="h-4 w-4 text-white" />
       </Button>
@@ -176,7 +176,7 @@ export default function SocialShare({ newsId }: NewsIdParams) {
         variant="ghost"
         size="icon"
         onClick={() => handleFontSize("decrease")}
-        className="bg-gray-800 hover:bg-gray-700 h-8 w-8 rounded-full p-0"
+        className="dark:bg-gray-500 bg-gray-800 hover:bg-gray-700 h-8 w-8 rounded-full p-0"
         aria-label="Decrease font size"
       >
         <span className="text-white text-sm font-semibold">অ-</span>
@@ -186,7 +186,7 @@ export default function SocialShare({ newsId }: NewsIdParams) {
         variant="ghost"
         size="icon"
         onClick={() => handleFontSize("increase")}
-        className="bg-gray-800 hover:bg-gray-700 h-8 w-8 rounded-full p-0"
+        className="dark:bg-gray-500 bg-gray-800 hover:bg-gray-700 h-8 w-8 rounded-full p-0"
         aria-label="Increase font size"
       >
         <span className="text-white text-sm font-semibold">অ+</span>

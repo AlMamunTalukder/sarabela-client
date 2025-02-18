@@ -66,7 +66,7 @@ const LogIn = () => {
 
   return (
     <div className="py-8 flex items-center justify-center">
-      <div className="shadow-xl mx-2 lg:mx-48  bg-white rounded-lg p-4 lg:p-8 border mt-4">
+      <div className="shadow-xl mx-2 lg:mx-48  dark:bg-gray-400 rounded-lg p-4 lg:p-8 border mt-4">
         <div className="grid md:grid-cols-2 gap-5">
           <div className="flex flex-col items-center space-y-5">
             <Image
@@ -97,7 +97,7 @@ const LogIn = () => {
             <Form {...form}>
               <div className="space-y-6">
                 <div className="relative">
-                  <User className="absolute top-4 left-3 h-5 w-5 text-gray-400" />
+                  <User className="absolute top-4 left-3 h-5 w-5 dark:text-white text-gray-400" />
                   <TextInput
                     control={form.control}
                     placeholder="Username"
@@ -107,7 +107,7 @@ const LogIn = () => {
                   />
                 </div>
                 <div className="relative">
-                  <LockKeyhole className="absolute top-4 left-3 h-5 w-5 text-gray-400" />
+                  <LockKeyhole className="absolute top-4 left-3 h-5 w-5 dark:text-white text-gray-400" />
                   <TextInput
                     control={form.control}
                     className="pl-10 w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"

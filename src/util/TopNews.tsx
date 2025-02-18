@@ -72,7 +72,7 @@ const TopNews = ({ category, basePath}: TopNewsProps) => {
               <h2 className="text-lg lg:text-xl font-bold hover:text-blue-600">
                 <Link href={`${basePath}/${news.slug}`}>{news?.newsTitle}</Link>
               </h2>
-              <p className="text-sm ">{parse(truncateText(news?.description, 200))}</p>
+              <p className="text-sm  ">{parse(truncateText(news?.description, 170))}</p>
               <div className="flex justify-between">
                 <p className="text-sm text-gray-400">{formatDate(news?.postDate)}</p>
                 <p className="text-blue-600 text-sm">
