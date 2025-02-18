@@ -26,8 +26,9 @@
     .breaking-news-container {
       display: flex;
       background: #ffffff;
-      color: #ffffff; /* Change to black so text is visible */
+      color: #ffffff; 
       padding: 10px 0;
+      overflow: hidden;
     }
   
     .breaking-news-title {
