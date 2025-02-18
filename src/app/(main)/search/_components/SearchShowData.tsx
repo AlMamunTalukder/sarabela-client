@@ -24,7 +24,7 @@ const SearchShowData = ({ newsData, loading, error, category }: NewsProps) => {
       <div className="grid grid-cols-1 gap-6">
         {newsData.map((news) => (
           <Link key={news._id} href={`${category}/${news.slug}`}>
-            <div className="flex bg-white  border border-gray-200 hover:shadow-lg transition-shadow duration-200 rounded">
+            <div className="flex   border border-gray-200 hover:shadow-lg transition-shadow duration-200 rounded">
               <div className="w-[120px] h-[120px] flex-shrink-0 ">
                 {news.images.slice(0, 1).map((img) => (
                   <Image
@@ -39,10 +39,10 @@ const SearchShowData = ({ newsData, loading, error, category }: NewsProps) => {
               </div>
 
               <div className="p-4">
-                <h2 className="lg:text-xl hover:text-blue-500 font-semibold text-gray-800">
+                <h2 className="lg:text-xl hover:text-blue-500 font-semibold ">
                   {news.newsTitle}
                 </h2>
-                <p className="hidden lg:flex text-gray-600 hover:text-blue-500 mt-2">
+                <p className="hidden lg:flex dark:text-gray-300 text-gray-600 hover:text-blue-500 mt-2">
                   {news?.description
                     ? parse(truncateText(news.description, 200))
                     : ""}

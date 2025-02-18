@@ -14,7 +14,7 @@ interface TopNewsProps {
   category:string;
 }
 
-const RelatedNews = ({category, basePath = "/international" }: TopNewsProps) => {
+const SideBarRelatedNews = ({category, basePath = "/international" }: TopNewsProps) => {
   // const category = getCategory(basePath);
   const { newsData, loading, error } = useSpecificNewsData({category:category})
 
@@ -30,7 +30,7 @@ const RelatedNews = ({category, basePath = "/international" }: TopNewsProps) => 
   return (
     <div className="w-full p-2 border-t">
       <h1 className="text-2xl font-bold mb-4">সম্পর্কিত খবর</h1>
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+      <div className="grid grid-cols-1 gap-4">
         {sortNewsData?.map((newsItem) => (
           <div key={newsItem._id} className="flex items-start gap-4">
 
@@ -63,4 +63,4 @@ const RelatedNews = ({category, basePath = "/international" }: TopNewsProps) => 
   );
 };
 
-export default RelatedNews;
+export default SideBarRelatedNews;

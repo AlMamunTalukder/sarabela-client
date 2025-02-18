@@ -25,7 +25,7 @@ const NewsCard: React.FC<NewsCardProps> = ({ news }: NewsCardProps) => {
 
   return (
     <article className="pt-8">
-      <h2 className="text-2xl md:text-4xl font-semibold text-gray-800">{news?.newsTitle}</h2>
+      <h2 className="text-2xl md:text-4xl font-semibold dark:text-white text-gray-800">{news?.newsTitle}</h2>
       <SocialShare newsId={news._id}/>
       <div className="relative w-full overflow-hidden aspect-[3/2] mt-5">
         {news?.videoUrl ? (
@@ -66,7 +66,7 @@ const NewsCard: React.FC<NewsCardProps> = ({ news }: NewsCardProps) => {
                 </figure>
               ) : (
                 <div className="relative aspect-[16/9] w-full bg-gray-200 flex items-center justify-center">
-                  <p className="text-gray-500">No Image Available</p>
+                  <p className="dark:text-white text-gray-500">No Image Available</p>
                 </div>
               )}
             </CardContent>
@@ -74,7 +74,7 @@ const NewsCard: React.FC<NewsCardProps> = ({ news }: NewsCardProps) => {
             {news?.imageTagline && (
               <CardFooter className="px-4 py-3 text-sm text-muted-foreground flex justify-center">
                 <p className="font-bengali text-center">
-                  {news.imageTagline} <span className="text-gray-500">ছবি : সারাবেলানিউজ২৪</span>
+                  {news.imageTagline} <span className="dark:text-white text-gray-500">ছবি : সারাবেলানিউজ২৪</span>
                 </p>
               </CardFooter>
 
@@ -84,12 +84,12 @@ const NewsCard: React.FC<NewsCardProps> = ({ news }: NewsCardProps) => {
       </div>
 
       <header className="mt-4">
-        <p className="text-sm text-gray-500">{formatDate(news?.postDate)}</p>
+        <p className="text-sm dark:text-gray-300 text-gray-500">{formatDate(news?.postDate)}</p>
       </header>
       <div className="mt-2">
 
-        <p className="mt-2 text-gray-700">{news?.description ? parse(news.description) : ""}</p>
-        <p className="mt-1 text-sm text-gray-500">Estimated Read Time: {formatDate(news?.postDate)}</p>
+        <p className="mt-2 dark:text-white text-gray-700">{news?.description ? parse(news.description) : ""}</p>
+        <p className="mt-1 text-sm dark:text-gray-300 text-gray-500">Estimated Read Time: {formatDate(news?.postDate)}</p>
       </div>
     </article>
   )

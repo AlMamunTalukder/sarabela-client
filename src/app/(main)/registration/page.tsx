@@ -62,12 +62,12 @@ const Registration = () => {
 
   return (
     <div className="py-8 flex items-center justify-center">
-      <div className="shadow-xl mx-2 lg:mx-48  bg-white rounded-lg p-4 lg:p-8 border mt-4">
+      <div className="shadow-xl mx-2 lg:mx-48  dark:bg-gray-400 rounded-lg p-4 lg:p-8 border mt-4">
         <Form {...form}>
           <div className="">
-            <div className="  bg-white p-1 lg:p-2  mt-4">
+            <div className="   p-1 lg:p-2  mt-4">
               <div className="grid md:grid-cols-2 ">
-                <div className="max-w-md w-full space-y-8 bg-white rounded-xl ">
+                <div className="max-w-md w-full space-y-8  rounded-xl ">
                   <div className="text-center">
                     <h2 className="text-3xl font-extrabold text-gray-900">
                       Create your account
@@ -79,7 +79,7 @@ const Registration = () => {
                   <Form {...form}>
                     <div className="space-y-6">
                       <div className="relative">
-                        <User className="absolute top-3 left-3 h-5 w-5 text-gray-400" />
+                        <User className="absolute top-3 left-3 h-5 w-5 dark:text-white text-gray-400" />
                         <TextInput
                           control={form.control}
                           name="name"
@@ -89,7 +89,7 @@ const Registration = () => {
                         />
                       </div>
                       <div className="relative">
-                        <Mail className="absolute top-3 left-3 h-5 w-5 text-gray-400" />
+                        <Mail className="absolute top-3 left-3 h-5 w-5 dark:text-white text-gray-400" />
                         <TextInput
                           control={form.control}
                           name="email"
@@ -99,7 +99,7 @@ const Registration = () => {
                         />
                       </div>
                       <div className="relative">
-                        <LockKeyhole className="absolute top-3 left-3 h-5 w-5 text-gray-400" />
+                        <LockKeyhole className="absolute top-3 left-3 h-5 w-5 dark:text-white text-gray-400" />
                         <TextInput
                           control={form.control}
                           name="password"

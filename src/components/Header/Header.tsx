@@ -20,7 +20,7 @@ const Header = () => {
               alt="daily times 24"
               objectFit="fill"
               fill
-              priority
+              priority              
             />
           </Link>
           <div className="text-gray-800 dark:text-gray-300">
