@@ -26,7 +26,7 @@ const OtherNews = ({ category, basePath = "/international" }: TopNewsProps) => {
         {sortNewsData.map((news) => (
           <article
             key={news._id}
-            className="flex items-start space-x-3 bg-white rounded-lg p-3"
+            className="flex items-start space-x-3 rounded-lg p-3"
           >
             <div className="w-1/3">
               <Link href={`${basePath}/${news.slug}`} className="block">
@@ -46,7 +46,7 @@ const OtherNews = ({ category, basePath = "/international" }: TopNewsProps) => {
 
             <div className="w-2/3 ps-2 space-y-2">
               <Link href={`${basePath}/${news.slug}`} className="block group">
-                <h2 className="text-lg font-semibold text-gray-800 line-clamp-2 group-hover:text-blue-600 transition-colors">
+                <h2 className="text-lg font-semibold  line-clamp-2 group-hover:text-blue-600 transition-colors">
                   {news.newsTitle}
                 </h2>
               </Link>

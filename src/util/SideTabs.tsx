@@ -11,7 +11,7 @@ interface TopNewsProps {
 const SideTabs = ({ category, basePath = "/" }: TopNewsProps) => {
 
   return (
-    <Tabs defaultValue="most_read" defaultChecked className="bg-white">
+    <Tabs defaultValue="most_read" defaultChecked>
       <TabsList>
         <TabsTrigger value="most_read" className="font-semibold">
           অধিক পঠিত
