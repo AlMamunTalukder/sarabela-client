@@ -63,7 +63,7 @@ const Feedback = ({ news }: NewsParams) => {
   }
 
   return (
-    <div className="mx-auto my-8 p-6 bg-white rounded-xl shadow-sm">
+    <div className="mx-auto my-8 p-6 rounded-xl shadow-sm">
       {/* Comments Header */}
       <div className="flex w-full gap-x-5 items-center justify-between mb-6">
         <h2 className="text-xl font-semibold">মন্তব্য করুন</h2>
