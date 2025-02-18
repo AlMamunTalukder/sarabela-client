@@ -153,7 +153,7 @@ const Navbar: React.FC = () => {
 
 
         <div className="bg-gray-50/50">
-            <h1 style={{  padding: "8px 0" }} className="absolute z-10 w-[100px] bg-white text-black shadow-md ">ব্রেকিং নিউজ</h1>
+            <h1 style={{  padding: "8px 0" }} className="absolute z-10 w-[100px] bg-white text-black shadow-md text-center">ব্রেকিং নিউজ</h1>
           <div className="container mx-auto flex items-center  justify-center gap-x-2 px-2 ">
             <BreakingNews /> 
             
@@ -246,18 +246,18 @@ const Navbar: React.FC = () => {
 
       {/* Mobile Menu Dropdown */}
       {isOpen && (
-          <div className="bg-white absolute top-[142px] left-0 right-0 z-50 p-4 shadow-md border">
+          <div className="dark:bg-gray-400  bg-white absolute top-[142px] left-0 right-0 z-50 p-4 shadow-md border">
         
-            <div className="grid grid-cols-2 gap-2">
+            <div className="grid grid-cols-2 gap-2 ">
               {navItems.map((item) =>
                 item.nested ? (
                   <Accordion key={item.href} type="single" collapsible>
-                    <AccordionItem value={item.href}>
-                      <AccordionTrigger className="flex px-3 py-2 text-gray-800 hover:text-red-500">
+                    <AccordionItem value={item.href} className="" > 
+                      <AccordionTrigger className="flex px-3 py-2 dark:text-gray-700 [&>svg]:dark:text-gray-700">
                         {item.label}
                       </AccordionTrigger>
                       <AccordionContent>
-                        <div className="space-y-2 pl-4">
+                        <div className="space-y-2 pl-4 ">
                           {item.nested.map((nestedItem) => (
                             <Link
                               key={nestedItem.href}
