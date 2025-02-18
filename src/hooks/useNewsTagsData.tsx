@@ -12,7 +12,7 @@ const UseNewsTagsData = (tagName?:string) => {
     const fetchNewsData = async () => {
       try {
         const response = await fetch(
-          `https://api.sarabelanews24.com/api/v1/news?limit=4&fields=${newsFields}&newsTag=${tagName}`,
+          `${process.env.NEXT_PUBLIC_BASE_API_URL}/news?limit=4&fields=${newsFields}&newsTag=${tagName}`,
           {
             cache: "no-store",
           }

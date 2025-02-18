@@ -23,7 +23,7 @@ const SingleDetails = () => {
         const fetchData = async () => {
             try {
                 setLoading(true)
-                const res = await fetch(`https://api.sarabelanews24.com/api/v1/video-news/${decodedSlug}`);
+                const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_API_URL}/video-news/${decodedSlug}`);
                 if (!res.ok) {
                     throw new Error(`HTTP error! status: ${res.status}`);
                 }

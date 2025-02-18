@@ -31,8 +31,7 @@ const Registration = () => {
 
   const onSubmit = async (data: Inputs) => {
     try {
-      const res = await axios.post(
-        "https://api.sarabelanews24.com/api/v1/user",
+      const res = await axios.post(`${process.env.NEXT_PUBLIC_BASE_API_URL}/user`,
         data
       );
 

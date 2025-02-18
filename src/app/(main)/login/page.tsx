@@ -32,8 +32,7 @@ const LogIn = () => {
 
   const onSubmit = async (data: Inputs) => {
     try {
-      const res = await axios.post(
-        "https://api.sarabelanews24.com/api/v1/auth/login",
+      const res = await axios.post(`${process.env.NEXT_PUBLIC_BASE_API_URL}/auth/login`,
         data
       );
 

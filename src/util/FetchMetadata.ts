@@ -4,7 +4,7 @@ export async function fetchMetadata(slug: string) {
     const decodedSlug = encodedSlug ? decodeURIComponent(encodedSlug) : "";
 
     try {
-        const res = await fetch(`https://api.sarabelanews24.com/api/v1/news/${decodedSlug}`);
+        const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_API_URL}/news/${decodedSlug}`);
 
         if (!res.ok) {
             console.error("Error fetching news:", res.status);
