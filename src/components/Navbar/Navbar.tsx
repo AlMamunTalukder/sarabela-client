@@ -193,7 +193,7 @@ const Navbar: React.FC = () => {
                       <Link
                         href={item.href}
                         className={`px-3 py-2 hover:text-red-500 ${pathname === item.href
-                          ? "border-b-2 border-black text-red-500"
+                          ? "text-red-500"
                           : ""
                           }`}
                       >
