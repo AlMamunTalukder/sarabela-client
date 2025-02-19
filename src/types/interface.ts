@@ -14,6 +14,7 @@ export type TNews = {
   photojournalistName: string;
   category: {
     name: string;
+    slug:string;
   };
   newsCategory: string;
   newsTitle: string;
