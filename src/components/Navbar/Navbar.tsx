@@ -197,7 +197,7 @@ const Navbar: React.FC = () => {
                           : ""
                           }`}
                       >
-                        {item.label}
+                           {item.icon ? item.icon : item.label}
                       </Link>
                     </NavigationMenuItem>
                   )

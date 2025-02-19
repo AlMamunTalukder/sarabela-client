@@ -2,16 +2,13 @@
 "use client";
 import Image from "next/image";
 import Link from "next/link";
-import LeadNewsCard from "./LeadNewsCard";
 import { sortByDate } from "@/util/sort";
 import { useSpecificNewsData } from "@/hooks/useSpecificNewsData";
-import { getEnglishCategory } from "@/util/getEnglishCategory";
 
 const NewsCard = () => {
   const basePath = "/international";
   const { newsData, loading, error } = useSpecificNewsData({ currentNews: 'true' });
-  const searchCategory = newsData && newsData[0] ? newsData[0]?.category?.name : ''
-  const category = getEnglishCategory(searchCategory)
+  
   if (loading) {
     return <h3>Loading.......</h3>;
   }
@@ -22,10 +19,9 @@ const NewsCard = () => {
   return (
     <div className="flex flex-col gap-4">
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
-        {/* Side News */}
+        
         <div className="hidden lg:flex flex-col gap-4 border-e border-gray-500 pe-2">
           {newsData?.slice(0, 3)?.map((news) => {
-            const category = getEnglishCategory(searchCategory)
             return (
               <Link
                 key={news._id}
@@ -89,7 +85,7 @@ const NewsCard = () => {
       <div className="border-t border-gray-500" />
 
       {/* Bottom News Grid */}
-      <LeadNewsCard newsData={sortNewsData} />
+      {/* <LeadNewsCard newsData={sortNewsData} /> */}
     </div>
   );
 };
