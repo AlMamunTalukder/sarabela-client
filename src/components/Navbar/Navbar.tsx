@@ -19,8 +19,7 @@ import {
   Menu,
   X,
   Sun,
-  Moon,
-  House,
+  Moon
 } from "lucide-react";
 import Image from "next/image";
 import logo from "@public/asset/logo/logo3.png";
@@ -29,7 +28,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { toggleDarkMode } from "@/lib/themeSlice";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "../ui/accordion";
 import BreakingNews from "@/components/Share/BreakingNews/BreakingNews";
-
+import { AiFillHome } from "react-icons/ai";
 
 interface SocialLink {
   id: string;
@@ -52,7 +51,7 @@ const socialLinks: SocialLink[] = [
 ];
 
 const navItems: NavItem[] = [
-  { href: "/", icon: <House className="w-5 h-5" /> },
+  { href: "/", icon: <AiFillHome className="w-[22px] lg:w-[26px]  h-[22px] lg:h-[26px]" /> },
   { href: "/national", label: "জাতীয়" },
   { href: "/politics", label: "রাজনীতি" },
   { href: "/international", label: "আন্তর্জাতিক" },
@@ -193,11 +192,11 @@ const Navbar: React.FC = () => {
                       <Link
                         href={item.href}
                         className={`px-3 py-2 hover:text-red-500 ${pathname === item.href
-                          ? "text-red-500"
+                          ? " text-red-500"
                           : ""
                           }`}
                       >
-                           {item.icon ? item.icon : item.label}
+                        {item.icon ? item.icon : item.label}
                       </Link>
                     </NavigationMenuItem>
                   )

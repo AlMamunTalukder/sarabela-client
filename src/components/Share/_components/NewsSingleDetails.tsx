@@ -24,6 +24,8 @@ const NewsSingleDetails = ({ basePath }: TopNewsProps) => {
   const decodedSlug = encodedSlug ? decodeURIComponent(encodedSlug) : "";
   const { data } = useGetSingleNewsQuery(decodedSlug);
   const singleNewsData = data?.data;
+  const [fontSize, setFontSize] = useState(16);
+
 
   return (
     <main className="min-h-screen">

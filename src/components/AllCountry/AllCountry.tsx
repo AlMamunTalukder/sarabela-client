@@ -8,6 +8,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import Link from "next/link";
 
 const AllCountry = () => {
   return (
@@ -20,7 +21,7 @@ const AllCountry = () => {
 
       <div className="flex justify-center">
         <Select>
-          <SelectTrigger className="w-full md:w-[180px]">
+          <SelectTrigger className="">
             <SelectValue placeholder="বিভাগ নির্বাচন করুন" />
           </SelectTrigger>
           <SelectContent>
@@ -38,7 +39,7 @@ const AllCountry = () => {
 
       <div className="flex justify-center">
         <Select>
-          <SelectTrigger className="w-full md:w-[180px]">
+          <SelectTrigger className="">
             <SelectValue placeholder="জেলা নির্বাচন করুন" />
           </SelectTrigger>
           <SelectContent>
@@ -56,7 +57,7 @@ const AllCountry = () => {
 
       <div className="flex justify-center">
         <Select>
-          <SelectTrigger className="w-full md:w-[180px]">
+          <SelectTrigger className="">
             <SelectValue placeholder="উপজেলা নির্বাচন করুন" />
           </SelectTrigger>
           <SelectContent>
@@ -73,9 +74,11 @@ const AllCountry = () => {
       </div>
 
       <div className="flex justify-center">
+        <Link href={"/national/region"}>
         <button className="px-6 py-2 bg-blue-700 text-white font-medium rounded hover:bg-blue-800 transition">
           খুঁজুন
         </button>
+        </Link>
       </div>
     </div>
   );
