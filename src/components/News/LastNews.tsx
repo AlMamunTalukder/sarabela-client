@@ -11,7 +11,6 @@ import { useSpecificNewsData } from "@/hooks/useSpecificNewsData";
 
 
 const LastNews = () => {
-const basePath = ''
   const category = 'জাতীয়'
   const { newsData, loading, error } = useSpecificNewsData({ category: category, newsTag: 'latest' });
 
@@ -39,7 +38,7 @@ const basePath = ''
               className="py-3 md:py-4 transition-colors duration-200"
             >
               <Link
-                href={`${basePath}/${news.slug}`}
+                href={`sports/${news.slug}`}
                 className="block space-y-1"
               >
                 <h3
