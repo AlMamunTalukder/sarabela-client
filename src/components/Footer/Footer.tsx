@@ -1,9 +1,9 @@
-"use client"
+"use client";
 
-import { Facebook, Twitter, Linkedin, Youtube } from "lucide-react"
-import Link from "next/link"
-import logo from "@public/asset/logo/logo2.svg"
-import Image from "next/image"
+import { Facebook, Twitter, Linkedin, Youtube } from "lucide-react";
+import Link from "next/link";
+import logo from "@public/asset/logo/logo2.svg";
+import Image from "next/image";
 
 const socialLinks = [
   {
@@ -30,7 +30,7 @@ const socialLinks = [
     link: "https://youtube.com",
     label: "YouTube",
   },
-]
+];
 
 const Footer = () => {
   return (
@@ -70,27 +70,39 @@ const Footer = () => {
           </div>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 mt-12 gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 mt-12 gap-4">
           <div>
             <h2 className="font-bold mb-4 text-xl">সাম্প্রতিক খবর</h2>
             <ul className="space-y-2">
               <li>
-                <Link href="/" className="hover:text-red-500 transition-colors duration-300">
+                <Link
+                  href="/"
+                  className="hover:text-red-500 transition-colors duration-300"
+                >
                   সর্বশেষ
                 </Link>
               </li>
               <li>
-                <Link href="/national" className="hover:text-red-500 transition-colors duration-300">
+                <Link
+                  href="/national"
+                  className="hover:text-red-500 transition-colors duration-300"
+                >
                   জাতীয়
                 </Link>
               </li>
               <li>
-                <Link href="/politics" className="hover:text-red-500 transition-colors duration-300">
+                <Link
+                  href="/politics"
+                  className="hover:text-red-500 transition-colors duration-300"
+                >
                   রাজনীতি
                 </Link>
               </li>
               <li>
-                <Link href="/international" className="hover:text-red-500 transition-colors duration-300">
+                <Link
+                  href="/international"
+                  className="hover:text-red-500 transition-colors duration-300"
+                >
                   আন্তর্জাতিক
                 </Link>
               </li>
@@ -100,22 +112,34 @@ const Footer = () => {
             <h2 className="font-bold mb-4 text-xl">বিভাগসমূহ</h2>
             <ul className="space-y-2">
               <li>
-                <Link href="/technology" className="hover:text-red-500 transition-colors duration-300">
+                <Link
+                  href="/technology"
+                  className="hover:text-red-500 transition-colors duration-300"
+                >
                   প্রযুক্তি
                 </Link>
               </li>
               <li>
-                <Link href="/health" className="hover:text-red-500 transition-colors duration-300">
+                <Link
+                  href="/health"
+                  className="hover:text-red-500 transition-colors duration-300"
+                >
                   স্বাস্থ্য
                 </Link>
               </li>
               <li>
-                <Link href="/economy" className="hover:text-red-500 transition-colors duration-300">
+                <Link
+                  href="/economy"
+                  className="hover:text-red-500 transition-colors duration-300"
+                >
                   অর্থনীতি
                 </Link>
               </li>
               <li>
-                <Link href="/tourism" className="hover:text-red-500 transition-colors duration-300">
+                <Link
+                  href="/tourism"
+                  className="hover:text-red-500 transition-colors duration-300"
+                >
                   পর্যটন
                 </Link>
               </li>
@@ -125,22 +149,34 @@ const Footer = () => {
             <h2 className="font-bold mb-4 text-xl">অন্য বিভাগ</h2>
             <ul className="space-y-2">
               <li>
-                <Link href="/education" className="hover:text-red-500 transition-colors duration-300">
+                <Link
+                  href="/education"
+                  className="hover:text-red-500 transition-colors duration-300"
+                >
                   শিক্ষা
                 </Link>
               </li>
               <li>
-                <Link href="/sport" className="hover:text-red-500 transition-colors duration-300">
+                <Link
+                  href="/sport"
+                  className="hover:text-red-500 transition-colors duration-300"
+                >
                   খেলাধুলা
                 </Link>
               </li>
               <li>
-                <Link href="/entertainment" className="hover:text-red-500 transition-colors duration-300">
+                <Link
+                  href="/entertainment"
+                  className="hover:text-red-500 transition-colors duration-300"
+                >
                   বিনোদন
                 </Link>
               </li>
               <li>
-                <Link href="/religion" className="hover:text-red-500 transition-colors duration-300">
+                <Link
+                  href="/religion"
+                  className="hover:text-red-500 transition-colors duration-300"
+                >
                   ধর্ম
                 </Link>
               </li>
@@ -149,10 +185,16 @@ const Footer = () => {
           <div>
             <h2 className="font-bold mb-4 text-xl">যোগাযোগ</h2>
             <ul className="space-y-2">
-              <li>ই-মেইল: demo@gmail.com</li>
-              <li>ফোন: 0123456789</li>
-              <li>ঠিকানা: ব্লক এ, বসুন্ধরা আবাসিক,</li>
-              <li>ভাটারা, ঢাকা-১২১২</li>
+              <li>প্রধান সম্পাদক ও প্রকাশক: মোঃ আদনান আরিফ</li>
+              <li>সম্পাদক ও প্রকাশক: মোঃ শাহরিয়ার মাহমুদ শিহাব</li>
+
+              <li>ই-মেইল: sarabelanews24@gmail.com</li>
+              <li>ফোন: 01957713249, 01604249971</li>
+              <li>বিজ্ঞাপন: 01724502183</li>
+              <li>
+                ঠিকানা: স্বপ্ন ডাঙ্গা, হাজারীবাগ শাহজাহান শাহ রোড, পশ্চিম
+                ধানমন্ডি, ঢাকা-১২০৫
+              </li>
             </ul>
           </div>
         </div>
@@ -160,7 +202,10 @@ const Footer = () => {
         {/* Bottom Section */}
         <div className="pt-12 mt-12 border-t border-gray-800">
           <div className="flex flex-col md:flex-row justify-between items-center text-gray-400 text-sm">
-            <p className="mb-4 md:mb-0">&copy; {new Date().getFullYear()} sarabelanews24. All Rights Reserved.</p>
+            <p className="mb-4 md:mb-0">
+              &copy; {new Date().getFullYear()} sarabelanews24. All Rights
+              Reserved.
+            </p>
             <p>
               Develop & Maintenance by{" "}
               <Link
@@ -174,8 +219,7 @@ const Footer = () => {
         </div>
       </div>
     </footer>
-  )
-}
+  );
+};
 
-export default Footer
-
+export default Footer;

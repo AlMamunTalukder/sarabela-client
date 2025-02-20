@@ -10,23 +10,50 @@ import { useGetShareCountsQuery, useShareNewsMutation } from "@/redux/dailynews/
 import { FaFacebookMessenger } from "react-icons/fa6";
 import { FaFacebookF } from "react-icons/fa";
 
+
+
+
+
+
+
 type NewsIdParams = {
   newsId: string;
 }
 export default function SocialShare({ newsId }: NewsIdParams) {
-  const [fontSize, setFontSize] = useState(16)
+  const [fontSize, setFontSize] = useState(16);
 
-  const { data: shareCounts = {}, isLoading, error } = useGetShareCountsQuery(newsId);
+  const { data: shareCounts = {} } = useGetShareCountsQuery(newsId);
   const [shareNews] = useShareNewsMutation();
+
+  // Function to handle font size changes
   const handleFontSize = (action: "increase" | "decrease") => {
+    const parentElement = document.getElementById("news-content");
+    if (!parentElement) return;
+
     if (action === "increase" && fontSize < 24) {
-      setFontSize((prev) => prev + 2)
-      document.body.style.fontSize = `${fontSize + 2}px`
+      setFontSize((prev) => prev + 2);
+      parentElement.style.fontSize = `${fontSize + 2}px`;
     } else if (action === "decrease" && fontSize > 12) {
-      setFontSize((prev) => prev - 2)
-      document.body.style.fontSize = `${fontSize - 2}px`
+      setFontSize((prev) => prev - 2);
+      parentElement.style.fontSize = `${fontSize - 2}px`;
     }
-  }
+  };
+
+  // Reset font size when the component unmounts
+  useEffect(() => {
+    return () => {
+      const parentElement = document.getElementById("news-content");
+      if (parentElement) {
+        parentElement.style.fontSize = ""; // Reset to default
+      }
+    };
+  }, []);
+
+
+
+  
+  
+  
 
 
   const handleShare = async (platform: string) => {
