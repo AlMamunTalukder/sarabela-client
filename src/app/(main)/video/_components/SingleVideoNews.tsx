@@ -11,6 +11,7 @@ import Feedback from "@/components/Share/_components/Comment/Feedback";
 import Advertisements from "@/components/Share/_components/Advertisment";
 import RelatedNews from "@/components/Share/_components/RelatedNews";
 import NewsCard from "@/components/LeadNews/NewsCard";
+import Loading from "@/components/Share/_components/Loading";
 
 interface TopNewsProps {
     basePath?: string;
@@ -52,7 +53,7 @@ const category = ''
 
 
     if (loading) {
-        return <h2>Loading.......</h2>;
+        return <Loading/>;
     }
     if (error) {
         return <h1>Oops! data not found.</h1>;

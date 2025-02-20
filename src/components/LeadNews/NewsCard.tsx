@@ -4,13 +4,14 @@ import Image from "next/image";
 import Link from "next/link";
 import { sortByDate } from "@/util/sort";
 import { useSpecificNewsData } from "@/hooks/useSpecificNewsData";
+import Loading from "../Share/_components/Loading";
 
 const NewsCard = () => {
   const basePath = "/international";
   const { newsData, loading, error } = useSpecificNewsData({ currentNews: 'true' });
   
   if (loading) {
-    return <h3>Loading.......</h3>;
+    return <Loading/>;
   }
   if (error) {
     return <h3>Oops! data not found.</h3>;
@@ -57,7 +58,7 @@ const NewsCard = () => {
           {sortNewsData?.slice(0, 1)?.map((news) => (
             <div key={news._id}>
               <Link href={`sports/${news.slug}`} className="block group">
-                <div className="relative aspect-[3/2] overflow-hidden">
+                <div className="relative aspect-[6/5] overflow-hidden">
                   <div className="relative w-full h-full transform transition-transform duration-500 group-hover:scale-105">
 
                     {news?.images?.[0] && (
@@ -66,7 +67,7 @@ const NewsCard = () => {
                         alt={news?.newsTitle || "News Image"}
                         sizes="(max-width: 768px) 100vw, (max-width: 1200px) 100vw"
                         width={500}
-                        height={500}
+                        height={800}
                         className="object-cover w-full h-full "
                       />
                     )}

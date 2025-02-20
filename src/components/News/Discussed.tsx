@@ -6,6 +6,7 @@ import { sortByDate } from "@/util/sort";
 import truncateText from "@/util/truncate";
 import parse from "html-react-parser";
 import Link from "next/link";
+import Loading from "../Share/_components/Loading";
 type BaseProps = {
   basePath: string;
   category: string;
@@ -18,7 +19,7 @@ const Discussed = ({ category, basePath }: BaseProps) => {
   });
 
   if (loading) {
-    return <h3>Loading.......</h3>;
+    return <Loading/>;
   }
   if (error) {
     return <h3>Oops! data not found.</h3>;

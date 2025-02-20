@@ -6,6 +6,7 @@ import parse from 'html-react-parser'
 import { formatDate } from "@/util/formateDate";
 import { useSpecificNewsData } from "@/hooks/useSpecificNewsData";
 import { sortByDate } from "@/util/sort";
+import Loading from "../Share/_components/Loading";
 type BaseProps = {
   basePath: string
   category: string,
@@ -15,7 +16,7 @@ const ReadNews = ({ category, basePath }: BaseProps) => {
   const { newsData, loading, error } = useSpecificNewsData({ category: category, newsTag: "latest" });
 
   if (loading) {
-    return <h3>Loading.......</h3>
+    return <Loading/>
   }
   if (error) {
     return <h3>Oops! data not found.</h3>

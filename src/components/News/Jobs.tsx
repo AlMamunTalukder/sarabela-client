@@ -5,12 +5,13 @@ import { ChevronRight } from "lucide-react"
 import type { TNews } from "@/types"
 import { sortByDate } from "@/util/sort"
 import UseNewsTagsData from "@/hooks/useNewsTagsData"
+import Loading from "../Share/_components/Loading"
 
 const Education = () => {
   const basePath = 'job';
   const { newsData, loading, error } = UseNewsTagsData(basePath)
   if (loading) {
-    return <h3>Loading.......</h3>
+    return <Loading/>
   }
   if (error) {
     return <h3>Oops! data not found.</h3>

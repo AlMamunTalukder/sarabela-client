@@ -4,12 +4,13 @@ import Marquee from "react-fast-marquee";
 import Link from "next/link";
 import { getCategory } from "@/util/getCategory";
 import "./BreakingNews.css"; 
+import Loading from "../_components/Loading";
 
 const BreakingNews = () => {
   const { newsData, loading, error } = useSpecificNewsData({limit:'1000'});
 
   if (loading) {
-    return <h3>Loading.......</h3>;
+    return <Loading/>;
   }
   if (error) {
     return <h3>Oops! data not found.</h3>;

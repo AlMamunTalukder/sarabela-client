@@ -4,6 +4,7 @@ import Image from "next/image";
 import PaginationPages from "./PaginationPages";
 import { useSpecificNewsData } from "@/hooks/useSpecificNewsData";
 import { sortByDate } from "./sort";
+import Loading from "@/components/Share/_components/Loading";
 interface TopNewsProps {
   basePath?: string;
   category: string;
@@ -12,7 +13,7 @@ interface TopNewsProps {
 const OtherNews = ({ category, basePath = "/international" }: TopNewsProps) => {
   const { newsData, loading, error } = useSpecificNewsData({category:category})
   if (loading) {
-    return <h3>Loading.......</h3>
+    return <Loading/>
   }
   if (error) {
     return <h3>Oops! data not found.</h3>

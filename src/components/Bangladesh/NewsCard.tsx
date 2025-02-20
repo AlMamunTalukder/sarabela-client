@@ -9,13 +9,14 @@ import truncateText from "@/util/truncate";
 import { getCategory } from "@/util/getCategory";
 import parse from "html-react-parser";
 import { formatDate } from "@/util/formateDate";
+import Loading from "../Share/_components/Loading";
 const NewsCard = () => {
   const basePath = "/national";
   const category = getCategory(basePath);
 
   const { newsData, loading, error } = useSpecificNewsData({category:category})
   if (loading) {
-    return <h3>Loading.......</h3>;
+    return <Loading/>;
   }
   if (error) {
     return <h3>Oops! data not found.</h3>;

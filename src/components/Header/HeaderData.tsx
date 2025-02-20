@@ -3,11 +3,12 @@ import { sortByDate } from '@/util/sort';
 import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
+import Loading from '../Share/_components/Loading';
 
 const HeaderData = () => {
     const { newsData, loading, error } = useSpecificNewsData({})
     if (loading) {
-        return <h3>Loading.......</h3>
+        return <Loading/>
     }
     if (error) {
         return <h3>Oops! data not found.</h3>

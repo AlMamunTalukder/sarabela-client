@@ -8,6 +8,7 @@ import Advertisements from "@/components/Share/_components/Advertisment";
 import Feedback from "@/components/Share/_components/Comment/Feedback";
 import NewsCard from "@/components/Share/_components/NewsCard";
 import PhotoNewsSidebar from "../_components/PhotoNewsSidebar";
+import Loading from "@/components/Share/_components/Loading";
 
 const SingleDetails = () => {
     const params = useParams();
@@ -46,7 +47,7 @@ const SingleDetails = () => {
 
 
     if (loading) {
-        return <h2>Loading.......</h2>;
+        return <Loading/> ;
     }
     if (error) {
         return <h1>Oops! data not found.</h1>;

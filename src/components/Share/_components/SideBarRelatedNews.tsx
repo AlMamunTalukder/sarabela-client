@@ -9,6 +9,7 @@ import Image from "next/image";
 import Link from "next/link";
 import parse from "html-react-parser";
 import { formatDate } from "@/util/formateDate";
+import Loading from "./Loading";
 interface TopNewsProps {
   basePath?: string;
   category:string;
@@ -19,7 +20,7 @@ const SideBarRelatedNews = ({category, basePath = "/international" }: TopNewsPro
   const { newsData, loading, error } = useSpecificNewsData({category:category})
 
   if (loading) {
-    return <h3>Loading.......</h3>
+    return <Loading/>
   }
   if (error) {
     return <h3>Oops! data not found.</h3>

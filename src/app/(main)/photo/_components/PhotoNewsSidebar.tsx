@@ -1,4 +1,5 @@
 "use client";
+import Loading from "@/components/Share/_components/Loading";
 import { usePhotonewsData } from "@/hooks/usePhotonewsData";
 import { sortByDate } from "@/util/sort";
 import Image from "next/image";
@@ -11,7 +12,7 @@ const PhotoNewsSidebar = ({ basePath = "/photo" }: TopNewsProps) => {
   const { photoNewsData, loading, error } = usePhotonewsData()
 
   if (loading) {
-    return <h3>Loading.......</h3>
+    return <Loading/>
   }
   if (error) {
     return <h3>Oops! data not found.</h3>
