@@ -33,7 +33,7 @@ const SaidBar = ({ category, basePath = "/sports" }: TopNewsProps) => {
           <div key={index} className="flex gap-4 items-start border-b pb-4">
             <div className="w-1/2">
               <h1 className="font-semibold  hover:text-blue-600 cursor-pointer">
-                <Link href={`${basePath}/${news.slug}`}>{news?.newsTitle}</Link>
+                <Link href={`${basePath}/${news._id}`}>{news?.newsTitle}</Link>
               </h1>
               <p className="truncate">{formatDate(news?.postDate)}</p>
             </div>

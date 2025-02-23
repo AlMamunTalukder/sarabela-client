@@ -31,7 +31,7 @@ const PhotoNewsSidebar = ({ basePath = "/photo" }: TopNewsProps) => {
           <div key={index} className="flex gap-4 items-start border-b pb-4">
             <div className="w-1/2">
               <h1 className="font-semibold text-gray-800 hover:text-blue-600 cursor-pointer">
-                <Link href={`${basePath}/${news.slug}`}>{news?.title}</Link>
+                <Link href={`${basePath}/${news._id}`}>{news?.title}</Link>
               </h1>
               <p className="truncate">{news?.postDate.toLocaleString()}</p>
             </div>

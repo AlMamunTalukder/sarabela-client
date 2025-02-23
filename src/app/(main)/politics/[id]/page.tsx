@@ -1,21 +1,33 @@
+import { fetchMetadata } from "@/util/FetchMetadata"
+import NewsSingleDetails from "../../../../components/Share/_components/NewsSingleDetails"
+import type { Metadata } from "next"
 
-import { fetchMetadata } from "@/util/FetchMetadata";
-import NewsSingleDetails from "../../../../components/Share/_components/NewsSingleDetails";
-import { Metadata } from "next";
+type Params = { id: string }
+type SearchParams = { [key: string]: string | string[] | undefined }
 
-export async function generateMetadata({ params }: { params: { id: string } }): Promise<Metadata> {
-    const { id } = params;
-    return await fetchMetadata(id);
+type GenerateMetadataProps = {
+  params: Promise<Params>
+  searchParams: Promise<SearchParams>
+}
+
+export async function generateMetadata(
+  { params }: GenerateMetadataProps,
+
+): Promise<Metadata> {
+  const { id } = await params
+  return await fetchMetadata(id)
 }
 
 type PageProps = {
-    params: { id: string };
-};
+  params: Promise<Params>
+  searchParams: Promise<SearchParams>
+}
 
-const Page = ({ params }: PageProps) => {
-    const { id } = params; 
-    console.log(id);
-    return <NewsSingleDetails id={id} basePath="/politics" />;
-};
+const Page = async ({ params }: PageProps) => {
+  const { id } = await params
 
-export default Page;
+  return <NewsSingleDetails id={id} basePath="/politics" />
+}
+
+export default Page
+

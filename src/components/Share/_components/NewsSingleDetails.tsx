@@ -22,7 +22,7 @@ const NewsSingleDetails = ({ basePath, id }: TopNewsProps) => {
   const { data } = useGetSingleNewsQuery(id);
   const singleNewsData = data?.data;
   const [fontSize, setFontSize] = useState(16);
-  console.log(data)
+
 
   return (
     <main className="min-h-screen">
@@ -34,6 +34,7 @@ const NewsSingleDetails = ({ basePath, id }: TopNewsProps) => {
                 <SideBarRelatedNews category={category} basePath={basePath} />
               </div>
             </div>
+
           </div>
           <div className="w-full lg:w-3/4">
             <div className="">

@@ -51,7 +51,7 @@ const Education = () => {
         {sortNewsData.map((news: TNews) => (
           <div key={news._id}>
             <h1 className="text-xl font-semibold py-2 border-b-2 hover:text-blue-500">
-              <Link href={`education/${news.slug}`}>{news?.newsTitle}</Link>
+              <Link href={`education/${news._id}`}>{news?.newsTitle}</Link>
             </h1>
           </div>
         ))}

@@ -16,7 +16,7 @@ const LeadNewsCard = ({ newsData }: NewsProps) => {
       {newsData?.slice(0, 3).map((news) => (
         <Link
           key={news._id}
-          href={`international/${news.slug}`}
+          href={`/${news?.category?.slug ?? 'national'}/${news._id}`}
           className="group flex lg:flex-col flex-row gap-4"
         >
           <div className="w-full overflow-hidden">

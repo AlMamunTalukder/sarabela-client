@@ -35,7 +35,7 @@ const DailyIslam = ({ tagName }: tagsProps) => {
               className="py-3 md:py-4 transition-colors duration-200"
             >
               <Link
-                href={`religion/${news.slug}`}
+                href={`/${news?.category?.slug ?? 'national'}/${news._id}`}
                 className="block space-y-1"
               >
                 <h3

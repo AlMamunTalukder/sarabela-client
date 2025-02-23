@@ -53,6 +53,7 @@ const Sports = () => {
           <NewsCard newsData={sortNewsData} />
         </div>
 
+
         {/* Sidebar */}
         <div className="hidden lg:block lg:order-3 order-2 lg:w-3/12 w-full">
           <SaidBar category={category} basePath={basePath} />

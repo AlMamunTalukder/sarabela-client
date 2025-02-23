@@ -2,7 +2,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import PaginationPages from "@/util/PaginationPages";
 import { useEffect, useState } from "react";
-import { useParams, } from "next/navigation";
 import { TNews } from "@/types";
 import Advertisements from "@/components/Share/_components/Advertisment";
 import Feedback from "@/components/Share/_components/Comment/Feedback";
@@ -11,20 +10,34 @@ import PhotoNewsSidebar from "../_components/PhotoNewsSidebar";
 import Loading from "@/components/Share/_components/Loading";
 
 type PageProps = {
-    params: { id: string };
+    params: Promise<{ id: string }>;  
 };
 
-const SingleDetails = ({params}:PageProps) => {
-    const { id } = params; 
-
+const SingleDetails = ({ params }: PageProps) => {
+    const [id, setId] = useState<string | null>(null);  
     const [singleNewsData, setSingleNewsData] = useState<TNews | null>(null);
-    const [loading, setLoading] = useState(false)
+    const [loading, setLoading] = useState(false);
     const [error, setError] = useState<string | null>(null);
-  
+
+
     useEffect(() => {
+        const resolveParams = async () => {
+            try {
+                const resolvedParams = await params;
+                setId(resolvedParams.id);
+            } catch (err) {
+                console.error('Error resolving params:', err);
+            }
+        };
+        resolveParams();
+    }, [params]);
+
+    useEffect(() => {
+        if (!id) return; 
+
         const fetchData = async () => {
             try {
-                setLoading(true)
+                setLoading(true);
                 const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_API_URL}/photonews/${id}`);
                 if (!res.ok) {
                     throw new Error(`HTTP error! status: ${res.status}`);
@@ -40,19 +53,18 @@ const SingleDetails = ({params}:PageProps) => {
                 console.error("Error fetching data:", error);
                 setError("An error occurred while fetching data.");
             } finally {
-                setLoading(false)
+                setLoading(false);
             }
         };
 
         fetchData();
     }, [id]);
 
-
     if (loading) {
-        return <Loading/> ;
+        return <Loading />;
     }
     if (error) {
-        return <h1>Oops! data not found.</h1>;
+        return <h1>Oops! Data not found.</h1>;
     }
 
     return (
@@ -66,20 +78,18 @@ const SingleDetails = ({params}:PageProps) => {
 
                                 <div className="overflow-hidden">
                                     {singleNewsData ? <NewsCard news={singleNewsData} /> : <p>Loading news...</p>}
-                                    {singleNewsData ? <Feedback news={singleNewsData}/> : <p>Loading news...</p>}
-
+                                    {singleNewsData ? <Feedback news={singleNewsData} /> : <p>Loading news...</p>}
 
                                     <Advertisements />
                                     {/* <RelatedNews basePath='/photonews' /> */}
                                     <PaginationPages />
                                 </div>
 
-
-
                                 <div className="px-4 py-6 border-t border-gray-100"></div>
                             </div>
                         </div>
                     </div>
+
                     <div className="hidden lg:block w-full lg:w-1/4">
                         <div className="sticky top-[70px]">
                             <div className="bg-white py-2">
@@ -87,6 +97,7 @@ const SingleDetails = ({params}:PageProps) => {
                             </div>
                         </div>
                     </div>
+
                 </div>
             </div>
         </main>

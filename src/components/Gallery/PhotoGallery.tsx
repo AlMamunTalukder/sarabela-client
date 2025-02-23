@@ -84,7 +84,7 @@ const NewsSlider: React.FC = () => {
                   </span>
                 </div>
                 <Link
-                  href={`/photo/${photoNewsData[currentCarouselIndex]?.slug}`}
+                  href={`/photo/${photoNewsData[currentCarouselIndex]?._id}`}
                   className="hover:text-blue-500"
                 >
                   <h2 className=" text-ellipsis text-xl lg:text-2xl font-bold mb-2">

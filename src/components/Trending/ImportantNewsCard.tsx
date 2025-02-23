@@ -7,9 +7,10 @@ import Loading from "../Share/_components/Loading";
 import { useSpecificNewsData } from "@/hooks/useSpecificNewsData";
 import { sortByDate } from "@/util/sort";
 
-const TrendingCard = () => {
 
-  const { newsData, loading, error } = useSpecificNewsData({ newsTag: 'latest' });
+const ImportantNewsCard = () => {
+
+  const { newsData, loading, error } = useSpecificNewsData({ newsTag: 'important' });
   if (loading) {
     return <Loading />;
   }
@@ -18,6 +19,7 @@ const TrendingCard = () => {
   }
 
   const sortNewsData = sortByDate(newsData, "postDate");
+
   return (
     <div className="grid">
       {sortNewsData?.slice(0, 5).map((news) => (
@@ -45,4 +47,4 @@ const TrendingCard = () => {
   );
 };
 
-export default TrendingCard;
+export default ImportantNewsCard;

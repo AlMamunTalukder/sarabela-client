@@ -8,7 +8,7 @@ import Loading from '../Share/_components/Loading';
 const HeaderData = () => {
     const { newsData, loading, error } = useSpecificNewsData({})
     if (loading) {
-        return <Loading/>
+        return <Loading />
     }
     if (error) {
         return <h3>Oops! data not found.</h3>
@@ -41,7 +41,7 @@ const HeaderData = () => {
                     </div>
                     <div className="col-span-1 flex-1">
                         <h2 className="text-sm font-semibold hover:text-blue-500 dark:hover:text-blue-400 text-gray-900 dark:text-gray-200">
-                            <Link href={`/national/${item.slug}`}>{item.newsTitle}</Link>
+                            <Link href={`/${item?.category?.slug ?? 'national'}/${item._id}`}>{item.newsTitle}</Link>
                         </h2>
                     </div>
                 </div>

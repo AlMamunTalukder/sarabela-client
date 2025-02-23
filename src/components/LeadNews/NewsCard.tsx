@@ -5,28 +5,30 @@ import Link from "next/link";
 import { sortByDate } from "@/util/sort";
 import { useSpecificNewsData } from "@/hooks/useSpecificNewsData";
 import Loading from "../Share/_components/Loading";
+import LeadNewsCard from "./LeadNewsCard";
 
 const NewsCard = () => {
   const basePath = "/international";
   const { newsData, loading, error } = useSpecificNewsData({ currentNews: 'true' });
-  
+
   if (loading) {
-    return <Loading/>;
+    return <Loading />;
   }
   if (error) {
     return <h3>Oops! data not found.</h3>;
   }
   const sortNewsData = sortByDate(newsData, "postDate");
+  console.log('for cateogyr', sortNewsData)
   return (
     <div className="flex flex-col gap-4">
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
-        
+
         <div className="hidden lg:flex flex-col gap-4 border-e border-gray-500 pe-2">
           {newsData?.slice(0, 3)?.map((news) => {
             return (
               <Link
                 key={news._id}
-                href={`${basePath}/${news.slug}`}
+                href={`/${news?.category?.slug ?? 'national'}/${news._id}`}
                 className="group flex flex-row-reverse gap-2 border-b  border-gray-200 p-1"
               >
                 <div className="w-full overflow-hidden">
@@ -57,7 +59,7 @@ const NewsCard = () => {
         <div className="lg:col-span-2">
           {sortNewsData?.slice(0, 1)?.map((news) => (
             <div key={news._id}>
-              <Link href={`sports/${news.slug}`} className="block group">
+              <Link href={`/${news?.category?.slug ?? 'national'}/${news._id}`} className="block group">
                 <div className="relative aspect-[6/5] overflow-hidden">
                   <div className="relative w-full h-full transform transition-transform duration-500 group-hover:scale-105">
 
@@ -86,7 +88,7 @@ const NewsCard = () => {
       <div className="border-t border-gray-500" />
 
       {/* Bottom News Grid */}
-      {/* <LeadNewsCard newsData={sortNewsData} /> */}
+      <LeadNewsCard newsData={sortNewsData} />
     </div>
   );
 };

@@ -17,7 +17,7 @@ const NewsCard = ({ newsData }: NewsProps) => {
         {
           newsData?.slice(0, 1).map((news) => (
             <div key={news._id} className="col-span-1 sm:col-span-2">
-              <Link href={`sports/${news.slug}`} className="block group">
+              <Link href={`sports/${news._id}`} className="block group">
                 <div className="relative aspect-[3/2] overflow-hidden">
                   <div className="relative w-full h-full transform transition-transform duration-500 group-hover:scale-105">
 
@@ -46,7 +46,7 @@ const NewsCard = ({ newsData }: NewsProps) => {
         {/* Normal News */}
         {newsData?.slice(0, 2)?.map((news) => (
           <div key={news._id} className="col-span-1">
-            <Link href={`sports/${news.slug}`} className="block group">
+            <Link href={`sports/${news._id}`} className="block group">
               <article className="overflow-hidden">
                 <div className="flex flex-row sm:flex-row lg:flex-col h-full">
                   {/* Image container */}

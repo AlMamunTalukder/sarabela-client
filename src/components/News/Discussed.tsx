@@ -8,11 +8,11 @@ import parse from "html-react-parser";
 import Link from "next/link";
 import Loading from "../Share/_components/Loading";
 type BaseProps = {
-  basePath: string;
+  basePath?: string;
   category: string;
 };
 
-const Discussed = ({ category, basePath }: BaseProps) => {
+const Discussed = ({ basePath,  category }: BaseProps) => {
   const { newsData, loading, error } = useSpecificNewsData({
     category: category,
     newsTag: "discussed",
@@ -39,7 +39,7 @@ const Discussed = ({ category, basePath }: BaseProps) => {
             key={index}
             className="border-b last:border-b-0 pb-4 last:pb-0 transition"
           >
-            <Link href={`${basePath}/${news._id}`} className="block">
+            <Link href={`/${news?.category?.slug ?? 'national'}/${news._id}`} className="block">
               <h3 className="text-lg font-semibold hover:text-blue-500">
                 {news.newsTitle}
               </h3>

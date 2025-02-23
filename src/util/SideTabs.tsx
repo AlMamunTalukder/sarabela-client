@@ -24,18 +24,17 @@ const SideTabs = ({ category, basePath = "/" }: TopNewsProps) => {
         </TabsTrigger>
       </TabsList>
       <TabsContent value="most_read">
-        <ReadNews category={category} basePath={basePath} />
+        <ReadNews category={category}/>
       </TabsContent>
 
       <TabsContent value="important">
-        <ImportantNews basePath={basePath} />
+        <ImportantNews />
       </TabsContent>
       <TabsContent value="discussed">
         <Discussed category={category} basePath={basePath} />
       </TabsContent>
     </Tabs>
   );
-
 };
 
 export default SideTabs;
