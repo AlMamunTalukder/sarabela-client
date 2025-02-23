@@ -28,13 +28,14 @@ const SideTabs = ({ category, basePath = "/" }: TopNewsProps) => {
       </TabsContent>
 
       <TabsContent value="important">
-        <ImportantNews />
+        <ImportantNews basePath={basePath} />
       </TabsContent>
       <TabsContent value="discussed">
         <Discussed category={category} basePath={basePath} />
       </TabsContent>
     </Tabs>
   );
+
 };
 
 export default SideTabs;

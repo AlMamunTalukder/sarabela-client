@@ -1,10 +1,8 @@
 // utils/fetchMetadata.ts
-export async function fetchMetadata(slug: string) {
-    const encodedSlug = Array.isArray(slug) ? slug.join("/") : slug || "";
-    const decodedSlug = encodedSlug ? decodeURIComponent(encodedSlug) : "";
-
+export async function fetchMetadata(id: string) {
+ 
     try {
-        const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_API_URL}/news/${decodedSlug}`);
+        const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_API_URL}/news/${id}`);
 
         if (!res.ok) {
             console.error("Error fetching news:", res.status);
@@ -24,7 +22,7 @@ export async function fetchMetadata(slug: string) {
         }
 
         const { metaTitle, metaDescription, metaKeywords, images } = news.data;
-        const pageUrl = `https://sarabelanews24.com/economy/${slug}`;
+        const pageUrl = `https://sarabelanews24.com/economy/${id}`;
 
         return {
             title: metaTitle ? `${metaTitle} | SaraBela News24` : "SaraBela News24 - Latest News",

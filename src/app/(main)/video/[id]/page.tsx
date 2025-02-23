@@ -11,10 +11,12 @@ import NewsCard from "@/components/Share/_components/NewsCard";
 import VideoNewsSidebar from "../_components/VideoNewsSidebar";
 import Loading from "@/components/Share/_components/Loading";
 
-const SingleDetails = () => {
-    const params = useParams();
-    const encodedSlug = Array.isArray(params?.slug) ? params.slug.join("/") : params?.slug || "";
-    const decodedSlug = encodedSlug ? decodeURIComponent(encodedSlug) : "";
+type PageProps = {
+    params: { id: string };
+};
+const SingleDetails = ({ params }: PageProps) => {
+    const { id } = params;
+
     const [singleNewsData, setSingleNewsData] = useState<TNews | null>(null);
     const [loading, setLoading] = useState(false)
     const [error, setError] = useState<string | null>(null);
@@ -23,7 +25,7 @@ const SingleDetails = () => {
         const fetchData = async () => {
             try {
                 setLoading(true)
-                const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_API_URL}/video-news/${decodedSlug}`);
+                const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_API_URL}/video-news/${id}`);
                 if (!res.ok) {
                     throw new Error(`HTTP error! status: ${res.status}`);
                 }
@@ -35,7 +37,7 @@ const SingleDetails = () => {
                     setError("Data not found");
                 }
             } catch (error) {
-   
+
                 setError("An error occurred while fetching data.");
             } finally {
                 setLoading(false)
@@ -43,11 +45,11 @@ const SingleDetails = () => {
         };
 
         fetchData();
-    }, [decodedSlug]);
+    }, [id]);
 
 
     if (loading) {
-        return <Loading/>;
+        return <Loading />;
     }
     if (error) {
         return <h1>Oops! data not found.</h1>;
@@ -64,7 +66,7 @@ const SingleDetails = () => {
 
                                 <div className="overflow-hidden">
                                     {singleNewsData ? <NewsCard news={singleNewsData} /> : <p>Loading news...</p>}
-                                    {singleNewsData ? <Feedback news={singleNewsData}/> : <p>Loading news...</p>}
+                                    {singleNewsData ? <Feedback news={singleNewsData} /> : <p>Loading news...</p>}
 
                                     <Advertisements />
                                     {/* <RelatedNews basePath='/video' /> */}

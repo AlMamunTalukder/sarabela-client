@@ -11,9 +11,9 @@ interface TopNewsProps {
 }
 
 const OtherNews = ({ category, basePath = "/international" }: TopNewsProps) => {
-  const { newsData, loading, error } = useSpecificNewsData({category:category})
+  const { newsData, loading, error } = useSpecificNewsData({ category: category })
   if (loading) {
-    return <Loading/>
+    return <Loading />
   }
   if (error) {
     return <h3>Oops! data not found.</h3>
@@ -30,7 +30,7 @@ const OtherNews = ({ category, basePath = "/international" }: TopNewsProps) => {
             className="flex items-start space-x-3 rounded-lg p-3"
           >
             <div className="w-1/3">
-              <Link href={`${basePath}/${news.slug}`} className="block">
+              <Link href={`${basePath}/${news._id}`} className="block">
                 <div className="h-16 rounded-md relative w-full aspect-[3/2]">
                   {news?.images?.[0] && (
                     <Image
@@ -46,7 +46,7 @@ const OtherNews = ({ category, basePath = "/international" }: TopNewsProps) => {
             </div>
 
             <div className="w-2/3 ps-2 space-y-2">
-              <Link href={`${basePath}/${news.slug}`} className="block group">
+              <Link href={`${basePath}/${news._id}`} className="block group">
                 <h2 className="text-lg font-semibold  line-clamp-2 group-hover:text-blue-600 transition-colors">
                   {news.newsTitle}
                 </h2>

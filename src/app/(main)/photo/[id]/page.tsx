@@ -10,20 +10,22 @@ import NewsCard from "@/components/Share/_components/NewsCard";
 import PhotoNewsSidebar from "../_components/PhotoNewsSidebar";
 import Loading from "@/components/Share/_components/Loading";
 
-const SingleDetails = () => {
-    const params = useParams();
-    const encodedSlug = Array.isArray(params?.slug) ? params.slug.join("/") : params?.slug || "";
-    const decodedSlug = encodedSlug ? decodeURIComponent(encodedSlug) : "";
+type PageProps = {
+    params: { id: string };
+};
+
+const SingleDetails = ({params}:PageProps) => {
+    const { id } = params; 
+
     const [singleNewsData, setSingleNewsData] = useState<TNews | null>(null);
     const [loading, setLoading] = useState(false)
     const [error, setError] = useState<string | null>(null);
-    console.log('photo data', singleNewsData)
-
+  
     useEffect(() => {
         const fetchData = async () => {
             try {
                 setLoading(true)
-                const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_API_URL}/photonews/${decodedSlug}`);
+                const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_API_URL}/photonews/${id}`);
                 if (!res.ok) {
                     throw new Error(`HTTP error! status: ${res.status}`);
                 }
@@ -43,7 +45,7 @@ const SingleDetails = () => {
         };
 
         fetchData();
-    }, [decodedSlug]);
+    }, [id]);
 
 
     if (loading) {

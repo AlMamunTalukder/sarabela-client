@@ -14,18 +14,15 @@ import { useGetSingleNewsQuery } from "@/redux/dailynews/news.api";
 import SideBarRelatedNews from "./SideBarRelatedNews";
 interface TopNewsProps {
   basePath?: string;
+  id: string;
 }
-const NewsSingleDetails = ({ basePath }: TopNewsProps) => {
-  const params = useParams();
-  const encodedSlug = Array.isArray(params?.slug)
-    ? params.slug.join("/")
-    : params?.slug || "";
+const NewsSingleDetails = ({ basePath, id }: TopNewsProps) => {
+
   const category = getCategory(basePath);
-  const decodedSlug = encodedSlug ? decodeURIComponent(encodedSlug) : "";
-  const { data } = useGetSingleNewsQuery(decodedSlug);
+  const { data } = useGetSingleNewsQuery(id);
   const singleNewsData = data?.data;
   const [fontSize, setFontSize] = useState(16);
-
+  console.log(data)
 
   return (
     <main className="min-h-screen">
