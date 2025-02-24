@@ -11,24 +11,28 @@ const socialLinks = [
     icon: <Facebook size={20} />,
     link: "https://facebook.com",
     label: "Facebook",
+    hoverColor: "hover:bg-[#1877F2] hover:text-white", 
   },
   {
     id: "02",
     icon: <Twitter size={20} />,
     link: "https://twitter.com",
     label: "Twitter",
+    hoverColor: "hover:bg-[#1DA1F2] hover:text-white", 
   },
   {
     id: "03",
     icon: <Linkedin size={20} />,
     link: "https://linkedin.com",
     label: "LinkedIn",
+    hoverColor: "hover:bg-[#0077B5] hover:text-white", 
   },
   {
     id: "04",
     icon: <Youtube size={20} />,
     link: "https://youtube.com",
     label: "YouTube",
+    hoverColor: "hover:bg-[#FF0000] hover:text-white", 
   },
 ];
 
@@ -43,7 +47,6 @@ const Footer = () => {
               <Image
                 src={logo || "/placeholder.svg"}
                 alt="brand logo"
-                // placeholder="blur"
                 objectFit="cover"
                 width={170}
                 height={170}
@@ -61,7 +64,7 @@ const Footer = () => {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={`Visit our ${link.label} page`}
-                  className="bg-white text-black hover:bg-red-500 hover:text-white p-2 rounded-full transition-all duration-300"
+                  className={`bg-white text-black p-2 rounded-full transition-all duration-300 ${link.hoverColor}`}
                 >
                   {link.icon}
                 </Link>
@@ -200,7 +203,7 @@ const Footer = () => {
         </div>
 
         {/* Bottom Section */}
-        <div className="pt-12 mt-12 border-t border-gray-800 font-sans">
+        <div className="py-8 mt-12 border-t border-gray-800 font-sans">
           <div className="flex flex-col md:flex-row justify-between items-center text-gray-400 text-sm">
             <p className="mb-4 md:mb-0">
               &copy; {new Date().getFullYear()} sarabelanews24. All Rights

@@ -23,16 +23,16 @@ const NewsCard = () => {
     <div className="flex flex-col gap-4">
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
 
-        <div className="hidden lg:flex flex-col gap-4 border-e border-gray-500 pe-2">
+        <div className="hidden lg:flex flex-col gap-3 border-e border-gray-500 pe-1">
           {newsData?.slice(0, 3)?.map((news) => {
             return (
               <Link
                 key={news._id}
                 href={`/${news?.category?.slug ?? 'national'}/${news._id}`}
-                className="group flex flex-row-reverse gap-2 border-b  border-gray-200 p-1"
+                className="group flex flex-row-reverse gap-2 border-b  border-gray-200 pb-2"
               >
                 <div className="w-full overflow-hidden">
-                  <div className="relative w-full aspect-[3/2] transform transition-transform duration-500 hover:scale-105">
+                  <div className="relative aspect-[3/2] transform transition-transform duration-500 hover:scale-105">
                     {news.images && news.images.length > 0 && (
                       <Image
                         src={news?.images[0] || "/placeholder.svg"}
@@ -46,8 +46,8 @@ const NewsCard = () => {
                     )}
                   </div>
                 </div>
-                <div className="w-full ps-2 lg:pt-2">
-                  <h2 className="text-xl font-bold hover:text-blue-600 transition-colors">
+                <div className="w-full ps-2 lg:pt-0">
+                  <h2 className="text-lg font-bold text-justify hover:text-blue-600 transition-colors">
                     {news.newsTitle}
                   </h2>
                 </div>
