@@ -8,6 +8,7 @@ import Loading from "../_components/Loading";
 
 const BreakingNews = () => {
   const { newsData, loading, error } = useSpecificNewsData({limit:'1000'});
+  console.log(newsData)
 
   if (loading) {
     return <Loading/>;

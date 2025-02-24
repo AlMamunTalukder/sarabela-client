@@ -39,7 +39,7 @@ const socialLinks = [
 const Footer = () => {
   return (
     <footer className="bg-black text-white">
-      <div className="max-w-7xl mx-auto px-4 py-5 lg:py-12">
+      <div className="max-w-7xl mx-auto lg:px-4 py-5 lg:py-12">
         <div className="grid grid-cols-1 lg:grid-cols-4 items-center lg:gap-8">
           {/* Logo */}
           <div className="flex justify-center lg:justify-start lg:col-span-3">
