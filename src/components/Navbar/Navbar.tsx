@@ -181,18 +181,18 @@ const Navbar: React.FC = () => {
         <div className="mt-2 ">
           <h1
             style={{ padding: "8.5px 0" }}
-            className="absolute z-10 w-[100px] bg-white text-black shadow-md text-center"
+            className="absolute z-10 w-[100px] bg-white dark:bg-gray-600 dark:text-white text-black shadow-md text-center"
           >
             ব্রেকিং নিউজ
           </h1>
-          <div className="container mx-auto flex items-center  justify-center gap-x-2 px-2 ">
+          <div className="container mx-auto flex items-center justify-center gap-x-2 pl-2">
             <BreakingNews />
           </div>
         </div>
       </div>
 
       {/* Desktop Navigation */}
-      <div className="hidden lg:block max-w-7xl mx-auto px-4 py-[10px] font-bold ">
+      <div className="hidden lg:block max-w-7xl mx-auto px-4 py-[10px] font-bold">
         <div className="flex justify-between items-center">
           {/* Navigation Menu */}
           <div>

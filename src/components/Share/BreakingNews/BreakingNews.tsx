@@ -19,13 +19,13 @@ const BreakingNews = () => {
 
 
   return (
-    <div className="breaking-news-container">
-      <h2 className="breaking-news-title">ব্রেকিং নিউজ</h2>
+    <div className="breaking-news-container  dark:bg-gray-600 lg:bg-[#333]">
+      <h2 className="breaking-news-title text-white">ব্রেকিং নিউজ</h2>
       <Marquee pauseOnHover={true} speed={50}>
         {newsData.map((news, index) => {
           
           return (
-            <div key={index} className="breaking-news-item">
+            <div key={index} className="breaking-news-item ">
               <Link href={`/${news.category?.slug ?? "national"}/${news._id}`}>{news.newsTitle}</Link>
             </div>
           );
