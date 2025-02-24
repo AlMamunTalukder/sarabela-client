@@ -6,16 +6,15 @@ import { ChevronsRight } from "lucide-react";
 import { useSpecificNewsData } from "@/hooks/useSpecificNewsData";
 import { sortByDate } from "@/util/sort";
 import truncateText from "@/util/truncate";
-import { getCategory } from "@/util/getCategory";
+
 import parse from "html-react-parser";
 import { formatDate } from "@/util/formateDate";
+import Loading from "../Share/_components/Loading";
 const NewsCard = () => {
-  const basePath = "/national";
-  const category = getCategory(basePath);
 
-  const { newsData, loading, error } = useSpecificNewsData({category:category})
+  const { newsData, loading, error } = useSpecificNewsData({})
   if (loading) {
-    return <h3>Loading.......</h3>;
+    return <Loading />;
   }
   if (error) {
     return <h3>Oops! data not found.</h3>;
@@ -52,7 +51,7 @@ const NewsCard = () => {
             </div>
             <div className="p-4">
               <h2 className="text-2xl font-bold mb-2 hover:text-blue-600">
-                <Link href={`/national/${news._id}`}>{news.newsTitle}</Link>
+                <Link href={`/${news?.category?.slug ?? 'national'}/${news._id}`}>{news.newsTitle}</Link>
               </h2>
               <p className="text-gray-600 mb-3">
                 {parse(truncateText(news?.shortDescription, 300))}
@@ -68,7 +67,7 @@ const NewsCard = () => {
         ))}
         {/* Normal News Section */}
         <div className="grid grid-cols-1 gap-4 lg:border-s dark:border-gray-300 border-black lg:ps-4">
-          {sortNewsData.map((news) => (
+          {sortNewsData?.slice(0, 4)?.map((news) => (
             <div
               key={news._id}
               className="flex border-b-2 dark:border-gray-300 overflow-hidden flex-row-reverse"
@@ -86,7 +85,7 @@ const NewsCard = () => {
               </div>
               <div className="flex-1 pe-1">
                 <h2 className="text-lg font-bold hover:text-blue-600">
-                  <Link href={`/national/${news._id}`}>{news.newsTitle}</Link>
+                  <Link href={`/${news?.category?.slug ?? 'national'}/${news._id}`}>{news.newsTitle}</Link>
                 </h2>
                 <p className="text-sm text-gray-600 touch-pan-right">
                   {truncateText(news.shortDescription, 300)}

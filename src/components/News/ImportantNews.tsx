@@ -7,12 +7,7 @@ import { formatDate } from "@/util/formateDate";
 import { useSpecificNewsData } from "@/hooks/useSpecificNewsData";
 import { sortByDate } from "@/util/sort";
 import Loading from "../Share/_components/Loading";
-import { getEnglishCategory } from "@/util/getEnglishCategory";
-// type BaseProps = {
-//   basePath: string
-//   category: string,
 
-// }
 const ImportantNews = () => {
   const { newsData, loading, error } = useSpecificNewsData({newsTag: 'important' });
 
@@ -24,9 +19,6 @@ const ImportantNews = () => {
   }
 
   const sortNewsData = sortByDate(newsData, "postDate");
-
-  const searchCategory = newsData && newsData[0] ? newsData[0]?.category?.name : ''
-  const basePath = getEnglishCategory(searchCategory)
 
   return (
     <div
@@ -41,7 +33,7 @@ const ImportantNews = () => {
               className="py-3 md:py-4 transition-colors duration-200"
             >
               <Link
-                href={`${basePath}/${news?._id}`}
+               href={`/${news?.category?.slug ?? 'national'}/${news._id}`}
                 className="block space-y-1"
               >
                 <h3

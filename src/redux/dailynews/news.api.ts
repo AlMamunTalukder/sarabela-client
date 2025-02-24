@@ -3,11 +3,11 @@ import { baseApi } from "../api/baseApi";
 const newsApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
     getSingleNews: builder.query({
-      query: (slug) => ({
-        url: `/news/${slug}`,
+      query: (id) => ({
+        url: `/news/${id}`,
         method: "GET",
       }),
-      providesTags: (result, error, slug) => [{ type: "news", id: slug }],
+      providesTags: (result, error, id) => [{ type: "news", id: id }],
     }),
   }),
 });

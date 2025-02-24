@@ -9,53 +9,57 @@ type NewsProps = {
   newsData: TNews[];
   loading: any;
   error: any;
-  category: string;
+
 };
 
-const SearchShowData = ({ newsData, loading, error, category }: NewsProps) => {
+const SearchShowData = ({ newsData, loading, error }: NewsProps) => {
   if (loading) {
     return <p>Loading</p>;
   }
   if (error) {
     return <p>Oops! data not found .</p>;
   }
+
   return (
     <div className="max-w-7xl mx-auto p-2">
       <div className="grid grid-cols-1 gap-6">
-        {newsData.map((news) => (
-          <Link key={news._id} href={`${category}/${news._id}`}>
-            <div className="flex   border border-gray-200 hover:shadow-lg transition-shadow duration-200 rounded">
-              <div className="w-[120px] h-[120px] flex-shrink-0 ">
-                {news.images.slice(0, 1).map((img) => (
-                  <Image
-                    key={img}
-                    src={img}
-                    alt={news.newsTitle}
-                    width={120}
-                    height={120}
-                    className="w-full h-full object-cover rounded-l"
-                  />
-                ))}
-              </div>
+        {newsData.map((news) => {
+         
+          return (
+            <Link key={news._id} href={`/${news.category?.slug ?? "national"}/${news.slug ?? "national"}`}>
+              <div className="flex   border border-gray-200 hover:shadow-lg transition-shadow duration-200 rounded">
+                <div className="w-[120px] h-[120px] flex-shrink-0 ">
+                  {news.images.slice(0, 1).map((img) => (
+                    <Image
+                      key={img}
+                      src={img}
+                      alt={news.newsTitle}
+                      width={120}
+                      height={120}
+                      className="w-full h-full object-cover rounded-l"
+                    />
+                  ))}
+                </div>
 
-              <div className="p-4">
-                <h2 className="lg:text-xl hover:text-blue-500 font-semibold ">
-                  {news.newsTitle}
-                </h2>
-                <p className="hidden lg:flex dark:text-gray-300 text-gray-600 hover:text-blue-500 mt-2">
-                  {news?.description
-                    ? parse(truncateText(news.description, 200))
-                    : ""}
-                </p>
-                <p className="lg:hidden text-gray-600 hover:text-blue-500 mt-2">
-                  {news?.description
-                    ? parse(truncateText(news.description, 50))
-                    : ""}
-                </p>
+                <div className="p-4">
+                  <h2 className="lg:text-xl hover:text-blue-500 font-semibold ">
+                    {news.newsTitle}
+                  </h2>
+                  <p className="hidden lg:flex dark:text-gray-300 text-gray-600 hover:text-blue-500 mt-2">
+                    {news?.description
+                      ? parse(truncateText(news.description, 200))
+                      : ""}
+                  </p>
+                  <p className="lg:hidden text-gray-600 hover:text-blue-500 mt-2">
+                    {news?.description
+                      ? parse(truncateText(news.description, 50))
+                      : ""}
+                  </p>
+                </div>
               </div>
-            </div>
-          </Link>
-        ))}
+            </Link>
+          )
+        })}
       </div>
     </div>
   );

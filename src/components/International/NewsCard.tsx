@@ -6,10 +6,12 @@ import { ChevronsRight } from "lucide-react";
 import { sortByDate } from "@/util/sort";
 import { useSpecificNewsData } from "@/hooks/useSpecificNewsData";
 import truncateText from "@/util/truncate";
-import { getCategory } from "@/util/getCategory";
 import Loading from "../Share/_components/Loading";
-
+import { getCategory } from "@/util/getCategory";
+import parse from 'html-react-parser'
+import { formatDate } from "@/util/formateDate";
 const NewsCard = () => {
+
   const basePath = "/international";
   const category = getCategory(basePath);
 
@@ -24,7 +26,6 @@ const NewsCard = () => {
   }
 
   const sortNewsData = sortByDate(newsData, "postDate");
-
   return (
     <div>
       <div className="flex justify-between items-center">
@@ -62,10 +63,10 @@ const NewsCard = () => {
                 </Link>
               </h2>
               <p className="text-sm mb-2">
-                {truncateText(news?.description, 400)}
+                {news?.description ? parse(truncateText(news.description, 300)) : ""}
               </p>
               <div className="flex justify-between text-xs">
-                <p>{news.postDate}</p>
+                <p>{formatDate(news.postDate)}</p>
                 <p className="text-blue-600 text-sm">
                   <Link href={`/international`}>আরো পড়ুন</Link>
                 </p>
@@ -76,7 +77,7 @@ const NewsCard = () => {
 
         {/* Normal News Section */}
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-          {sortNewsData.map((news) => (
+          {sortNewsData?.slice(0, 4)?.map((news) => (
             <div
               key={news._id}
               className="overflow-hidden flex flex-row lg:flex-col"

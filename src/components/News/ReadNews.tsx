@@ -6,16 +6,16 @@ import parse from 'html-react-parser'
 import { formatDate } from "@/util/formateDate";
 import { useSpecificNewsData } from "@/hooks/useSpecificNewsData";
 import { sortByDate } from "@/util/sort";
+import Loading from "../Share/_components/Loading";
 type BaseProps = {
-  basePath: string
   category: string,
 
 }
-const ReadNews = ({ category, basePath }: BaseProps) => {
+const ReadNews = ({ category }: BaseProps) => {
   const { newsData, loading, error } = useSpecificNewsData({ category: category, newsTag: "latest" });
 
   if (loading) {
-    return <h3>Loading.......</h3>
+    return <Loading />
   }
   if (error) {
     return <h3>Oops! data not found.</h3>
@@ -35,7 +35,7 @@ const ReadNews = ({ category, basePath }: BaseProps) => {
             key={index}
             className="border-b last:border-b-0 pb-4 last:pb-0 transition"
           >
-            <Link href={`${basePath}/${news._id}`} className="block">
+            <Link href={`/${news?.category?.slug ?? 'national'}/${news._id}`} className="block">
               <h3 className="text-lg font-semibold  hover:text-blue-500">
                 {news.newsTitle}
               </h3>

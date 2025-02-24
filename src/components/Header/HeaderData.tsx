@@ -3,11 +3,12 @@ import { sortByDate } from '@/util/sort';
 import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
+import Loading from '../Share/_components/Loading';
 
 const HeaderData = () => {
     const { newsData, loading, error } = useSpecificNewsData({})
     if (loading) {
-        return <h3>Loading.......</h3>
+        return <Loading />
     }
     if (error) {
         return <h3>Oops! data not found.</h3>
@@ -40,7 +41,7 @@ const HeaderData = () => {
                     </div>
                     <div className="col-span-1 flex-1">
                         <h2 className="text-sm font-semibold hover:text-blue-500 dark:hover:text-blue-400 text-gray-900 dark:text-gray-200">
-                            <Link href={`/national/${item._id}`}>{item.newsTitle}</Link>
+                            <Link href={`/${item?.category?.slug ?? 'national'}/${item._id}`}>{item.newsTitle}</Link>
                         </h2>
                     </div>
                 </div>

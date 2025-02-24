@@ -132,7 +132,7 @@ const Navbar: React.FC = () => {
                 <Link
                   key={item.href}
                   href={item.href}
-                  className={`whitespace-nowrap px-3 py-1 text-sm ${pathname === item.href
+                  className={`whitespace-nowrap px-1 py-1 text-sm ${pathname === item.href
                     ? "text-red-500 font-medium"
                     : ""
                     }`}

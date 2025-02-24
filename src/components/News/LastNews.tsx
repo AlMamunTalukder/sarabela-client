@@ -11,9 +11,8 @@ import { useSpecificNewsData } from "@/hooks/useSpecificNewsData";
 
 
 const LastNews = () => {
-const basePath = ''
-  const category = 'জাতীয়'
-  const { newsData, loading, error } = useSpecificNewsData({ category: category, newsTag: 'latest' });
+
+  const { newsData, loading, error } = useSpecificNewsData({  newsTag: 'latest' });
 
   if (loading) {
     return <Loading />;
@@ -32,14 +31,14 @@ const basePath = ''
       <ul className="divide-y divide-gray-200">
         {sortNewsData?.map((news) => {
 
-       
+
           return (
             <li
               key={news?._id}
               className="py-3 md:py-4 transition-colors duration-200"
             >
               <Link
-                href={`${basePath}/${news._id}`}
+                href={`/${news?.category?.slug ?? 'national'}/${news._id}`}
                 className="block space-y-1"
               >
                 <h3

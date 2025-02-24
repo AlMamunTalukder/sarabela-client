@@ -3,6 +3,7 @@ import { useSpecificVideoNewsData } from "@/hooks/useSpecificVideoNewsData"
 import { sortByDate } from "@/util/sort"
 import Link from "next/link"
 import dynamic from "next/dynamic"
+import Loading from "@/components/Share/_components/Loading"
 
 const ReactPlayer = dynamic(() => import("react-player/lazy"), { ssr: false })
 
@@ -14,7 +15,7 @@ const VideoNewsSidebar = ({ basePath = "/video" }: TopNewsProps) => {
   const { videoNewsData, loading, error } = useSpecificVideoNewsData()
 
   if (loading) {
-    return <h3>Loading.......</h3>
+    return <Loading />
   }
   if (error) {
     return <h3>Oops! data not found.</h3>

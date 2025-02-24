@@ -21,12 +21,13 @@ const SaidTabs = () => {
         </TabsTrigger>
       </TabsList>
       <TabsContent value="latest">
-        <LastNews/>
+        <LastNews />
       </TabsContent>
       <TabsContent value="important">
-        <ImportantNews/>
+        <ImportantNews />
       </TabsContent>
-      <TabsContent  value="dailyIslam">
+
+      <TabsContent value="dailyIslam">
         <DailyIslam tagName="daily-islam" />
       </TabsContent>
     </Tabs>

@@ -11,15 +11,11 @@ import SearchShowData from "./_components/SearchShowData";
 import { DatePickerDemo } from "./_components/DatePicker";
 import { RadioGroup, RadioGroupItem } from "./_components/RadioGroupItem";
 
-import { getEnglishCategory } from "@/util/getEnglishCategory";
 const Page = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [query, setQuery] = useState("");
   const [selectedWriter, setSelectedWriter] = React.useState("")
   const { newsData, loading, error } = useSpecificNewsData({ searchTerm: query });
-
-  const searchCategory = newsData && newsData[0] ? newsData[0]?.category?.name : ''
-  const category = getEnglishCategory(searchCategory)
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     setQuery(searchTerm);
@@ -158,7 +154,7 @@ const Page = () => {
 
 
 
-      <SearchShowData loading={loading} error={error} newsData={newsData} category={category} />
+      <SearchShowData loading={loading} error={error} newsData={newsData}/>
     </div>
   );
 };

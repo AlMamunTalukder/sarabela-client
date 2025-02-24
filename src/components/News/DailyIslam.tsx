@@ -6,13 +6,10 @@ import parse from "html-react-parser";
 import { formatDate } from "@/util/formateDate";
 import UseNewsTagsData from "@/hooks/useNewsTagsData";
 import Loading from "../Share/_components/Loading";
-import { usePathname } from "next/navigation";
-
 type tagsProps = {
   tagName: string;
 };
 const DailyIslam = ({ tagName }: tagsProps) => {
-    const basePath = usePathname();
 
   const { newsData, loading, error } = UseNewsTagsData(tagName);
   if (loading) {
@@ -31,14 +28,14 @@ const DailyIslam = ({ tagName }: tagsProps) => {
     >
       <ul className="divide-y divide-gray-200">
         {sortNewsData?.map((news) => {
-         
+
           return (
             <li
               key={news?._id}
               className="py-3 md:py-4 transition-colors duration-200"
             >
               <Link
-                href={`${basePath}/${news._id}`}
+                href={`/${news?.category?.slug ?? 'national'}/${news._id}`}
                 className="block space-y-1"
               >
                 <h3

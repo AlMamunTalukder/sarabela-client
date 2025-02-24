@@ -7,6 +7,7 @@ import VideoModal from "./VideoModal"
 import { useSpecificVideoNewsData } from "@/hooks/useSpecificVideoNewsData"
 import { sortByDate } from "@/util/sort"
 import Image from "next/image"
+import Loading from "../Share/_components/Loading"
 
 const VideoGallery = () => {
   const [currentCarouselIndex, setCurrentCarouselIndex] = useState(0)
@@ -46,7 +47,7 @@ const VideoGallery = () => {
   }
 
   if (loading) {
-    return <h3>Loading.......</h3>
+    return <Loading/>
   }
   if (error) {
     return <h3>Oops! Data not found.</h3>

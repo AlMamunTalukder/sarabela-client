@@ -1,17 +1,26 @@
 "use client";
-import { TNews } from "@/types";
 import truncateText from "@/util/truncate";
 import Image from "next/image";
 import Link from "next/link";
 import parse from 'html-react-parser'
-type NewsProps = {
-  data: TNews[]
-}
+import Loading from "../Share/_components/Loading";
+import { useSpecificNewsData } from "@/hooks/useSpecificNewsData";
+import { sortByDate } from "@/util/sort";
 
-const TrendingCard = ({ data }: NewsProps) => {
+const TrendingCard = () => {
+
+  const { newsData, loading, error } = useSpecificNewsData({ newsTag: 'latest' });
+  if (loading) {
+    return <Loading />;
+  }
+  if (error) {
+    return <h3>Oops! data not found.</h3>;
+  }
+
+  const sortNewsData = sortByDate(newsData, "postDate");
   return (
     <div className="grid">
-      {data.map((news) => (
+      {sortNewsData?.slice(0, 5).map((news) => (
         <div key={news._id} className=" flex flex-row  pt-2">
 
           {news.images?.[0] && (
@@ -26,7 +35,7 @@ const TrendingCard = ({ data }: NewsProps) => {
           )}
           <div className="ms-4">
             <h3 className="text-lg font-semibold hover:text-blue-500">
-              <Link href={`/international/${news._id}`}>{news.newsTitle}</Link>
+              <Link href={`/${news?.category?.slug ?? 'national'}/${news._id}`}>{news.newsTitle}</Link>
             </h3>
             <p className="text-sm mt-2">  {news?.description ? parse(truncateText(news.description, 100)) : ""}</p>
           </div>

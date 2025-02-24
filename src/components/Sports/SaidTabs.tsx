@@ -3,8 +3,9 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import ReadNews from "../News/ReadNews";
 import Discussed from "../News/Discussed";
 import GoodNews from "../News/GoodNews";
+
 const SaidTabs = () => {
-  const category = ''
+
   return (
     <Tabs defaultValue="Read" defaultChecked>
       <TabsList>
@@ -20,15 +21,15 @@ const SaidTabs = () => {
       </TabsList>
       <TabsContent value="Read">
         {/* this is last news  */}
-        <ReadNews category={category} basePath='' />
+        <ReadNews category="" />
       </TabsContent>
       <TabsContent value="Discussed">
         {/* this is important news */}
-        <Discussed category={category} basePath='basePath'/>
+        <Discussed  category=""/>
       </TabsContent>
       <TabsContent value="GoodNews">
         {/* this is important news */}
-        <GoodNews tagName={`good-news`}/>
+        <GoodNews tagName={`good-news`} />
       </TabsContent>
     </Tabs>
   );

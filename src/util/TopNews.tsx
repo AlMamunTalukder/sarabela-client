@@ -7,15 +7,16 @@ import { sortByDate } from "./sort";
 import truncateText from "./truncate";
 import { formatDate } from "./formateDate";
 import parse from 'html-react-parser'
+import Loading from "@/components/Share/_components/Loading";
 interface TopNewsProps {
   basePath?: string;
   category: string;
 }
-const TopNews = ({ category, basePath}: TopNewsProps) => {
+const TopNews = ({ category, basePath }: TopNewsProps) => {
 
-  const { newsData, loading, error } = useSpecificNewsData({category:category,})
+  const { newsData, loading, error } = useSpecificNewsData({ category: category, })
   if (loading) {
-    return <h3>Loading.......</h3>
+    return <Loading />
   }
   if (error) {
     return <h3>Oops! data not found.</h3>
