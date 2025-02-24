@@ -49,18 +49,13 @@ const SideBarRelatedNews = ({category, basePath = "/international" }: TopNewsPro
             )}
 
             <div>
-              <h2 className="text-lg font-semibold hover:text-blue-600">
-                <Link href={`${basePath}/${newsItem._id}`}>{newsItem?.newsTitle}</Link>
-              </h2>
-              <p className="text-sm dark:text-white text-gray-600">  {newsItem?.description ? parse(truncateText(newsItem.description, 50)) : ""}</p>
-              <p className="text-xs dark:text-gray-300 text-gray-500">
+            <p className="text-xs dark:text-gray-300 text-gray-500">
                 {formatDate(newsItem?.postDate)}
               </p>
               <h2 className="text-lg font-semibold hover:text-blue-600">
                 <Link href={`${basePath}/${newsItem._id}`}>{newsItem?.newsTitle}</Link>
               </h2>
-              {/* <p className="text-sm dark:text-white text-gray-600">  {newsItem?.description ? parse(truncateText(newsItem.description, 50)) : ""}</p> */}
-              
+              {/* <p className="text-sm dark:text-white text-gray-600">  {newsItem?.description ? parse(truncateText(newsItem.description, 50)) : ""}</p> */}              
             </div>
           </div>
         ))}
