@@ -35,7 +35,7 @@ const GoodNews = ({ tagName }: tagsProps) => {
             key={index}
             className="border-b last:border-b-0 pb-4 last:pb-0 transition"
           >
-            <Link href={`international/${news.slug}`} className="block">
+            <Link href={`international/${news._id}`} className="block">
               <h3 className="text-lg font-semibold  hover:text-blue-500">
                 {news.newsTitle}
               </h3>

@@ -41,7 +41,7 @@ const ImportantNews = () => {
               className="py-3 md:py-4 transition-colors duration-200"
             >
               <Link
-                href={`${basePath}/${news?.slug}`}
+                href={`${basePath}/${news?._id}`}
                 className="block space-y-1"
               >
                 <h3

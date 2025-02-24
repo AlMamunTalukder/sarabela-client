@@ -24,7 +24,7 @@ const Layout = ({ children }: { children: ReactNode }) => {
         <BreakingNews />
       </div>
 
-      <footer className="relative z-30 mb-[50px]">
+      <footer className="relative z-30 ">
         <Footer />
       </footer>
       <ScrollToTop />

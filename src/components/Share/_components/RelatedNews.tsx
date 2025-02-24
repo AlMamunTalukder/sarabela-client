@@ -49,7 +49,7 @@ const RelatedNews = ({category, basePath = "/international" }: TopNewsProps) => 
 
             <div>
               <h2 className="text-lg font-semibold hover:text-blue-600">
-                <Link href={`${basePath}/${newsItem.slug}`}>{newsItem?.newsTitle}</Link>
+                <Link href={`${basePath}/${newsItem._id}`}>{newsItem?.newsTitle}</Link>
               </h2>
               <p className="text-sm dark:text-white text-gray-600">  {newsItem?.description ? parse(truncateText(newsItem.description, 50)) : ""}</p>
               <p className="text-xs dark:text-gray-300 text-gray-500">

@@ -200,7 +200,7 @@ const Footer = () => {
         </div>
 
         {/* Bottom Section */}
-        <div className="pt-12 mt-12 border-t border-gray-800">
+        <div className="py-7 mt-6 border-t border-gray-800">
           <div className="flex flex-col md:flex-row justify-between items-center text-gray-400 text-sm">
             <p className="mb-4 md:mb-0">
               &copy; {new Date().getFullYear()} sarabelanews24. All Rights

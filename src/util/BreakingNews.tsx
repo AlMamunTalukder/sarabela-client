@@ -26,7 +26,7 @@
 
 //           return (
 //             <div key={index} style={{ marginRight: "50px", fontSize: "16px" }}>
-//             <Link href={`${basePath}/${news.slug}`} style={{ color: "#fff", textDecoration: "none" }}>
+//             <Link href={`${basePath}/${news._id}`} style={{ color: "#fff", textDecoration: "none" }}>
 //               {news.newsTitle}
 //             </Link>
 //           </div>

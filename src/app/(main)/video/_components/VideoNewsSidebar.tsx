@@ -33,7 +33,7 @@ const VideoNewsSidebar = ({ basePath = "/video" }: TopNewsProps) => {
           <div key={index} className="flex gap-4 items-start border-b pb-4">
             <div className="w-1/2">
               <h1 className="font-semibold text-gray-800 hover:text-blue-600 cursor-pointer">
-                <Link href={`${basePath}/${news.slug}`}>{news?.newsTitle}</Link>
+                <Link href={`${basePath}/${news._id}`}>{news?.newsTitle}</Link>
               </h1>
               <p className="truncate">{news?.postDate}</p>
             </div>

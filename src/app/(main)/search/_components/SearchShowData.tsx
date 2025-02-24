@@ -23,7 +23,7 @@ const SearchShowData = ({ newsData, loading, error, category }: NewsProps) => {
     <div className="max-w-7xl mx-auto p-2">
       <div className="grid grid-cols-1 gap-6">
         {newsData.map((news) => (
-          <Link key={news._id} href={`${category}/${news.slug}`}>
+          <Link key={news._id} href={`${category}/${news._id}`}>
             <div className="flex   border border-gray-200 hover:shadow-lg transition-shadow duration-200 rounded">
               <div className="w-[120px] h-[120px] flex-shrink-0 ">
                 {news.images.slice(0, 1).map((img) => (

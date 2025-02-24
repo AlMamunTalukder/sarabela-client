@@ -23,7 +23,7 @@ const NewsCard: React.FC<NewsCardProps> = ({ news }: NewsCardProps) => {
 
   return (
     <article className="pt-8" id="news-content">
-      <h2 className="text-2xl md:text-4xl font-semibold dark:text-white text-gray-800">
+      <h2 className="text-2xl md:text-3xl font-semibold dark:text-white text-gray-800">
         {news?.newsTitle}
       </h2>
       <SocialShare newsId={news._id} />

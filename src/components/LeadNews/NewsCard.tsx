@@ -29,26 +29,28 @@ const NewsCard = () => {
           {newsData?.slice(0, 3)?.map((news) => (
             <Link
               key={news._id}
-              href={`/international/${news.slug}`}
+              href={`/international/${news._id}`}
               className="group flex flex-row-reverse gap-2 border-b  border-gray-200 p-1"
             >
               <div className="w-full overflow-hidden">
-                <div className="relative w-full aspect-[3/2] transform transition-transform duration-500 hover:scale-105">
+                <div className="relative w-full  transform transition-transform duration-500 hover:scale-105">
                   {news.images && news.images.length > 0 && (
                     <Image
                       src={news?.images[0] || "/placeholder.svg"}
                       alt={news?.newsTitle}
-                      objectFit="fill"
-                      fill
-                      priority
+                   
+                  
+                      
                       placeholder="blur"
                       blurDataURL="/placeholder.svg"
+                      height={200}
+                      width={140}
                     />
                   )}
                 </div>
               </div>
               <div className="w-full ps-2 lg:pt-2">
-                <h2 className="text-xl font-bold hover:text-blue-600 transition-colors">
+                <h2 className="text-lg font-bold hover:text-blue-600 transition-colors">
                   {news.newsTitle}
                 </h2>
               </div>
@@ -59,7 +61,7 @@ const NewsCard = () => {
         <div className="lg:col-span-2">
           {sortNewsData?.slice(0, 1)?.map((news) => (
             <div key={news._id}>
-             <Link href={`sports/${news.slug}`} className="block group">
+             <Link href={`sports/${news._id}`} className="block group">
                 <div className="relative aspect-[3/2] overflow-hidden">
                   <div className="relative w-full h-full transform transition-transform duration-500 group-hover:scale-105">
 

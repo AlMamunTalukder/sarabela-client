@@ -57,7 +57,7 @@ const NewsCard = () => {
             </div>
             <div className="pt-4">
               <h2 className="text-2xl font-bold mb-3 hover:text-blue-600">
-                <Link href={`/international/${news.slug}`}>
+                <Link href={`/international/${news._id}`}>
                   {news.newsTitle}
                 </Link>
               </h2>
@@ -94,7 +94,7 @@ const NewsCard = () => {
               </div>
               <div className="flex-1 ps-2 lg:pt-4 flex flex-col justify-between">
                 <h3 className="text-lg font-semibold mb-2 hover:text-blue-600">
-                  <Link href={`/international/${news.slug}`}>
+                  <Link href={`/international/${news._id}`}>
                     {news.newsTitle}
                   </Link>
                 </h3>

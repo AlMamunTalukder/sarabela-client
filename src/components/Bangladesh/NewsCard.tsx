@@ -52,7 +52,7 @@ const NewsCard = () => {
             </div>
             <div className="p-4">
               <h2 className="text-2xl font-bold mb-2 hover:text-blue-600">
-                <Link href={`/national/${news.slug}`}>{news.newsTitle}</Link>
+                <Link href={`/national/${news._id}`}>{news.newsTitle}</Link>
               </h2>
               <p className="text-gray-600 mb-3">
                 {parse(truncateText(news?.shortDescription, 300))}
@@ -86,7 +86,7 @@ const NewsCard = () => {
               </div>
               <div className="flex-1 pe-1">
                 <h2 className="text-lg font-bold hover:text-blue-600">
-                  <Link href={`/national/${news.slug}`}>{news.newsTitle}</Link>
+                  <Link href={`/national/${news._id}`}>{news.newsTitle}</Link>
                 </h2>
                 <p className="text-sm text-gray-600 touch-pan-right">
                   {truncateText(news.shortDescription, 300)}

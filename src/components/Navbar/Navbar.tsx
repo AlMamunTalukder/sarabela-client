@@ -162,7 +162,7 @@ const Navbar: React.FC = () => {
       </div>
 
       {/* Desktop Navigation */}
-      <div className="hidden lg:block max-w-7xl mx-auto px-4 py-4 font-bold ">
+      <div className="hidden lg:block max-w-7xl mx-auto px-4 py-3 font-bold ">
         <div className="flex justify-between items-center">
           {/* Navigation Menu */}
           <div>

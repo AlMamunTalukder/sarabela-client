@@ -26,7 +26,7 @@ const TrendingCard = ({ data }: NewsProps) => {
           )}
           <div className="ms-4">
             <h3 className="text-lg font-semibold hover:text-blue-500">
-              <Link href={`/international/${news.slug}`}>{news.newsTitle}</Link>
+              <Link href={`/international/${news._id}`}>{news.newsTitle}</Link>
             </h3>
             <p className="text-sm mt-2">  {news?.description ? parse(truncateText(news.description, 100)) : ""}</p>
           </div>

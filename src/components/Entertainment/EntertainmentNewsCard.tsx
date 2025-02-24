@@ -36,7 +36,7 @@ const EntertainmentNewsCard = () => {
       <div className="grid grid-cols-1 lg:grid-cols-4 gap-4">
         {sortNewsData?.slice(0, 1)?.map((news) => (
           <div key={news._id} className="col-span-1 lg:order-2 sm:col-span-2">
-            <Link href={`sports/${news.slug}`} className="block group">
+            <Link href={`sports/${news._id}`} className="block group">
               <div className="relative aspect-[3/2] overflow-hidden">
                 <div className="relative w-full aspect-[3/2] ">
                   {news?.images?.[0] && (
@@ -79,7 +79,7 @@ const EntertainmentNewsCard = () => {
                 </div>
               </div>
               <div className="flex-1 px-2 flex flex-col justify-between">
-                <Link href={`/entertainment/${news.slug}`}>
+                <Link href={`/entertainment/${news._id}`}>
                   <h2 className="text-sm font-bold mb-2 hover:text-blue-600">
                     {news?.newsTitle}
                   </h2>
@@ -93,7 +93,7 @@ const EntertainmentNewsCard = () => {
           {sortNewsData?.slice(2)?.map((news) => (
             <div key={news._id} className="overflow-hidden flex items-stretch">
               <div className="flex-1 px-2 flex flex-col justify-between">
-                <Link href={`/entertainment/${news.slug}`}>
+                <Link href={`/entertainment/${news._id}`}>
                   <h2 className="text-sm font-bold mb-2 hover:text-blue-600">
                     {news?.newsTitle}
                   </h2>

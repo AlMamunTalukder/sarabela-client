@@ -22,10 +22,10 @@ const BreakingNews = () => {
       <h2 className="breaking-news-title">ব্রেকিং নিউজ</h2>
       <Marquee pauseOnHover={true} speed={50}>
         {newsData.map((news, index) => {
-          const basePath = getCategory(news?.category?.name);
+          // const basePath = getCategory(news?.category?.name);
           return (
             <div key={index} className="breaking-news-item">
-              <Link href={`${basePath}/${news.slug}`}>{news.newsTitle}</Link>
+              <Link href={`${news?.category?.slug}/${news._id}`}>{news.newsTitle}</Link>
             </div>
           );
         })}
