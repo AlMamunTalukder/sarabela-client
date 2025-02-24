@@ -24,7 +24,7 @@ const SearchShowData = ({ newsData, loading, error }: NewsProps) => {
     <div className="max-w-7xl mx-auto p-2">
       <div className="grid grid-cols-1 gap-6">
         {newsData.map((news) => {
-          console.log('slug here tis  ', news.category?.slug)
+         
           return (
             <Link key={news._id} href={`/${news.category?.slug ?? "national"}/${news.slug ?? "national"}`}>
               <div className="flex   border border-gray-200 hover:shadow-lg transition-shadow duration-200 rounded">
