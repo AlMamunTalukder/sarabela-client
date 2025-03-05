@@ -181,7 +181,7 @@ const Navbar: React.FC = () => {
         <div className="mt-2 ">
           <h1
             style={{ padding: "8.5px 0" }}
-            className="absolute z-10 w-[100px] bg-white dark:bg-gray-600 dark:text-white text-black shadow-md text-center"
+            className="absolute z-10 w-[100px] bg-white dark:bg-gray-600 dark:text-white text-red-500 shadow-md text-center"
           >
             ব্রেকিং নিউজ
           </h1>
