@@ -10,9 +10,15 @@ import PhotoGallery from "@/components/Gallery/PhotoGallery";
 import VideoGallery from "@/components/Gallery/VideoGallery";
 import Advertisement_1 from "@/util/Advertisement_1";
 import banner from "@public/asset/sarabelanews24-banner.png";
+import BreakingNews from "@/components/Share/BreakingNews/BreakingNews";
 const Page = () => {
   return (
+    <>
+      <div className="lg:hidden mt-2">
+        <BreakingNews />
+      </div>
     <div className="max-w-7xl mx-auto px-4">
+    
       <LeadSection />
       <AllCountry />
       <Bangladesh />
@@ -25,6 +31,7 @@ const Page = () => {
       <PhotoGallery />
       <AllNews />
     </div>
+    </>
   );
 };
 

@@ -32,7 +32,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "../ui/accordion";
-import BreakingNews from "@/components/Share/BreakingNews/BreakingNews";
+
 import { AiFillHome } from "react-icons/ai";
 
 interface SocialLink {
@@ -61,7 +61,7 @@ const socialLinks: SocialLink[] = [
     icon: <Twitter size={15} />,
     link: "https://twitter.com",
     hoverColor: "hover:bg-[#1DA1F2] dark:hover:bg-[#1DA1F2] hover:text-white",
-  }, 
+  },
   {
     id: "03",
     icon: <Linkedin size={15} />,
@@ -178,17 +178,7 @@ const Navbar: React.FC = () => {
           </div>
         </div>
 
-        <div className="mt-2 ">
-          <h1
-            style={{ padding: "8.5px 0" }}
-            className="absolute z-10 w-[100px] bg-white dark:bg-gray-600 dark:text-white text-red-500 shadow-md text-center"
-          >
-            ব্রেকিং নিউজ
-          </h1>
-          <div className="container mx-auto flex items-center justify-center gap-x-2 pl-2">
-            <BreakingNews />
-          </div>
-        </div>
+        
       </div>
 
       {/* Desktop Navigation */}

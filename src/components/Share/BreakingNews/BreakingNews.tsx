@@ -17,11 +17,9 @@ const BreakingNews = () => {
     return <h3>Oops! data not found.</h3>;
   }
 
-
-
   return (
-    <div className="breaking-news-container  dark:bg-gray-600 lg:bg-[#333]">
-      <h2 className="breaking-news-title text-red-600">ব্রেকিং নিউজ</h2>
+    <div className="breaking-news-container  dark:bg-gray-600 lg:bg-[#333] shadow-md">
+      <h2 className="breaking-news-title text-red-600 ">শিরোনাম</h2>
       <Marquee pauseOnHover={true} speed={50}>
         {newsData.map((news, index) => {          
           return (
