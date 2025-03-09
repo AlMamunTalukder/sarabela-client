@@ -23,6 +23,7 @@ import {
 } from "@/components/ui/breadcrumb";
 import { Clock3, House, SquarePen, UserRound } from "lucide-react";
 import { AiFillHome } from "react-icons/ai";
+import DynamicBreadcrumb from "../Breadcrumb/Breadcrumb";
 
 interface TopNewsProps {
   basePath?: string;
@@ -34,67 +35,40 @@ const NewsSingleDetails = ({ basePath, id }: TopNewsProps) => {
   const singleNewsData = data?.data;
   const [fontSize, setFontSize] = useState(16);
 
+
+
   return (
     <main className="min-h-screen">
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
-        {/* <div className="mt-2 lg:w-[250px]">
-          <Breadcrumb className="mb-2">
-            <BreadcrumbList className="text-black">
-              <BreadcrumbItem>
-                <BreadcrumbLink href="/">
-                  <AiFillHome className=" w-[18px] lg:w-[17px] h-[18px] lg:h-[17px]" />
-                </BreadcrumbLink>
-              </BreadcrumbItem>
-              <BreadcrumbSeparator />
-              <BreadcrumbItem>
-                <BreadcrumbLink href="/components">রাজনীতি</BreadcrumbLink>
-              </BreadcrumbItem>
-            </BreadcrumbList>
-          </Breadcrumb>
-          <div className="space-y-2">
-            <div className="flex items-center gap-2 text-sm text-gray-500">
-              <UserRound size={"16px"} />
-              <h5>ডেস্ক রিপোর্ট</h5>
-            </div>
-            <div className="flex items-center gap-2 text-sm text-gray-500">
-              <Clock3 size={"20px"} />
-              <h5>আপডেট: ০৫:৫৫ পিএম, ১৭ জানুয়ারী, শুক্রবার, ২০২৫</h5>
-            </div>
-            <div className="flex items-center gap-2 text-sm text-gray-500">
-              <SquarePen size={"16px"} />
-              <h5>অনলাইন সংস্করণ</h5>
-            </div>
-          </div>
-        </div> */}
         <div className="flex flex-col lg:flex-row gap-4">
-
-
-
-
           <div className=" top-[70px]">
-
             <div className="hidden lg:block mt-8 ">
-              <Breadcrumb className="mb-2">
-                <BreadcrumbList className="text-black">
-                  <BreadcrumbItem>
-                    <BreadcrumbLink href="/">
-                      <AiFillHome className=" w-[18px] lg:w-[17px] h-[18px] lg:h-[17px]" />
-                    </BreadcrumbLink>
-                  </BreadcrumbItem>
-                  <BreadcrumbSeparator />
-                  <BreadcrumbItem>
-                    <BreadcrumbLink href="/components">রাজনীতি</BreadcrumbLink>
-                  </BreadcrumbItem>
-                </BreadcrumbList>
-              </Breadcrumb>
+           <DynamicBreadcrumb news={singleNewsData}/>   
+
               <div className="space-y-2">
                 <div className="flex items-center gap-2 text-sm text-gray-500">
                   <UserRound size={"16px"} />
-                  <h5>ডেস্ক রিপোর্ট</h5>
+                  <h5>{singleNewsData?.reporterName} </h5>
                 </div>
                 <div className="flex items-center gap-2 text-sm text-gray-500">
                   <Clock3 size={"20px"} />
-                  <h5>আপডেট: ০৫:৫৫ পিএম, ১৭ জানুয়ারী, শুক্রবার, ২০২৫</h5>
+                  <h5>
+                    {" "}
+                    আপডেট:{" "}
+                    {new Date(singleNewsData?.updatedAt).toLocaleDateString(
+                      "bn-BD",
+                      {
+                        year: "numeric",
+                        month: "long",
+                        day: "numeric",
+                        weekday: "long",
+                        hour: "numeric",
+                        minute: "numeric",
+                        second: "numeric",
+                        hour12: true,
+                      }
+                    )}
+                  </h5>
                 </div>
                 <div className="flex items-center gap-2 text-sm text-gray-500">
                   <SquarePen size={"16px"} />

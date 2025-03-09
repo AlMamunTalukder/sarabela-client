@@ -9,15 +9,8 @@ import parse from "html-react-parser";
 import SocialShare from "./Comment/SocialShare";
 import { Card, CardContent, CardFooter } from "@/components/ui/card";
 import type { TNews } from "@/types";
-import {
-  Breadcrumb,
-  BreadcrumbItem,
-  BreadcrumbLink,
-  BreadcrumbList,
-  BreadcrumbSeparator,
-} from "@/components/ui/breadcrumb";
 import { Clock3, SquarePen, UserRound } from "lucide-react";
-import { AiFillHome } from "react-icons/ai";
+import DynamicBreadcrumb from "../Breadcrumb/Breadcrumb";
 
 interface NewsCardProps {
   news: TNews & { videoUrl?: string };
@@ -33,21 +26,8 @@ const NewsCard: React.FC<NewsCardProps> = ({ news }: NewsCardProps) => {
   return (
     <article className="lg:pt-8" id="news-content">
       <div className="lg:hidden flex justify-between">
-        <Breadcrumb className="mb-2">
-          <BreadcrumbList className="text-black">
-            <BreadcrumbItem>
-              <BreadcrumbLink href="/">
-                <AiFillHome className=" w-[18px] lg:w-[17px] h-[18px] lg:h-[17px]" />
-              </BreadcrumbLink>
-            </BreadcrumbItem>
-            <BreadcrumbSeparator />
-            <BreadcrumbItem>
-              <BreadcrumbLink href="/components">রাজনীতি</BreadcrumbLink>
-            </BreadcrumbItem>
-          </BreadcrumbList>
-        </Breadcrumb>
+        <DynamicBreadcrumb news={news}/>        
         <div className="space-y-2">
-          
           <div className="flex items-center gap-2 text-sm text-gray-500">
             <SquarePen size={"16px"} />
             <h5>অনলাইন সংস্করণ</h5>
@@ -55,22 +35,33 @@ const NewsCard: React.FC<NewsCardProps> = ({ news }: NewsCardProps) => {
         </div>
       </div>
 
-
       <h2 className="text-2xl md:text-3xl font-semibold dark:text-white text-gray-800 mt-2">
         {news?.newsTitle}
       </h2>
+
       <div className="lg:hidden mt-2">
-       
         <div className="space-y-1">
           <div className="flex items-center gap-2 text-sm text-gray-500">
             <UserRound size={"16px"} />
-            <h5>ডেস্ক রিপোর্ট</h5>
+            <h5>{news?.reporterName} </h5>
           </div>
           <div className="flex items-center gap-2 text-sm text-gray-500">
             <Clock3 size={"20px"} />
-            <h5>আপডেট: ০৫:৫৫ পিএম, ১৭ জানুয়ারী, শুক্রবার, ২০২৫</h5>
+            
+            <h5>
+              আপডেট:{" "}
+              {new Date(news?.updatedAt).toLocaleDateString("bn-BD", {
+                year: "numeric",
+                month: "long",
+                day: "numeric",
+                weekday: "long",
+                hour: "numeric",
+                minute: "numeric",
+                second: "numeric",
+                hour12: true,
+              })}
+            </h5>
           </div>
-         
         </div>
       </div>
       <SocialShare newsId={news._id} />

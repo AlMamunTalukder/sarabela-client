@@ -31,6 +31,7 @@ export type TNews = {
   metaTitle: string;
   metaKeywords: string[];
   metaDescription: string;
+  updatedAt:string;
   comments: {
     _id: string;
     user: {
@@ -40,6 +41,8 @@ export type TNews = {
     comments: string;
     createdAt: Date;
   }[];
+
+
 };
 
 export type TVideoNews = {
