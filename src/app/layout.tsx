@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable react-hooks/rules-of-hooks */
 "use client";
 
@@ -9,6 +10,7 @@ import { Toaster } from "react-hot-toast";
 import ScrollToTop from "@/components/ScrolltoTop/ScrolltoTop";
 import { trackVisitorData } from "@/util/visitorTracker";
 import { useTrackVisitorMutation } from "@/redux/dailynews/visitorApi";
+import SubscriptionModal from "@/components/Share/SubscriptionModal";
 
 
 const tiro_Bangla = Tiro_Bangla({
@@ -32,20 +34,29 @@ export default function RootLayout({
     const trackVisitorCall = async () => {
       const [trackVisitor] = useTrackVisitorMutation();
       const visitorData = await trackVisitorData();
-      console.log('this is visitor data', visitorData);
-  
+
+
       if (visitorData && !localStorage.getItem("visitor_tracked")) {
         try {
-          const response = await trackVisitor(visitorData); // Make the API call
-          console.log('API Response:', response); // Log the response from the API
+          const response = await trackVisitor(visitorData);
+
           localStorage.setItem("visitor_tracked", "true");
         } catch (error) {
           console.error('Error tracking visitor:', error);
         }
       }
     };
-  
+
     trackVisitorCall();
+  }, []);
+
+  useEffect(() => {
+    if ("serviceWorker" in navigator) {
+      navigator.serviceWorker
+        .register("/sw.js")
+        .then((registration) => console.log("Service Worker registered:", registration))
+        .catch((error) => console.error("Service Worker registration failed:", error));
+    }
   }, []);
   
   return (
@@ -53,6 +64,7 @@ export default function RootLayout({
       <Providers>
         <body className={`bg-white dark:bg-gray-800 dark:text-white ${tiro_Bangla.className}`}>
           {children}
+          <SubscriptionModal />
           <Toaster />
           <ScrollToTop />
         </body>
