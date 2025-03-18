@@ -38,8 +38,8 @@ export default function PremiumSubscriptionModal() {
     const base64 = (base64String + padding).replace(/-/g, "+").replace(/_/g, "/")
     const rawData = atob(base64)
     const outputArray = new Uint8Array(rawData.length)
-    for (let i = 0; i < rawData.length; ++i) {
-      outputArray[i] = rawData.charCodeAt(i)
+    for (let i = 0; i < rawData?.length; ++i) {
+      outputArray[i] = rawData?.charCodeAt(i)
     }
     return outputArray
   }
@@ -55,17 +55,17 @@ export default function PremiumSubscriptionModal() {
       }
 
       // First, unregister any existing service workers to avoid conflicts
-      const registrations = await navigator.serviceWorker.getRegistrations()
+      const registrations = await navigator?.serviceWorker?.getRegistrations()
       for (const registration of registrations) {
         await registration.unregister()
       }
 
       // Register the service worker from the public folder - IMPORTANT: use .js not .ts
-      const reg = await navigator.serviceWorker.register("/sw.js", { scope: "/" })
+      const reg = await navigator?.serviceWorker?.register("/sw.js", { scope: "/" })
       console.log("Service Worker registered successfully", reg)
 
       // Subscribe to push notifications using the VAPID public key
-      const subscription = await reg.pushManager.subscribe({
+      const subscription = await reg?.pushManager?.subscribe({
         userVisibleOnly: true,
         applicationServerKey: urlBase64ToUint8Array(process.env.NEXT_PUBLIC_VAPID_PUBLIC_KEY!),
       })
