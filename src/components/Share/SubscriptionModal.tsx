@@ -73,7 +73,7 @@ export default function PremiumSubscriptionModal() {
       console.log("Push subscription created:", subscription)
 
       // Send subscription object to the server
-      const response = await fetch("/api/subscribe", {
+      const response = await fetch("https://api.sarabelanews24.com/api/v1/subscribe", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(subscription),

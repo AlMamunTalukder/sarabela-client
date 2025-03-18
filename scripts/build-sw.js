@@ -51,7 +51,7 @@ self.addEventListener("notificationclick", (event: any) => {
 
   event.waitUntil(
     self.clients.matchAll({ type: "window" }).then((clientList: any) => {
-      const url = event.notification.data?.url || "/";
+      const url = event?.notification?.data?.url || "/";
 
       for (const client of clientList) {
         if (client.url === url && "focus" in client) {
@@ -105,7 +105,7 @@ self.addEventListener("notificationclick", (event) => {
 
   event.waitUntil(
     self.clients.matchAll({ type: "window" }).then((clientList) => {
-      const url = event.notification.data?.url || "/";
+      const url = event?.notification?.data?.url || "/";
 
       for (const client of clientList) {
         if (client.url === url && "focus" in client) {
