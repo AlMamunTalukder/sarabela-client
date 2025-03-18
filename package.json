@@ -55,6 +55,7 @@
     "react-share": "^5.2.0",
     "shadcn": "^2.4.0-canary.14",
     "shadcn-ui": "^0.9.4",
+    "sharp": "^0.33.5",
     "tailwind-merge": "^2.5.5",
     "tailwind-variants": "^0.3.1",
     "tailwindcss-animate": "^1.0.7",
