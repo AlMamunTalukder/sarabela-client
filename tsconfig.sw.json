@@ -1,0 +1,17 @@
+{
+    "compilerOptions": {
+      "target": "es2020",
+      "module": "none",
+      "lib": ["es2020", "webworker"],
+      "strict": true,
+      "outFile": "./public/sw.js",
+      "rootDir": "./src",
+      "noEmit": false,
+      "allowJs": true,
+      "checkJs": false
+    },
+    "include": ["src/sw.ts"],
+    "exclude": ["node_modules"]
+  }
+  
+  
