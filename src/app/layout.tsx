@@ -8,9 +8,8 @@ import { Tiro_Bangla } from "next/font/google";
 import Providers from "@/lib/Provider";
 import { Toaster } from "react-hot-toast";
 import ScrollToTop from "@/components/ScrolltoTop/ScrolltoTop";
-import { trackVisitorData } from "@/util/visitorTracker";
-import { useTrackVisitorMutation } from "@/redux/dailynews/visitorApi";
 import SubscriptionModal from "@/components/Share/SubscriptionModal";
+import VisitorTracker from "@/components/VisitorTracker";
 
 
 const tiro_Bangla = Tiro_Bangla({
@@ -30,25 +29,25 @@ export default function RootLayout({
     document.documentElement.classList.toggle("dark", storedTheme === "dark");
   }, []);
 
-  useEffect(() => {
-    const trackVisitorCall = async () => {
-      const [trackVisitor] = useTrackVisitorMutation();
-      const visitorData = await trackVisitorData();
+  // useEffect(() => {
+  //   const trackVisitorCall = async () => {
+  //     const [trackVisitor] = useTrackVisitorMutation();
+  //     const visitorData = await trackVisitorData();
 
 
-      if (visitorData && !localStorage.getItem("visitor_tracked")) {
-        try {
-          const response = await trackVisitor(visitorData);
+  //     if (visitorData && !localStorage.getItem("visitor_tracked")) {
+  //       try {
+  //         const response = await trackVisitor(visitorData);
 
-          localStorage.setItem("visitor_tracked", "true");
-        } catch (error) {
-          console.error('Error tracking visitor:', error);
-        }
-      }
-    };
+  //         localStorage.setItem("visitor_tracked", "true");
+  //       } catch (error) {
+  //         console.error('Error tracking visitor:', error);
+  //       }
+  //     }
+  //   };
 
-    trackVisitorCall();
-  }, []);
+  //   trackVisitorCall();
+  // }, []);
 
   useEffect(() => {
     if ("serviceWorker" in navigator) {
@@ -63,6 +62,7 @@ export default function RootLayout({
     <html lang="en" className={theme === "dark" ? "dark" : ""}>
       <Providers>
         <body className={`bg-white dark:bg-gray-800 dark:text-white ${tiro_Bangla.className}`}>
+        <VisitorTracker/>
           {children}
           <SubscriptionModal />
           <Toaster />

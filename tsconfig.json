@@ -5,7 +5,8 @@
     "allowJs": true,
     "skipLibCheck": true,
     "strict": true,
-    "noEmit": true, // Prevent emitting files for Next.js
+    "noEmit": true,
+    "types": ["node", "react"],
     "esModuleInterop": true,
     "module": "esnext",
     "moduleResolution": "bundler",
@@ -20,5 +21,5 @@
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "public/sw.ts"],
-  "exclude": ["node_modules", "public/sw.ts"] // Exclude service worker from main config
+  "exclude": ["node_modules", "public/sw.ts"] 
 }

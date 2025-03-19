@@ -19,20 +19,19 @@ export default function PremiumSubscriptionModal() {
   const [isSubscribing, setIsSubscribing] = useState(false)
 
   useEffect(() => {
-    // Check if the user has already made a choice
+
     const subscriptionChoice = localStorage.getItem("subscriptionChoice")
 
-    // If no choice found, show the modal after a short delay
     if (!subscriptionChoice) {
       const timer = setTimeout(() => {
         setShowModal(true)
-      }, 1500) // Show after 1.5 seconds
+      }, 1500)
 
       return () => clearTimeout(timer)
     }
   }, [])
 
-  // Helper function to convert the VAPID key
+
   function urlBase64ToUint8Array(base64String: string) {
     const padding = "=".repeat((4 - (base64String.length % 4)) % 4)
     const base64 = (base64String + padding).replace(/-/g, "+").replace(/_/g, "/")
@@ -49,18 +48,18 @@ export default function PremiumSubscriptionModal() {
     try {
       setIsSubscribing(true)
 
-      // Check if service worker is supported
+
       if (!("serviceWorker" in navigator) || !("PushManager" in window)) {
         throw new Error("Push notifications are not supported in this browser")
       }
 
-      // First, unregister any existing service workers to avoid conflicts
+
       const registrations = await navigator?.serviceWorker?.getRegistrations()
       for (const registration of registrations) {
         await registration.unregister()
       }
 
-      // Register the service worker from the public folder - IMPORTANT: use .js not .ts
+
       const reg = await navigator?.serviceWorker?.register("/sw.js", { scope: "/" })
       console.log("Service Worker registered successfully", reg)
 
@@ -72,8 +71,8 @@ export default function PremiumSubscriptionModal() {
 
       console.log("Push subscription created:", subscription)
 
-      // Send subscription object to the server
-      const response = await fetch("https://api.sarabelanews24.com/api/v1/subscribe", {
+
+      const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_API_URL}/subscribe`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(subscription),
@@ -83,11 +82,11 @@ export default function PremiumSubscriptionModal() {
         throw new Error("Failed to send subscription to server")
       }
 
-      // Success animation and close
+
       setStage("closing")
       toast.success("আপনি এখন সারাবেলানিউজ২৪ থেকে নোটিফিকেশন পাবেন।")
 
-      // Save the user's choice to not show the modal again
+
       setTimeout(() => {
         localStorage.setItem("subscriptionChoice", "yes")
         setShowModal(false)
@@ -100,24 +99,24 @@ export default function PremiumSubscriptionModal() {
     }
   }
 
-  // If user clicks "না"
+
   const handleDecline = () => {
     setStage("closing")
-    // Animate before closing
+
     setTimeout(() => {
       localStorage.setItem("subscriptionChoice", "no")
       setShowModal(false)
     }, 800)
   }
 
-  // Update stage based on hover state
+
   useEffect(() => {
     if (hoverYes) setStage("yes-hover")
     else if (hoverNo) setStage("no-hover")
     else if (stage !== "closing") setStage("initial")
   }, [hoverYes, hoverNo, stage])
 
-  // Don't render anything if modal shouldn't be shown
+
   if (!showModal) return null
 
   return (
@@ -131,7 +130,7 @@ export default function PremiumSubscriptionModal() {
             transition={{ type: "spring", damping: 15 }}
             className="w-full max-w-md relative"
           >
-            {/* Decorative elements */}
+
             <motion.div
               className="absolute -top-10 -left-10 w-20 h-20 rounded-full bg-blue-600/20 z-0"
               animate={{
@@ -159,7 +158,7 @@ export default function PremiumSubscriptionModal() {
             />
 
             <Card className="border-0 shadow-2xl overflow-hidden bg-gradient-to-br from-white to-blue-50 dark:from-gray-900 dark:to-gray-800">
-              {/* Animated top border */}
+
               <motion.div
                 className="h-1.5 bg-gradient-to-r from-blue-400 via-blue-600 to-blue-500"
                 animate={{
@@ -187,7 +186,7 @@ export default function PremiumSubscriptionModal() {
               </div>
 
               <div className="pt-8 pb-6 px-6">
-                {/* Logo with pulse effect */}
+
                 <div className="relative mx-auto w-24 h-24 mb-4">
                   <motion.div
                     className="absolute inset-0 rounded-full bg-blue-500/20"
@@ -213,7 +212,7 @@ export default function PremiumSubscriptionModal() {
                   </div>
                 </div>
 
-                {/* Title with animated gradient */}
+
                 <motion.div
                   className="text-center mb-6"
                   animate={stage === "closing" ? { y: -20, opacity: 0 } : { y: 0, opacity: 1 }}
@@ -224,7 +223,7 @@ export default function PremiumSubscriptionModal() {
                   <p className="text-lg font-medium text-gray-700 dark:text-gray-300">আপনার নিউজ আপডেট</p>
                 </motion.div>
 
-                {/* Message with icon */}
+
                 <motion.div
                   className="bg-blue-50 dark:bg-gray-800/50 rounded-lg p-4 mb-6 flex items-start gap-3 border border-blue-100 dark:border-gray-700"
                   initial={{ opacity: 0, y: 10 }}
@@ -242,7 +241,7 @@ export default function PremiumSubscriptionModal() {
                   </div>
                 </motion.div>
 
-                {/* Benefits that appear on hover */}
+
                 <AnimatePresence>
                   {hoverYes && !isSubscribing && (
                     <motion.div
@@ -285,7 +284,7 @@ export default function PremiumSubscriptionModal() {
                   )}
                 </AnimatePresence>
 
-                {/* Buttons with hover effects */}
+
                 <div className="flex justify-center gap-4">
                   <motion.div
                     whileHover={{ scale: isSubscribing ? 1 : 1.05 }}
@@ -330,7 +329,7 @@ export default function PremiumSubscriptionModal() {
                 </div>
               </div>
 
-              {/* Bottom wave decoration */}
+
               <div className="h-6 bg-gradient-to-r from-blue-500 to-blue-600 relative overflow-hidden">
                 <motion.div
                   className="absolute inset-0"
