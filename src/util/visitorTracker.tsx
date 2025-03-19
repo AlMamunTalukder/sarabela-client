@@ -1,29 +1,33 @@
 export const trackVisitorData = async () => {
   try {
-    // Fetch the public IP using ipify API
+    // Fetch the public IP
     const ipResponse = await fetch("https://api.ipify.org?format=json")
     const { ip } = await ipResponse.json()
 
-    // Fetch the location data based on the IP
-    const locationResponse = await fetch(`https://ipapi.co/${ip}/json/`)
+    // Fetch detailed location data (Use a premium API for more details)
+    const locationResponse = await fetch(`https://ipwhois.app/json/${ip}`)
     const locationData = await locationResponse.json()
 
-    // Collecting all visitor details
+    // Collect all available visitor details
     return {
       ip,
-      country: locationData.country_name,
+      country: locationData.country,
       city: locationData.city,
       region: locationData.region,
-      isp: locationData.org,
+      postal: locationData.postal, // ZIP or Postal Code
+      latitude: locationData.latitude, // Latitude
+      longitude: locationData.longitude, // Longitude
+      isp: locationData.isp, // Internet Service Provider
       browser: navigator.userAgent, // Browser info
       referrer: document.referrer, // Referrer URL
-      visitedAt: new Date().toISOString(), // Time of visit in ISO format
+      visitedAt: new Date().toISOString(), // Time of visit
     }
   } catch (error) {
     console.error("Error collecting visitor data:", error)
-    return null // In case of error, return null
+    return null
   }
 }
+
 
 export const trackVisitor = async () => {
   try {
@@ -47,6 +51,7 @@ export const trackVisitor = async () => {
       },
       body: JSON.stringify(visitorData),
     })
+    console.log('visitor tracking response data ',response)
 
     if (!response.ok) {
       throw new Error("Failed to track visitor")
