@@ -62,8 +62,8 @@ const SingleDetails = () => {
                             <div className="space-y-6">
 
                                 <div className="overflow-hidden">
-                                    {singleNewsData ? <NewsCard news={singleNewsData} /> : <p>Loading news...</p>}
-                                    {singleNewsData ? <Feedback news={singleNewsData} /> : <p>Loading news...</p>}
+                                    {singleNewsData ? <NewsCard news={singleNewsData} /> : <Loading/>}
+                                    {singleNewsData ? <Feedback news={singleNewsData} /> :<Loading/>}
 
                                     <Advertisements />
                                     {/* <RelatedNews basePath='/video' /> */}

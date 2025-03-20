@@ -24,6 +24,7 @@ import {
 import { Clock3, House, SquarePen, UserRound } from "lucide-react";
 import { AiFillHome } from "react-icons/ai";
 import DynamicBreadcrumb from "../Breadcrumb/Breadcrumb";
+import Loading from "./Loading";
 
 interface TopNewsProps {
   basePath?: string;
@@ -92,13 +93,13 @@ const NewsSingleDetails = ({ basePath, id }: TopNewsProps) => {
                   {singleNewsData ? (
                     <NewsCard news={singleNewsData} />
                   ) : (
-                    <p>Loading news...</p>
+                    <Loading/>
                   )}
 
                   {singleNewsData ? (
                     <Feedback news={singleNewsData} />
                   ) : (
-                    <p>Loading news...</p>
+                    <Loading/>
                   )}
                   <Advertisements />
                   <RelatedNews category={category} basePath={basePath} />
