@@ -10,7 +10,7 @@ import { useParams } from "next/navigation";
 import { TNews } from "@/types";
 import RelatedNews from "./RelatedNews";
 import { getCategory } from "@/util/getCategory";
-import { useGetSingleNewsQuery } from "@/redux/dailynews/news.api";
+import { useGetSingleNewsQuery } from "@/redux/sarabelanews/news.api";
 import SideBarRelatedNews from "./SideBarRelatedNews";
 
 import {

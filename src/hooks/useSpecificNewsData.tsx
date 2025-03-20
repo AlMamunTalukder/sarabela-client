@@ -1,59 +1,79 @@
-import { TNews } from "@/types";
-import { newsFields } from "@/util/fields";
-import { useEffect, useState } from "react";
+"use client"
+
+import type { TNews } from "@/types"
+import { newsFields } from "@/util/fields"
+import { useEffect, useState } from "react"
 
 interface UseSpecificNewsDataProps {
-    category?: string;
-    newsTag?: string;
-    limit?: string;
-    searchTerm?: string;
-    currentNews?: string
+  category?: string
+  newsTag?: string
+  limit?: string
+  searchTerm?: string
+  currentNews?: string
+  division?: string | null
+  district?: string | null
+  upazila?: string | null
 }
 
-export const useSpecificNewsData = ({ category, newsTag, limit, searchTerm, currentNews }: UseSpecificNewsDataProps) => {
-    const [newsData, setNewsData] = useState<TNews[]>([]);
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState<string | null>(null);
+export const useSpecificNewsData = ({
+  category,
+  newsTag,
+  limit,
+  searchTerm,
+  currentNews,
+  division,
+  district,
+  upazila,
+}: UseSpecificNewsDataProps) => {
+  const [newsData, setNewsData] = useState<TNews[]>([])
+  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState<string | null>(null)
 
-    useEffect(() => {
-        const fetchNewsData = async () => {
-            setLoading(true);
-            setError(null);
+  useEffect(() => {
+    const fetchNewsData = async () => {
+      setLoading(true)
+      setError(null)
 
-            try {
-                const url = new URL(`${process.env.NEXT_PUBLIC_BASE_API_URL}/news`);
-                const params = new URLSearchParams({ fields: newsFields });
+      try {
+        const url = new URL(`${process.env.NEXT_PUBLIC_BASE_API_URL}/news`)
+        const params = new URLSearchParams({ fields: newsFields })
 
-                if (category) params.append("category", category);
-                if (limit) params.append("limit", limit);
-                if (newsTag) params.append("newsTag", newsTag);
-                if (searchTerm) params.append("searchTerm", searchTerm);
-                if (currentNews) params.append("currentNews", currentNews);
+        if (category) params.append("category", category)
+        if (limit) params.append("limit", limit)
+        if (newsTag) params.append("newsTag", newsTag)
+        if (searchTerm) params.append("searchTerm", searchTerm)
+        if (currentNews) params.append("currentNews", currentNews)
 
-                url.search = params.toString();
+        // Add location parameters
+        if (division) params.append("division", division)
+        if (district) params.append("district", district)
+        if (upazila) params.append("upazila", upazila)
 
-                const response = await fetch(url.toString(), { cache: "no-store" });
+        url.search = params.toString()
 
-                if (!response.ok) {
-                    throw new Error(`Error: ${response.status} ${response.statusText}`);
-                }
+        const response = await fetch(url.toString(), { cache: "no-store" })
 
-                const data = await response.json();
+        if (!response.ok) {
+          throw new Error(`Error: ${response.status} ${response.statusText}`)
+        }
 
-                if (!data?.data?.news) {
-                    throw new Error("No news data found!");
-                }
+        const data = await response.json()
 
-                setNewsData(data.data.news);
-            } catch (err: any) {
-                setError(err.message || "Failed to load news data!");
-            } finally {
-                setLoading(false);
-            }
-        };
+        if (!data?.data?.news) {
+          throw new Error("No news data found!")
+        }
 
-        fetchNewsData();
-    }, [category, newsTag, searchTerm]);
+        setNewsData(data.data.news)
+      } catch (err: any) {
+        setError(err.message || "Failed to load news data!")
+      } finally {
+        setLoading(false)
+      }
+    }
 
-    return { newsData, loading, error };
-};
+    fetchNewsData()
+  }, [category, newsTag, searchTerm, currentNews, division, district, upazila, limit])
+
+  return { newsData, loading, error }
+}
+

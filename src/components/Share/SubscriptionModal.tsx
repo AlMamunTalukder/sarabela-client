@@ -61,16 +61,12 @@ export default function PremiumSubscriptionModal() {
 
 
       const reg = await navigator?.serviceWorker?.register("/sw.js", { scope: "/" })
-      console.log("Service Worker registered successfully", reg)
 
       // Subscribe to push notifications using the VAPID public key
       const subscription = await reg?.pushManager?.subscribe({
         userVisibleOnly: true,
         applicationServerKey: urlBase64ToUint8Array(process.env.NEXT_PUBLIC_VAPID_PUBLIC_KEY!),
       })
-
-      console.log("Push subscription created:", subscription)
-
 
       const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_API_URL}/subscribe`, {
         method: "POST",

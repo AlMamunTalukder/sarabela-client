@@ -9,6 +9,7 @@ import banner from "@public/asset/banner.jpg";
 import { usePathname } from "next/navigation";
 
 const Page = () => {
+
   const basePath = usePathname();
   const category = getCategory(basePath);
 

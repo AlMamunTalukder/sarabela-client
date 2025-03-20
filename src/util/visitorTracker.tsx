@@ -53,7 +53,7 @@ export const trackVisitor = async () => {
       },
       body: JSON.stringify(visitorData),
     })
-    console.log('visitor tracking response data ',response)
+  
 
     if (!response.ok) {
       throw new Error("Failed to track visitor")

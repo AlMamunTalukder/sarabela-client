@@ -1,3 +1,5 @@
+
+'use client'
 export const getCategory = (basePath: string = "national"): string => {
   switch (basePath) {
     case "/international":

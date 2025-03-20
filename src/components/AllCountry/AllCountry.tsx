@@ -11,8 +11,8 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Input } from "@/components/ui/input";
-import Link from "next/link";
 import locationData from '../../../public/data/location.json';
+import { useRouter } from "next/navigation";
 
 // Define the type for locationData
 interface LocationData {
@@ -22,6 +22,7 @@ interface LocationData {
 }
 
 const AllCountry = () => {
+  const router = useRouter()
   const [selectedDivision, setSelectedDivision] = useState<string | null>(null);
   const [selectedDistrict, setSelectedDistrict] = useState<string | null>(null);
   const [selectedUpazila, setSelectedUpazila] = useState<string | null>(null);
@@ -32,7 +33,7 @@ const AllCountry = () => {
   const typedLocationData = locationData as LocationData;
 
   // Get list of divisions
-  const divisions = Object.keys(typedLocationData);
+   const divisions = Object.keys(typedLocationData);
 
   // Get districts for selected division
   const districtsInDivision = selectedDivision
@@ -176,11 +177,31 @@ const AllCountry = () => {
 
       {/* Search Button */}
       <div className="flex justify-center">
-        <Link href={"/national/region"}>
-          <button className="px-6 py-2 bg-blue-700 text-white font-medium rounded hover:bg-blue-800 transition">
-            খুঁজুন
-          </button>
-        </Link>
+      <button
+          className="px-6 py-2 bg-blue-700 text-white font-medium rounded hover:bg-blue-800 transition"
+          onClick={() => {
+            // Build query parameters
+            const params = new URLSearchParams()
+
+            if (selectedDivision) {
+              params.append("division", selectedDivision)
+            }
+
+            if (selectedDistrict) {
+              params.append("district", selectedDistrict)
+            }
+
+            if (selectedUpazila) {
+              params.append("upazila", selectedUpazila)
+            }
+
+            // Navigate to national page with query parameters
+            const queryString = params.toString()
+            router.push(`/national/district-news${queryString ? `?${queryString}` : ""}`)
+          }}
+        >
+          খুঁজুন
+        </button>
       </div>
     </div>
   );

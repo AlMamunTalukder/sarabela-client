@@ -15,7 +15,6 @@ if (!fs.existsSync(path.join(__dirname, "../public"))) {
 try {
   // Check if the source file exists
   if (!fs.existsSync(srcPath)) {
-    console.log("Service worker source file not found. Creating a default one...")
 
     // Create the src directory if it doesn't exist
     const srcDir = path.dirname(srcPath)
@@ -89,14 +88,14 @@ self.addEventListener("notificationclick", (event: ExtendableEvent) => {
 });`
 
     fs.writeFileSync(srcPath, defaultSW)
-    console.log("Default service worker created at", srcPath)
+
   }
 
   // Compile TypeScript to JavaScript
-  console.log("Compiling service worker...")
+
   execSync(`npx tsc ${srcPath} --outFile ${destPath} --lib es2020,webworker --target es2020 --module none`)
-  console.log("Service worker compiled successfully!")
-  console.log("Service worker available at:", destPath)
+
+
 } catch (error) {
   console.error("Error compiling service worker:", error.message)
   process.exit(1)

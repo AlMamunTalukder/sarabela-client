@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button"
 import { useEffect, useState } from "react"
 import toast from "react-hot-toast"
 import axios from "axios"
-import { useGetShareCountsQuery, useShareNewsMutation } from "@/redux/dailynews/shareApi"
+import { useGetShareCountsQuery, useShareNewsMutation } from "@/redux/sarabelanews/shareApi"
 import { FaFacebookMessenger } from "react-icons/fa6";
 import { FaFacebookF } from "react-icons/fa";
 

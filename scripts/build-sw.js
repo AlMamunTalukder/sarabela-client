@@ -21,7 +21,6 @@ if (!fs.existsSync(path.join(__dirname, "../public"))) {
 try {
   // Check if the source file exists
   if (!fs.existsSync(srcPath)) {
-    console.log("Service worker source file not found. Creating a default one...")
 
     // Create a default service worker TypeScript file
     const defaultSW = `// Service worker written in TypeScript
@@ -67,16 +66,16 @@ self.addEventListener("notificationclick", (event: any) => {
 });`
 
     fs.writeFileSync(srcPath, defaultSW)
-    console.log("Default service worker created at", srcPath)
+
   }
 
   // Compile TypeScript to JavaScript
-  console.log("Compiling service worker...")
+
 
   try {
     // Try using the TypeScript compiler with the config file
     execSync(`npx tsc --project ${configPath}`, { stdio: "inherit" })
-    console.log("Service worker compiled successfully!")
+
   } catch (compileError) {
     console.error("TypeScript compilation failed. Trying manual approach...")
 
@@ -121,10 +120,9 @@ self.addEventListener("notificationclick", (event) => {
 });`
 
     fs.writeFileSync(path.join(__dirname, "../public/sw.js"), jsContent)
-    console.log("Service worker created using fallback method.")
+
   }
 
-  console.log("Service worker available at:", path.join(__dirname, "../public/sw.js"))
 } catch (error) {
   console.error("Error:", error.message)
   process.exit(1)
