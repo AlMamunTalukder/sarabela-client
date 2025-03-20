@@ -17,20 +17,19 @@ const Page = () => {
       <div className="lg:hidden mt-2">
         <BreakingNews />
       </div>
-    <div className="max-w-7xl mx-auto px-4">
-    
-      <LeadSection />
-      <AllCountry />
-      <Bangladesh />
-      <Trending />
-      <Entertainment />
-      <Sports />
-      <Advertisement_1 banner={banner} />
-      <International />
-      <VideoGallery />
-      <PhotoGallery />
-      <AllNews />
-    </div>
+      <div className="max-w-7xl mx-auto px-4">
+        <LeadSection />
+        <AllCountry />
+        <Bangladesh />
+        <Trending />
+        <Entertainment />
+        <Sports />
+        <Advertisement_1 banner={banner} />
+        <International />
+        <VideoGallery />
+        <PhotoGallery />
+        <AllNews />
+      </div>
     </>
   );
 };

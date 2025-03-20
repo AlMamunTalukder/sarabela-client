@@ -7,7 +7,7 @@ const Lottie = dynamic(() => import("lottie-react"), { ssr: false });
 
 const Loading = () => {
   return (
-    <div className="h-screen w-full flex flex-col justify-center items-center">
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-white ">
       <Lottie animationData={loading} />
     </div>
   );

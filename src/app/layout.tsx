@@ -1,72 +1,78 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-/* eslint-disable react-hooks/rules-of-hooks */
-"use client";
-
-import { useEffect, useState } from "react";
 import "./globals.css";
 import { Tiro_Bangla } from "next/font/google";
 import Providers from "@/lib/Provider";
-import { Toaster } from "react-hot-toast";
-import ScrollToTop from "@/components/ScrolltoTop/ScrolltoTop";
-import SubscriptionModal from "@/components/Share/SubscriptionModal";
-import VisitorTracker from "@/components/VisitorTracker";
-
+import ThemeAndServiceWorker from "@/provider/ThemeServiceWorker";
+import VisitorTracker from "@/provider/VisitorTracker";
+import Head from "next/head";
 
 const tiro_Bangla = Tiro_Bangla({
   weight: "400",
   subsets: ["latin"],
 });
 
-
-export default function RootLayout({
-  children,
-}: Readonly<{ children: React.ReactNode }>) {
-  const [theme, setTheme] = useState("light");
-
-  useEffect(() => {
-    const storedTheme = localStorage.getItem("theme") || "light";
-    setTheme(storedTheme);
-    document.documentElement.classList.toggle("dark", storedTheme === "dark");
-  }, []);
-
-  // useEffect(() => {
-  //   const trackVisitorCall = async () => {
-  //     const [trackVisitor] = useTrackVisitorMutation();
-  //     const visitorData = await trackVisitorData();
-
-
-  //     if (visitorData && !localStorage.getItem("visitor_tracked")) {
-  //       try {
-  //         const response = await trackVisitor(visitorData);
-
-  //         localStorage.setItem("visitor_tracked", "true");
-  //       } catch (error) {
-  //         console.error('Error tracking visitor:', error);
-  //       }
-  //     }
-  //   };
-
-  //   trackVisitorCall();
-  // }, []);
-
-  useEffect(() => {
-    if ("serviceWorker" in navigator) {
-      navigator.serviceWorker
-        .register("/sw.js")
-        .then((registration) => console.log("Service Worker registered:", registration))
-        .catch((error) => console.error("Service Worker registration failed:", error));
-    }
-  }, []);
-  
+export const metadata = {
+  title: "Sarabela News 24 - Latest News in Bangladesh",
+  description: "Read the latest news on politics, sports, entertainment, technology, health, travel, and more on Sarabela News 24.",
+  keywords: "বাংলা নিউজ, চাকরি, স্বাস্থ্য, ভ্রমণ ও পর্যটন, ক্যাম্পাস, নারী, তথ্য ও প্রযুক্তি, জাতীয়, আন্তর্জাতিক, অর্থনীতি, বিনোদন, খেলা",
+  author: "Sarabela News 24",
+  siteUrl: "https://sarabelanews24.com/",
+};
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={theme === "dark" ? "dark" : ""}>
+    <html lang="bn">
+      <Head>
+        {/* Basic SEO Meta Tags */}
+        <title>সারাবেলা নিউজ 24 - সর্বশেষ বাংলা খবর</title>
+        <meta name="description" content="সারাবেলা নিউজ 24 থেকে সর্বশেষ বাংলা খবর, আন্তর্জাতিক সংবাদ, খেলাধুলা, বিনোদন, এবং রাজনৈতিক আপডেট পান।" />
+        <meta name="keywords" content="সারাবেলা নিউজ, বাংলা নিউজ, আজকের খবর, ব্রেকিং নিউজ, আন্তর্জাতিক সংবাদ" />
+        <meta name="author" content="Sarabela News 24" />
+        <meta name="robots" content="index, follow" />
+
+        {/* Open Graph for Social Media */}
+        <meta property="og:title" content="সারাবেলা নিউজ 24 - সর্বশেষ বাংলা খবর" />
+        <meta property="og:description" content="সারাবেলা নিউজ 24 থেকে সর্বশেষ বাংলা খবর, আন্তর্জাতিক সংবাদ, খেলাধুলা, বিনোদন, এবং রাজনৈতিক আপডেট পান।" />
+        <meta property="og:image" content="https://sarabelanews24.com/og-image.jpg" />
+        <meta property="og:url" content="https://sarabelanews24.com/" />
+        <meta property="og:type" content="website" />
+
+        {/* Twitter Card for Social Sharing */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="সারাবেলা নিউজ 24 - সর্বশেষ বাংলা খবর" />
+        <meta name="twitter:description" content="সারাবেলা নিউজ 24 থেকে সর্বশেষ বাংলা খবর, আন্তর্জাতিক সংবাদ, খেলাধুলা, বিনোদন, এবং রাজনৈতিক আপডেট পান।" />
+        <meta name="twitter:image" content="https://sarabelanews24.com/twitter-image.jpg" />
+
+        {/* Favicon */}
+        <link rel="icon" href="/favicon.ico" />
+
+        {/* Schema Markup */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "NewsMediaOrganization",
+              "name": "Sarabela News 24",
+              "url": "https://sarabelanews24.com/",
+              "logo": "https://sarabelanews24.com/logo.png",
+              "sameAs": [
+                "https://facebook.com/sarabelanews24",
+                "https://twitter.com/sarabelanews24"
+              ],
+              "contactPoint": {
+                "@type": "ContactPoint",
+                "telephone": "+01957713249",
+                "contactType": "Customer Service"
+              }
+            })
+          }}
+        />
+      </Head>
+
       <Providers>
         <body className={`bg-white dark:bg-gray-800 dark:text-white ${tiro_Bangla.className}`}>
-        <VisitorTracker/>
+          <ThemeAndServiceWorker />
+          <VisitorTracker />
           {children}
-          <SubscriptionModal />
-          <Toaster />
-          <ScrollToTop />
         </body>
       </Providers>
     </html>

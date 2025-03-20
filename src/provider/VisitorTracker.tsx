@@ -17,7 +17,6 @@ export default function VisitorTracker() {
     trackVisitorOnMount()
   }, [])
 
-  // This component doesn't render anything visible
   return null
 }
 

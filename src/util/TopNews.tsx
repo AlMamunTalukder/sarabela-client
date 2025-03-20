@@ -22,6 +22,8 @@ const TopNews = ({ category, basePath }: TopNewsProps) => {
     return <h3>Oops! data not found.</h3>
   }
 
+  
+
   const sortNewsData = sortByDate(newsData, 'postDate')
 
 

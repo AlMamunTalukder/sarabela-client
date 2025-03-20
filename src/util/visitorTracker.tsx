@@ -1,3 +1,5 @@
+'use client'
+
 export const trackVisitorData = async () => {
   try {
     // Fetch the public IP
