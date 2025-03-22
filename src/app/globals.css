@@ -66,6 +66,9 @@
   }
 }
 
+body {
+  font-family: 'Tiro Bangla', sans-serif !important;
+}
 
 
 .no-scrollbar::-webkit-scrollbar {

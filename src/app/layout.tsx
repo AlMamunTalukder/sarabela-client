@@ -10,7 +10,7 @@ import Script from "next/script"
 const tiro_Bangla = Tiro_Bangla({
   weight: "400",
   subsets: ["latin"],
-  display: "swap", // Improve font loading performance
+  display: "swap",
 })
 
 export const metadata: Metadata = {
@@ -77,7 +77,7 @@ export const metadata: Metadata = {
   },
   manifest: "/site.webmanifest",
   verification: {
-    google: "your-google-site-verification-code", // Add your Google verification code here
+    google: "your-google-site-verification-code",
   },
   other: {
     "msapplication-TileColor": "#ffffff",
