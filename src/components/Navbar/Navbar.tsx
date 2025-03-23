@@ -1,6 +1,8 @@
-"use client";
-import * as React from "react";
-import Link from "next/link";
+/* eslint-disable @typescript-eslint/no-unused-vars */
+"use client"
+
+import * as React from "react"
+import Link from "next/link"
 import {
   NavigationMenu,
   NavigationMenuContent,
@@ -8,45 +10,31 @@ import {
   NavigationMenuLink,
   NavigationMenuList,
   NavigationMenuTrigger,
-} from "@/components/ui/navigation-menu";
-import {
-  Facebook,
-  Twitter,
-  Linkedin,
-  Youtube,
-  Search,
-  UserRound,
-  Menu,
-  X,
-  Sun,
-  Moon,
-} from "lucide-react";
-import Image from "next/image";
-import logo from "@public/asset/logo/logo3.png";
-import { usePathname } from "next/navigation";
-import { useDispatch, useSelector } from "react-redux";
-import { toggleDarkMode } from "@/lib/themeSlice";
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "../ui/accordion";
+} from "@/components/ui/navigation-menu"
+import { Facebook, Twitter, Linkedin, Youtube, Search, UserRound, Menu, X, Sun, Moon } from "lucide-react"
+import Image from "next/image"
+import logo from "@public/asset/logo/logo3.png"
+import { usePathname } from "next/navigation"
+import { useDispatch, useSelector } from "react-redux"
+import { toggleDarkMode } from "@/lib/themeSlice"
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "../ui/accordion"
 
-import { AiFillHome } from "react-icons/ai";
+import { AiFillHome } from "react-icons/ai"
+import { useCategoryData } from "@/hooks/useCategoryData"
+import { sortByDate } from "@/util/sort"
 
 interface SocialLink {
-  id: string;
-  icon: React.ReactNode;
-  link: string;
-  hoverColor: string;
+  id: string
+  icon: React.ReactNode
+  link: string
+  hoverColor: string
 }
 
 interface NavItem {
-  href: string;
-  label?: string;
-  icon?: React.ReactNode;
-  nested?: Array<{ href: string; label: string }>;
+  href: string
+  label?: string
+  icon?: React.ReactNode
+  nested?: Array<{ href: string; label: string }>
 }
 
 const socialLinks: SocialLink[] = [
@@ -74,53 +62,73 @@ const socialLinks: SocialLink[] = [
     link: "https://youtube.com",
     hoverColor: "hover:bg-[#FF0000] dark:hover:bg-[#FF0000] hover:text-white",
   },
-];
+]
 
-const navItems: NavItem[] = [
-  {
-    href: "/",
-    icon: <AiFillHome className="w-[22px] lg:w-[26px]  h-[22px] lg:h-[26px]" />,
-  },
-  { href: "/national", label: "জাতীয়" },
-  { href: "/politics", label: "রাজনীতি" },
-  { href: "/international", label: "আন্তর্জাতিক" },
-  { href: "/sports", label: "খেলাধুলা" },
-  { href: "/entertainment", label: "বিনোদন" },
-  { href: "/economy", label: "অর্থনীতি" },
-  { href: "/technology", label: "প্রযুক্তি" },
-  { href: "/tourism", label: "পর্যটন" },
-  {
-    href: "/misc",
-    label: "বিবিধ",
-    nested: [
-      { href: "/health", label: "স্বাস্থ্য" },
-      { href: "/education", label: "শিক্ষা" },
-      { href: "/religion", label: "ধর্ম" },
-    ],
-  },
-];
+// Generate navItems dynamically from categoryData
+
+// Use the dynamic navItems based on categoryData
+
 
 const Navbar: React.FC = () => {
-  const [isOpen, setIsOpen] = React.useState(false);
-  const navRef = React.useRef<HTMLDivElement>(null);
-  const pathname = usePathname();
-  const dispatch = useDispatch();
-  const mode = useSelector((state: any) => state.themeToggle.mode);
-
+  const [isOpen, setIsOpen] = React.useState(false)
+  const navRef = React.useRef<HTMLDivElement>(null)
+  const pathname = usePathname()
+  const dispatch = useDispatch()
+  const mode = useSelector((state: any) => state.themeToggle.mode)
+  const { categoryData, loading, error } = useCategoryData({})
+  const sortNewsData = sortByDate(categoryData, 'updatedAt')
   React.useEffect(() => {
-    setIsOpen(false);
-  }, [pathname]);
+    setIsOpen(false)
+  }, [pathname])
+
+  const generateNavItems = (categories: any[]): NavItem[] => {
+    if (!categories || categories.length === 0) return []
+
+    // Home item is always first
+    const items: NavItem[] = [
+      {
+        href: "/",
+        icon: <AiFillHome className="w-[22px] lg:w-[26px] h-[22px] lg:h-[26px]" />,
+      },
+    ]
+
+    // Add first 8 categories directly to the main nav
+    const mainCategories = categories.slice(0, 7)
+    mainCategories.forEach((category) => {
+      if (category.slug) {
+        items.push({
+          href: `/${category.slug}`,
+          label: category.name,
+        })
+      }
+    })
+
+    // Add remaining categories to the "বিবিধ" (misc) dropdown
+    const remainingCategories = categories.slice(7).filter((cat) => cat.slug)
+    if (remainingCategories.length > 0) {
+      items.push({
+        href: "/misc",
+        label: "বিবিধ",
+        nested: remainingCategories.map((cat) => ({
+          href: `/${cat.slug}`,
+          label: cat.name,
+        })),
+      })
+    }
+
+    return items
+  }
+  const navItems: NavItem[] = React.useMemo(() => {
+    return generateNavItems(sortNewsData || [])
+  }, [categoryData])
 
   return (
-    <div
-      ref={navRef}
-      className="dark:text-black bg-white dark:bg-gray-400 border-b shadow-sm"
-    >
+    <div ref={navRef} className="dark:text-black bg-white dark:bg-gray-400 border-b shadow-sm">
       <div className="lg:hidden">
         <div className="border-b border-gray-200 px-4 ">
           <div className="flex items-center content-center justify-between h-16">
             <Image
-              src={logo}
+              src={logo || "/placeholder.svg"}
               alt="Daily Times 24"
               width={150}
               height={0}
@@ -143,11 +151,7 @@ const Navbar: React.FC = () => {
                 onClick={() => dispatch(toggleDarkMode())}
                 className="p-2 rounded-full bg-gray-200 dark:bg-gray-200"
               >
-                {mode ? (
-                  <Sun size={15} className="text-yellow-400" />
-                ) : (
-                  <Moon size={15} className="text-blue-400" />
-                )}
+                {mode ? <Sun size={15} className="text-yellow-400" /> : <Moon size={15} className="text-blue-400" />}
               </button>
             </div>
           </div>
@@ -160,25 +164,19 @@ const Navbar: React.FC = () => {
                 <Link
                   key={item.href}
                   href={item.href}
-                  className={`whitespace-nowrap px-1 py-1 text-sm ${
-                    pathname === item.href ? "text-red-500 font-medium" : ""
-                  }`}
+                  className={`whitespace-nowrap px-1 py-1 text-sm ${pathname === item.href ? "text-red-500 font-medium" : ""
+                    }`}
                 >
                   {item.icon ? item.icon : item.label}
                 </Link>
               ))}
             </div>
 
-            <button
-              onClick={() => setIsOpen(!isOpen)}
-              className="focus:outline-none ml-2"
-            >
+            <button onClick={() => setIsOpen(!isOpen)} className="focus:outline-none ml-2">
               {isOpen ? <X size={24} /> : <Menu size={24} />}
             </button>
           </div>
         </div>
-
-        
       </div>
 
       {/* Desktop Navigation */}
@@ -211,14 +209,12 @@ const Navbar: React.FC = () => {
                     <NavigationMenuItem key={item.href}>
                       <Link
                         href={item.href}
-                        className={`px-3 py-2 hover:text-red-500 ${
-                          pathname === item.href ? " text-red-500" : ""
-                        }`}
+                        className={`px-3 py-2 hover:text-red-500 ${pathname === item.href ? " text-red-500" : ""}`}
                       >
                         {item.icon ? item.icon : item.label}
                       </Link>
                     </NavigationMenuItem>
-                  )
+                  ),
                 )}
               </NavigationMenuList>
             </NavigationMenu>
@@ -235,9 +231,7 @@ const Navbar: React.FC = () => {
             </div>
             {socialLinks.map((link) => (
               <Link key={link.id} href={link.link}>
-                <div
-                  className={`p-2 rounded-full bg-gray-200 dark:bg-gray-200 transition-colors ${link.hoverColor}`}
-                >
+                <div className={`p-2 rounded-full bg-gray-200 dark:bg-gray-200 transition-colors ${link.hoverColor}`}>
                   {link.icon}
                 </div>
               </Link>
@@ -253,11 +247,7 @@ const Navbar: React.FC = () => {
                 onClick={() => dispatch(toggleDarkMode())}
                 className="p-2 rounded-full bg-gray-200 dark:bg-gray-200"
               >
-                {mode ? (
-                  <Sun size={15} className="text-yellow-400" />
-                ) : (
-                  <Moon size={15} className="text-blue-400" />
-                )}
+                {mode ? <Sun size={15} className="text-yellow-400" /> : <Moon size={15} className="text-blue-400" />}
               </button>
             </div>
           </div>
@@ -294,45 +284,41 @@ const Navbar: React.FC = () => {
                 <Link
                   key={item.href}
                   href={item.href}
-                  className={`border-b px-3 py-2  ${
-                    pathname === item.href
-                      ? "text-red-500 font-medium"
-                      : "text-gray-700 hover:text-blue-600"
-                  }`}
+                  className={`border-b px-3 py-2  ${pathname === item.href ? "text-red-500 font-medium" : "text-gray-700 hover:text-blue-600"
+                    }`}
                 >
                   {item.icon ? item.icon : item.label}
                 </Link>
-              )
+              ),
             )}
           </div>
         </div>
       )}
     </div>
-  );
-};
-
-interface ListItemProps extends React.AnchorHTMLAttributes<HTMLAnchorElement> {
-  title: string;
-  href: string;
+  )
 }
 
-const ListItem = React.forwardRef<HTMLAnchorElement, ListItemProps>(
-  ({ title, href, ...props }, ref) => (
-    <li>
-      <NavigationMenuLink asChild>
-        <a
-          ref={ref}
-          className="block p-2 text-gray-800 hover:bg-blue-50 rounded transition-colors"
-          href={href}
-          {...props}
-        >
-          {title}
-        </a>
-      </NavigationMenuLink>
-    </li>
-  )
-);
+interface ListItemProps extends React.AnchorHTMLAttributes<HTMLAnchorElement> {
+  title: string
+  href: string
+}
 
-ListItem.displayName = "ListItem";
+const ListItem = React.forwardRef<HTMLAnchorElement, ListItemProps>(({ title, href, ...props }, ref) => (
+  <li>
+    <NavigationMenuLink asChild>
+      <a
+        ref={ref}
+        className="block p-2 text-gray-800 hover:bg-blue-50 rounded transition-colors"
+        href={href}
+        {...props}
+      >
+        {title}
+      </a>
+    </NavigationMenuLink>
+  </li>
+))
 
-export default Navbar;
+ListItem.displayName = "ListItem"
+
+export default Navbar
+

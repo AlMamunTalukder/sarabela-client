@@ -18,7 +18,7 @@ const NewsCard = () => {
     return <h3>Oops! data not found.</h3>;
   }
   const sortNewsData = sortByDate(newsData, "postDate");
-  console.log('for cateogyr', sortNewsData)
+
   return (
     <div className="flex flex-col gap-4">
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">

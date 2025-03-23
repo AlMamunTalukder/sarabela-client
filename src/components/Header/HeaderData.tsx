@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { useSpecificNewsData } from '@/hooks/useSpecificNewsData';
 import { sortByDate } from '@/util/sort';
 import Image from 'next/image';
@@ -7,9 +8,9 @@ import Loading from '../Share/_components/Loading';
 
 const HeaderData = () => {
     const { newsData, loading, error } = useSpecificNewsData({})
-    if (loading) {
-        return <Loading />
-    }
+    // if (loading) {
+    //     return <Loading />
+    // }
     if (error) {
         return <h3>Oops! data not found.</h3>
     }

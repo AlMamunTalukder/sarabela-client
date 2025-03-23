@@ -69,8 +69,8 @@ const category = ''
                             <div className="space-y-6">
 
                                 <div className="overflow-hidden">
-                                    {singleNewsData ? <NewsCard/> : <p>Loading news...</p>}
-                                    {singleNewsData ? <Feedback news={singleNewsData}/> : <p>Loading news...</p>}
+                                    {singleNewsData ? <NewsCard/> : <Loading/>}
+                                    {singleNewsData ? <Feedback news={singleNewsData}/> : <Loading/>}
 
                                     <Advertisements />
                                     <RelatedNews category="/video" basePath={basePath} />

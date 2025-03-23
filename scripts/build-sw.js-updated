@@ -1,0 +1,3 @@
+// Replace the execSync line with this:
+execSync(`npx tsc --project tsconfig.sw.json`);
+

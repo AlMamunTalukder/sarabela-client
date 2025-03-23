@@ -10,7 +10,7 @@ import { useParams } from "next/navigation";
 import { TNews } from "@/types";
 import RelatedNews from "./RelatedNews";
 import { getCategory } from "@/util/getCategory";
-import { useGetSingleNewsQuery } from "@/redux/dailynews/news.api";
+import { useGetSingleNewsQuery } from "@/redux/sarabelanews/news.api";
 import SideBarRelatedNews from "./SideBarRelatedNews";
 
 import {
@@ -24,6 +24,7 @@ import {
 import { Clock3, House, SquarePen, UserRound } from "lucide-react";
 import { AiFillHome } from "react-icons/ai";
 import DynamicBreadcrumb from "../Breadcrumb/Breadcrumb";
+import Loading from "./Loading";
 
 interface TopNewsProps {
   basePath?: string;
@@ -90,13 +91,13 @@ const NewsSingleDetails = ({ basePath, id }: TopNewsProps) => {
                   {singleNewsData ? (
                     <NewsCard news={singleNewsData} />
                   ) : (
-                    <p>Loading news...</p>
+                    <Loading/>
                   )}
 
                   {singleNewsData ? (
                     <Feedback news={singleNewsData} />
                   ) : (
-                    <p>Loading news...</p>
+                    <Loading/>
                   )}
                   <Advertisements />
                   <RelatedNews category={category} basePath={basePath} />
