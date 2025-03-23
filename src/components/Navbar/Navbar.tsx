@@ -123,7 +123,7 @@ const Navbar: React.FC = () => {
   }, [categoryData])
 
   return (
-    <div ref={navRef} className="dark:text-black  border-b shadow-sm">
+    <div ref={navRef} className="dark:text-black  border-b shadow-sm z-50 bg-white dark:bg-gray-400">
       <div className="lg:hidden">
         <div className="border-b border-gray-200 px-4 bg-[#065799]">
           <div className="flex items-center content-center justify-between h-16">
@@ -157,7 +157,7 @@ const Navbar: React.FC = () => {
           </div>
         </div>
 
-        <div className="pr-4 py-2 shadow-lg z-50 border-b">
+        <div className="pr-4 py-2 shadow-lg z-50 border-b bg-white dark:bg-gray-400">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2 overflow-auto no-scrollbar font-bold ">
               {navItems.map((item) => (
@@ -180,7 +180,7 @@ const Navbar: React.FC = () => {
       </div>
 
       {/* Desktop Navigation */}
-      <div className="hidden lg:block max-w-7xl mx-auto px-4 py-[10px] font-bold">
+      <div className="hidden lg:block max-w-7xl mx-auto px-4 py-[10px] font-bold bg-white dark:bg-gray-400">
         <div className="flex justify-between items-center">
           {/* Navigation Menu */}
           <div>
