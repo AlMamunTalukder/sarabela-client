@@ -4,7 +4,7 @@
 import { useState, useEffect } from "react"
 import Image from "next/image"
 import {  AnimatePresence } from "framer-motion"
-import { Bell, Loader2 } from "lucide-react"
+import { Bell, Loader2 } from "lucide-react" 
 import { Button } from "@/components/ui/button"
 import { Card } from "@/components/ui/card"
 import { cn } from "@/lib/utils"
