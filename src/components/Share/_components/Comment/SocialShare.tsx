@@ -115,7 +115,7 @@ export default function SocialShare({ newsId }: NewsIdParams) {
   return (
     <div className="flex items-center gap-2 justify-end mt-10 flex-wrap">
 
-      <div className="flex flex-col items-center">
+      <div className="flex flex-col items-center english-text">
         {shareCounts?.data?.totalShares || 0}
         <span className="text-[12px] text-gray-500 ">Shares</span>
       </div>

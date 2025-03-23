@@ -67,8 +67,15 @@
 }
 
 body {
-  font-family: 'Tiro Bangla', sans-serif !important;
+  font-family:  'Tiro Bangla',  sans-serif !important;
 }
+
+
+
+.english-text {
+  font-family: 'Poppines';
+}
+
 
 
 .no-scrollbar::-webkit-scrollbar {
