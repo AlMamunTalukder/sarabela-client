@@ -14,11 +14,11 @@ import {
 import { Facebook, Twitter, Linkedin, Youtube, Search, UserRound, Menu, X, Sun, Moon } from "lucide-react"
 import Image from "next/image"
 import logo from "@public/asset/logo/logo3.png"
+import logoDark from '../../../public/asset/logo/logo2.svg'
 import { usePathname } from "next/navigation"
 import { useDispatch, useSelector } from "react-redux"
 import { toggleDarkMode } from "@/lib/themeSlice"
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "../ui/accordion"
-
 import { AiFillHome } from "react-icons/ai"
 import { useCategoryData } from "@/hooks/useCategoryData"
 import { sortByDate } from "@/util/sort"
@@ -123,12 +123,12 @@ const Navbar: React.FC = () => {
   }, [categoryData])
 
   return (
-    <div ref={navRef} className="dark:text-black bg-white dark:bg-gray-400 border-b shadow-sm">
+    <div ref={navRef} className="dark:text-black  border-b shadow-sm">
       <div className="lg:hidden">
-        <div className="border-b border-gray-200 px-4 ">
+        <div className="border-b border-gray-200 px-4 bg-[#065799]">
           <div className="flex items-center content-center justify-between h-16">
             <Image
-              src={logo || "/placeholder.svg"}
+              src={logoDark || "/placeholder.svg"}
               alt="Daily Times 24"
               width={150}
               height={0}
