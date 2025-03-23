@@ -21,7 +21,7 @@ const HeaderData = () => {
             {sortNewsData?.slice(0, 2)?.map((item) => (
                 <div
                     key={item._id}
-                    className="gap-2 border-s-2 border-gray-300 dark:border-gray-700 px-2 flex"
+                    className="gap-2 border-s-2 border-gray-700 px-2 flex"
                 >
                     <div>
                         {
@@ -40,7 +40,7 @@ const HeaderData = () => {
                         }
                     </div>
                     <div className="col-span-1 flex-1">
-                        <h2 className="text-sm font-semibold hover:text-blue-500 dark:hover:text-blue-400 text-gray-900 dark:text-gray-200">
+                        <h2 className="text-sm font-semibold hover:text-blue-500 dark:hover:text-blue-400 text-gray-200">
                             <Link href={`/${item?.category?.slug ?? 'national'}/${item._id}`}>{item.newsTitle}</Link>
                         </h2>
                     </div>

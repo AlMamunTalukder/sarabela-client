@@ -35,15 +35,13 @@ const NewsSingleDetails = ({ basePath, id }: TopNewsProps) => {
   const singleNewsData = data?.data;
   const [fontSize, setFontSize] = useState(16);
 
-
-
   return (
     <main className="min-h-screen">
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
         <div className="flex flex-col lg:flex-row gap-4">
           <div className=" top-[70px]">
             <div className="hidden lg:block mt-8 ">
-           <DynamicBreadcrumb news={singleNewsData}/>   
+              <DynamicBreadcrumb news={singleNewsData} />
 
               <div className="space-y-2">
                 <div className="flex items-center gap-2 text-sm text-gray-500">
