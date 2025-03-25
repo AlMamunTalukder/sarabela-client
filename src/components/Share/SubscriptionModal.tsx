@@ -166,8 +166,9 @@ export default function PremiumSubscriptionModal() {
         </div>
       </div>
     )}
-  </AnimatePresence>
-  
+  </AnimatePresence>  
   )
 }
+
+
 

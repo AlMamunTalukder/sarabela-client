@@ -41,7 +41,7 @@ const HeaderData = () => {
                         }
                     </div>
                     <div className="col-span-1 flex-1">
-                        <h2 className="text-sm font-semibold hover:text-blue-500 dark:hover:text-blue-400 text-gray-200">
+                        <h2 className="text-sm font-semibold hover:text-blue-500 dark:hover:text-blue-400 text-gray-600 dark:text-gray-200">
                             <Link href={`/${item?.category?.slug ?? 'national'}/${item._id}`}>{item.newsTitle}</Link>
                         </h2>
                     </div>

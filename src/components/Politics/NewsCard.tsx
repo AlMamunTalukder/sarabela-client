@@ -2,9 +2,9 @@
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
-import vote from "@public/asset/politics/vote.jpg";
-import parliament from "@public/asset/politics/perliment.jpg";
-import team from "@public/asset/politics/team.jpg";
+import vote from "../../../../public/asset/politics/vote.jpg";
+import parliament from "../../../../public/asset/politics/perliment.jpg";
+import team from "../../../../public/asset/politics/team.jpg";
 
 // Sample Politics Data
 const politicsData = [

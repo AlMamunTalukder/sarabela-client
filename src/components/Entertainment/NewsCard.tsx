@@ -3,10 +3,10 @@ import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { ChevronsRight } from "lucide-react";
-import Image2 from "@public/asset/entertainment/concert-1.jpg";
-import Image3 from "@public/asset/entertainment/concert-2.jpg";
-import Image4 from "@public/asset/entertainment/concert-3.jpg";
-import Image1 from "@public/asset/entertainment/concert-4.jpg";
+import Image2 from "../../../../public/asset/entertainment/concert-1.jpg";
+import Image3 from "../../../../public/asset/entertainment/concert-2.jpg";
+import Image4 from "../../../../public/asset/entertainment/concert-3.jpg";
+import Image1 from "../../../../public/asset/entertainment/concert-4.jpg";
 
 const news = [
   {

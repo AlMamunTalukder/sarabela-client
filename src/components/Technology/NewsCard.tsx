@@ -2,10 +2,10 @@
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
-import coding from "@public/asset/Technology/coding.jpg";
-import industry from "@public/asset/Technology/industry.jpg";
-import monitoring from "@public/asset/Technology/monitoring.jpg";
-import programing from "@public/asset/Technology/programing.jpg";
+import coding from "../../../../public/asset/Technology/coding.jpg";
+import industry from "../../../../public/asset/Technology/industry.jpg";
+import monitoring from "../../../../public/asset/Technology/monitoring.jpg";
+import programing from "../../../../public/asset/Technology/programing.jpg";
 
 const technology_news = [
   {

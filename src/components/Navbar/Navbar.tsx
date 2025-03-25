@@ -13,8 +13,8 @@ import {
 } from "@/components/ui/navigation-menu"
 import { Facebook, Twitter, Linkedin, Youtube, Search, UserRound, Menu, X, Sun, Moon } from "lucide-react"
 import Image from "next/image"
-import logo from "@public/asset/logo/logo3.png"
-import logoDark from '../../../public/asset/logo/logo2.svg'
+
+
 import { usePathname } from "next/navigation"
 import { useDispatch, useSelector } from "react-redux"
 import { toggleDarkMode } from "@/lib/themeSlice"
@@ -22,6 +22,8 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "..
 import { AiFillHome } from "react-icons/ai"
 import { useCategoryData } from "@/hooks/useCategoryData"
 import { sortByDate } from "@/util/sort"
+import logoLight from '../../../public/asset/logo/logo2.png'
+import logoDark from '../../../public/asset/logo/logo2.svg'
 
 interface SocialLink {
   id: string
@@ -81,6 +83,8 @@ const Navbar: React.FC = () => {
     setIsOpen(false)
   }, [pathname])
 
+  
+
   const generateNavItems = (categories: any[]): NavItem[] => {
     if (!categories || categories.length === 0) return []
 
@@ -125,10 +129,11 @@ const Navbar: React.FC = () => {
   return (
     <div ref={navRef} className="dark:text-black  border-b shadow-sm z-50 bg-white dark:bg-gray-400">
       <div className="lg:hidden">
-        <div className="border-b border-gray-200 px-4 bg-[#065799]">
+        <div className="border-b border-gray-200 px-4 ">
           <div className="flex items-center content-center justify-between h-16">
             <Image
-              src={logoDark || "/placeholder.svg"}
+              // src={logoDark || "/placeholder.svg"}
+              src={mode ? logoDark : logoLight || "/placeholder.svg"}
               alt="Daily Times 24"
               width={150}
               height={0}

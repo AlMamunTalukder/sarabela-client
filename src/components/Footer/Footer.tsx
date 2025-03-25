@@ -2,7 +2,7 @@
 
 import { Facebook, Twitter, Linkedin, Youtube } from "lucide-react";
 import Link from "next/link";
-import logo from "@public/asset/logo/logo2.svg";
+import logo from "../../../public/asset/logo/logo.svg";
 import Image from "next/image";
 
 const socialLinks = [

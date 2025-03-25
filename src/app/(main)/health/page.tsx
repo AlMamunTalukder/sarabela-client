@@ -5,7 +5,7 @@ import { getCategory } from "@/util/getCategory";
 import OtherNews from "@/util/OtherNews";
 import SideTabs from "@/util/SideTabs";
 import TopNews from "@/util/TopNews";
-import banner from "@public/asset/banner.jpg";
+import banner from "../../../../public/asset/sarabelanews24-banner.png";
 import { usePathname } from "next/navigation";
 
 const Page = () => {
